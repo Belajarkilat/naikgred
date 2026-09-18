@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NaikGred</title>
+<meta name="description" content="Alat pembelajaran dan pentaksiran untuk cikgu, murid dan ibu bapa di Malaysia.">
+<meta property="og:title" content="NaikGred">
+<meta property="og:description" content="Alat pembelajaran dan pentaksiran untuk cikgu, murid dan ibu bapa di Malaysia.">
+<meta property="og:image" content="https://belajarkilat.github.io/naikgred/jejak-tp/og.png">
+<meta name="theme-color" content="#0C3B34">
+<link rel="icon" href="aset/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="aset/apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+<style>
+:root{--ground:#F4F8F6;--surface:#fff;--ink:#0F1C1A;--muted:#5B6D68;--line:#D6E2DE;--brand:#0C6B5E;--mint:#86CEBD;--star:#F0A62F;--board:#0C3B34;--chalk:#EAF6F2;--chalk2:#A9CFC5}
+@media (prefers-color-scheme:dark){:root{--ground:#0B1513;--surface:#12201C;--ink:#E4F1ED;--muted:#93A8A2;--line:#22332E;--brand:#56B39B;--board:#081F1B}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif}
+.papan{background:var(--board);color:var(--chalk);padding:72px 20px 80px}
+.wrap{max-width:980px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:14px}
+.logo svg{width:52px;height:52px}
+.wordmark{font-size:40px;letter-spacing:-.042em;line-height:1}
+.wordmark b{font-weight:700;color:var(--mint)}.wordmark strong{font-weight:800}
+h1{font-size:clamp(28px,4.5vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin:36px 0 0;max-width:20ch;text-wrap:balance;color:#fff}
+.papan p{color:var(--chalk2);font-size:18px;max-width:54ch;margin:16px 0 0}
+main{padding:56px 20px 72px}
+h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin:0 0 18px}
+.produk{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.produk a{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.produk a:hover{border-color:var(--brand);transform:translateY(-2px)}
+.produk h3{margin:0;font-size:21px;font-weight:800;letter-spacing:-.02em}
+.produk p{margin:0;color:var(--muted);font-size:15px}
+.produk .untuk{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand)}
+.produk .pergi{margin-top:auto;padding-top:8px;font-weight:700;color:var(--brand)}
+footer{padding:0 20px 40px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<header class="papan">
+  <div class="wrap">
+    <div class="logo">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="12" height="18" rx="4.5" fill="#86CEBD"/><rect x="22" y="27" width="12" height="29" rx="4.5" fill="#2F9A83"/><path d="M38 20 L32.6 20 Q30 20 31.6 18 L41.8 6 Q44 3.4 46.2 6 L56.4 18 Q58 20 55.4 20 L50 20 L50 51.5 Q50 56 45.5 56 L42.5 56 Q38 56 38 51.5 Z" fill="#F0A62F"/></svg>
+      <span class="wordmark"><b>Naik</b><strong>Gred</strong></span>
+    </div>
+    <h1>Kerja cikgu jadi ringan. Murid naik satu tahap demi satu tahap.</h1>
+    <p>Alat pembelajaran dan pentaksiran untuk bilik darjah Malaysia, dibina bersama guru yang sedang mengajar.</p>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <h2>Produk</h2>
+    <div class="produk">
+      <a href="jejak-tp/">
+        <span class="untuk">Untuk cikgu · Sains T3</span>
+        <h3>Jejak TP Sains</h3>
+        <p>Murid main, TP1 hingga TP6 terus direkod ikut DSKP. Bab 1–3 percuma.</p>
+        <span class="pergi">Lihat →</span>
+      </a>
+      <a href="https://belajarkilat.github.io/matematik-kilat/">
+        <span class="untuk">Untuk murid · Darjah 1–6</span>
+        <h3>Matematik Kilat</h3>
+        <p>Permainan latihan Matematik KSSR, 1,200 soalan dari Darjah 1 hingga Darjah 6.</p>
+        <span class="pergi">Main →</span>
+      </a>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap">© 2026 NaikGred</div></footer>
+</body>
+</html>
