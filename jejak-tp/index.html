@@ -546,6 +546,7 @@ footer .jenama{color:var(--ink)} footer .wordmark{color:var(--ink)} footer .word
               <label><input type="checkbox" name="t" value="T5" id="f-t5">T5</label>
             </div>
           </fieldset>
+          <label class="tanda" for="f-dlp"><input type="checkbox" id="f-dlp"><span>Saya mengajar kelas DLP (Sains dalam Bahasa Inggeris). Beritahu saya bila versi English siap.</span></label>
           <label class="tanda" for="f-t45"><input type="checkbox" id="f-t45"><span>Beritahu saya bila set Menengah Atas (Sains T4–T5) siap, sekali dengan harga pra-tempahan.</span></label>
           <label class="tanda" for="f-setuju"><input type="checkbox" id="f-setuju" required><span>Saya setuju terima e-mel tentang Jejak TP Sains daripada NaikGred. Boleh berhenti langgan bila-bila masa. <a href="https://belajarkilat.github.io/jejak-tp-sains/privasi.html">Privasi</a></span></label>
           <div class="hp" aria-hidden="true"><label for="f-laman">Laman web</label><input id="f-laman" type="text" tabindex="-1" autocomplete="off"></div>
@@ -739,7 +740,7 @@ borang.addEventListener("submit",async e=>{
   const tingkatan=[...document.querySelectorAll("input[name=t]:checked")].map(x=>x.value);
   hantar.disabled=true;hantar.textContent="Sedang kunci tempat…";
   try{
-    const r=await rpc("ng_daftar_perintis",{p:{nama,emel,sekolah:document.getElementById("f-sekolah").value.trim(),negeri:document.getElementById("f-negeri").value,tingkatan,minat_t45:document.getElementById("f-t45").checked,sumber,setuju_emel:true}});
+    const r=await rpc("ng_daftar_perintis",{p:{nama,emel,sekolah:document.getElementById("f-sekolah").value.trim(),negeri:document.getElementById("f-negeri").value,tingkatan,minat_t45:document.getElementById("f-t45").checked,dlp:document.getElementById("f-dlp").checked,sumber,setuju_emel:true}});
     if(!r||!r.ok)throw new Error("tolak");
     kaunter(r.bil);
     document.getElementById("borang-isi").hidden=true;
