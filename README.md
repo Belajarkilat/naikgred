@@ -2,9 +2,10 @@
 
 Laman web naikgred.com. Diterbitkan melalui GitHub Pages.
 
-- `/` laman utama NaikGred
-- `/jejak-tp/` landing page Jejak TP Sains (pra-daftar cikgu perintis)
+- `/` laman utama NaikGred, senarai produk
 
-Borang perintis menulis ke Supabase melalui fungsi `ng_daftar_perintis` (jadual `ng_perintis`, dikunci RLS; anon hanya boleh panggil fungsi). Kaunter guna `ng_bil_perintis`.
+Landing page setiap produk diselenggara dalam repo masing-masing, bukan di sini:
+- Jejak TP Sains → repo `cikgunani`, live di jejaktpsains.naikgred.com
+- Matematik Kilat / Sains Kilat → repo `matematik-kilat`, live di belajarkilat.github.io/matematik-kilat/
 
-Jejak sumber pendaftaran dengan `?ref=`, contoh `/jejak-tp/?ref=tg-sains-selangor`.
+Landing page lama `/jejak-tp/` (borang pra-daftar cikgu perintis Supabase, jadual `ng_perintis`) dipadam 23 Sep 2026 sebab mesej harga/skop dah lapuk berbanding landing terkini; tiada link `?ref=` yang pernah dikongsi.
