@@ -51,8 +51,17 @@ a{color:inherit}
 .cta-kecil{font:600 14px "Lexend",sans-serif;background:var(--teal);color:#fff;border-radius:11px;padding:10px 18px;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding-block:24px 64px}
-@media (max-width:820px){.hero{grid-template-columns:1fr;gap:36px}}
+.hero{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:44px;align-items:center;padding-block:24px 64px}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:30px}}
+.hero-photo{position:relative;justify-self:center;max-width:320px;width:100%}
+.hero-photo img{width:100%;height:auto;display:block;border-radius:22px;border:7px solid var(--surface);box-shadow:var(--shadow);transform:rotate(-2deg)}
+.hero-badge{position:absolute;left:-10px;bottom:20px;background:var(--gold);color:#3A2510;font:700 13px "Lexend",sans-serif;padding:8px 13px;border-radius:12px;transform:rotate(-4deg);box-shadow:0 10px 22px -12px rgba(0,0,0,.35)}
+.video-sec{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding-block:24px 64px}
+@media (max-width:820px){.video-sec{grid-template-columns:1fr;gap:24px}}
+.video-sec h2{font-size:clamp(28px,4vw,40px)}
+.video-sec .intro{margin-top:10px;color:var(--ink2);max-width:46ch}
+.senarai{margin:16px 0 0;padding-left:20px;color:var(--ink2)}
+.senarai li{margin:6px 0}
 .tag{display:inline-block;background:var(--mint);color:var(--teal-deep);font:600 14px "Lexend",sans-serif;padding:6px 14px;border-radius:99px;margin-bottom:16px}
 h1{font-size:clamp(38px,6vw,58px)}
 h1 mark{background:linear-gradient(transparent 60%,rgba(232,163,61,.45) 60%);color:inherit;padding:0 2px}
@@ -164,6 +173,10 @@ footer .ng-logo.gelap{display:none}
 </div>
 
 <div class="wrap hero">
+  <div class="hero-photo">
+    <img src="hero-ibu-anak.jpg" alt="Ilustrasi seorang ibu bertudung bersama tiga anak sekolah menengah melihat kemajuan di telefon" width="640" height="794">
+    <div class="hero-badge">Sehingga 5 anak · RM59</div>
+  </div>
   <div>
     <span class="tag">Akan dilancarkan · Sains, Matematik, Sejarah KSSM</span>
     <h1>Anak kata <mark>“dah faham”</mark>. Betul ke?</h1>
@@ -173,6 +186,18 @@ footer .ng-logo.gelap{display:none}
       <a class="btn kedua" href="#video">&#9654;&nbsp; Lihat anak bermain</a>
     </div>
     <p class="harga-kecil"><b>RM59 setahun untuk seluruh keluarga</b>, sehingga 5 anak, ketiga-tiga subjek. Tiada bayaran sekarang.</p>
+  </div>
+</div>
+
+<section class="wrap video-sec">
+  <div>
+    <h2>Lihat anak bermain</h2>
+    <p class="intro">Anak menjawab soalan di telefon seperti bermain permainan. Setiap hentian yang dilepasi terus menghasilkan tahap penguasaan (TP).</p>
+    <ul class="senarai">
+      <li>Peta, hentian dan bintang yang membuat anak mahu teruskan</li>
+      <li>Soalan mengikut DSKP KSSM yang digunakan di sekolah</li>
+      <li>Tekan Sains atau Sejarah untuk melihat subjek lain</li>
+    </ul>
   </div>
   <div id="video">
     <div class="tab-subjek" role="group" aria-label="Pilih subjek video">
@@ -185,7 +210,7 @@ footer .ng-logo.gelap{display:none}
     </div></div>
     <p class="nota-video">Rakaman sebenar Jejak TP, versi yang kini digunakan guru di sekolah. Anak NaikGred menggunakan soalan dan sistem TP yang sama.</p>
   </div>
-</div>
+</section>
 
 <div class="wrap hook-sec">
   <div class="hook">
