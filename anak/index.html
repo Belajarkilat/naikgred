@@ -51,6 +51,11 @@ a{color:inherit}
 .cta-kecil{font:600 14px "Lexend",sans-serif;background:var(--teal);color:#fff;border-radius:11px;padding:10px 18px;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px}
 
 /* hero */
+.hero .bukti{margin-top:18px;display:flex;gap:28px;flex-wrap:wrap;border-left:4px solid var(--teal);padding-left:14px}
+.hero .bukti[hidden]{display:none}
+.hero .bukti div{display:flex;flex-direction:column}
+.hero .bukti b{font:700 2rem/1.1 "Lexend",sans-serif;color:var(--ink)}
+.hero .bukti span{font-size:.85rem;color:var(--ink2);margin-top:2px}
 .hero{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:44px;align-items:center;padding-block:24px 64px}
 @media (max-width:820px){.hero{grid-template-columns:1fr;gap:30px}}
 .hero-photo{position:relative;justify-self:center;max-width:320px;width:100%}
@@ -185,6 +190,7 @@ footer .ng-logo.gelap{display:none}
       <a class="btn utama" href="#harga">RM68 sekali bayar, 5 anak</a>
       <a class="btn kedua" href="#video">&#9654;&nbsp; Lihat anak bermain</a>
     </div>
+    <div class="bukti" id="bukti" hidden></div>
     <p class="harga-kecil"><b>RM68 sekali bayar untuk seluruh keluarga</b>, sehingga 5 anak, ketiga-tiga subjek, akses sehingga anak tamat Tingkatan 5. Bab 1 dan 2 percuma.</p>
   </div>
 </div>
@@ -301,6 +307,14 @@ footer .ng-logo.gelap{display:none}
 <script>
 (function(){
   var AWAN={url:"https://cqokowzzgseuvhcgpktj.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxb2tvd3p6Z3NldXZoY2dwa3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NzE5MDgsImV4cCI6MjEwMjU0NzkwOH0.AjFtow8RscN0KpIrWNrHCQu-cztcjd_ojTKZyY5GTg8"};
+  /* Pengira hidup: Sains + Matematik/Sejarah, dikira semula setiap kali halaman dibuka. Jika gagal, kotak kekal tersembunyi. */
+  var MJ={url:"https://noaeagitwklnpmyhhhtn.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vYWVhZ2l0d2tsbnBteWhoaHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU4MDEsImV4cCI6MjEwNTczMTgwMX0.Z7ltdqSgxAlVVSlzDuPvUnFdpStY5UWHbdOqXS8BtB0"};
+  var ambil=function(c,fn){return fetch(c.url+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":c.kunci,"Authorization":"Bearer "+c.kunci,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})};
+  Promise.all([ambil(AWAN,"lo_statistik_awam"),ambil(MJ,"mj_statistik_awam")]).then(function(h){
+    var s=h[0],m=h[1],e=document.getElementById("bukti");if(!s||!e||!(s.bermain_semua>=1))return;
+    var semua=s.bermain_semua+(m?m.semua:0),j24=s.bermain_24j+(m?m.j24:0);
+    var f=function(n){return n.toLocaleString("ms-MY")};
+    e.innerHTML="<div><b>"+f(semua)+"</b><span>murid sudah bermain sejak dilancarkan</span></div>"+(j24>=20?"<div><b>"+f(j24)+"</b><span>bermain dalam 24 jam lepas</span></div>":"");e.hidden=false});
   /* Tukar video ikut subjek */
   var vid=document.getElementById("vid");
   vid.muted=true; var p=vid.play(); if(p&&p.catch) p.catch(function(){});
