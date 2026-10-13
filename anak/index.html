@@ -272,7 +272,7 @@ footer .ng-logo.gelap{display:none}
 <section class="sec" id="harga">
   <div class="wrap">
     <h2>Harga</h2>
-    <p class="intro">Bab 1 dan 2 setiap subjek kekal percuma. Harga perintis RM68 bayar sekali sahaja, sehingga 31 Disember 2026. Mulai 1 Januari 2027, harga biasa ialah RM59 setahun.</p>
+    <p class="intro">Bab 1 dan 2 setiap subjek kekal percuma. Harga <i>Early Bird</i> (untuk pelanggan awal) RM68 bayar sekali sahaja, sehingga 31 Disember 2026. Mulai 1 Januari 2027, harga biasa ialah RM59 setahun.</p>
     <p class="kiraan" id="kiraan" hidden></p>
     <div class="harga">
       <div class="plan">
@@ -283,7 +283,7 @@ footer .ng-logo.gelap{display:none}
       <div class="plan utama">
         <span class="siapa">Anak NaikGred Keluarga</span>
         <span class="rm">RM68 <small>sekali bayar</small></span>
-        <span class="perintis">Harga perintis sehingga 31 Dis 2026</span>
+        <span class="perintis">Harga <i>Early Bird</i> sehingga 31 Dis 2026</span>
         <ul><li>Sehingga 5 anak dalam satu akaun</li><li>Akses sehingga anak tamat Tingkatan 5</li><li>Sains, Matematik dan Sejarah, Tingkatan 1 hingga 5</li><li>Akses semua bab</li><li>Laporan mingguan penuh dalam app</li></ul>
       </div>
     </div>
@@ -293,7 +293,7 @@ footer .ng-logo.gelap{display:none}
 <section class="sec lembut soalan">
   <div class="wrap">
     <h2>Soalan lazim</h2>
-    <details><summary>Berapa harganya?</summary><p>Bab 1 dan 2 setiap subjek percuma. Langganan keluarga RM68, bayar sekali sahaja, untuk sehingga 5 anak dan ketiga-tiga subjek, sehingga anak tamat Tingkatan 5. Tiada yuran bulanan atau tahunan. Ini harga perintis sehingga 31 Disember 2026. Mulai 1 Januari 2027, harga biasa ialah RM59 setahun. Keluarga yang melanggan sebelum 31 Disember 2026 tidak perlu membayar lagi sehingga anak tamat Tingkatan 5.</p></details>
+    <details><summary>Berapa harganya?</summary><p>Bab 1 dan 2 setiap subjek percuma. Langganan keluarga RM68, bayar sekali sahaja, untuk sehingga 5 anak dan ketiga-tiga subjek, sehingga anak tamat Tingkatan 5. Tiada yuran bulanan atau tahunan. Ini harga <i>Early Bird</i> sehingga 31 Disember 2026. Mulai 1 Januari 2027, harga biasa ialah RM59 setahun. Keluarga yang melanggan sebelum 31 Disember 2026 tidak perlu membayar lagi sehingga anak tamat Tingkatan 5.</p></details>
     <details><summary>Apa beza Anak NaikGred dengan Jejak TP?</summary><p>Jejak TP ialah versi untuk guru di sekolah. Anak NaikGred menggunakan soalan dan sistem TP yang sama, tetapi laporannya ditulis untuk ibu bapa.</p></details>
     <details><summary>Bagaimana data anak dilindungi?</summary><p>Kami tidak mengumpul gambar anak dan tidak menjual data kepada sesiapa. Butiran penuh akan diterbitkan dalam dasar privasi Anak NaikGred sebelum pelancaran.</p></details>
   </div>
@@ -317,13 +317,13 @@ footer .ng-logo.gelap{display:none}
     var semua=s.bermain_semua+(m?m.semua:0),j24=s.bermain_24j+(m?m.j24:0);
     var f=function(n){return n.toLocaleString("ms-MY")};
     e.innerHTML="<div><b>"+f(semua)+"</b><span>murid sudah bermain sejak dilancarkan</span></div>"+(j24>=20?"<div><b>"+f(j24)+"</b><span>bermain dalam 24 jam lepas</span></div>":"");e.hidden=false});
-  /* Kiraan detik harga perintis: tarikh akhir sebenar, 31 Dis 2026 11:59 malam waktu Malaysia */
+  /* Kiraan detik harga Early Bird: tarikh akhir sebenar, 31 Dis 2026 11:59 malam waktu Malaysia */
   (function(){var k=document.getElementById("kiraan");if(!k)return;
     var h=Math.ceil((new Date("2026-12-31T23:59:59+08:00")-new Date())/864e5);
     if(h<=0)return;
-    k.innerHTML="<b>"+h+" hari lagi</b> untuk harga perintis RM68. Seorang anak Tingkatan 1 yang belajar sehingga Tingkatan 5 bermakna 5 tahun &times; RM59 = RM295 selepas itu.";
+    k.innerHTML="<b>"+h+" hari lagi</b> untuk harga <i>Early Bird</i> RM68. Seorang anak Tingkatan 1 yang belajar sehingga Tingkatan 5 bermakna 5 tahun &times; RM59 = RM295 selepas itu.";
     k.hidden=false;
-    var hk=document.querySelector(".harga-kecil");if(hk)hk.innerHTML+=" <b>Harga perintis tamat dalam "+h+" hari.</b>";})();
+    var hk=document.querySelector(".harga-kecil");if(hk)hk.innerHTML+=" <b>Harga <i>Early Bird</i> tamat dalam "+h+" hari.</b>";})();
   /* Tukar video ikut subjek */
   var vid=document.getElementById("vid");
   vid.muted=true; var p=vid.play(); if(p&&p.catch) p.catch(function(){});
