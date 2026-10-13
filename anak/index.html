@@ -189,8 +189,8 @@ footer .ng-logo.gelap{display:none}
     <h1>Anak kata <mark>“dah faham”</mark>. Betul ke?</h1>
     <p class="lede">Anak NaikGred menunjukkan bab yang anak sudah kuasai dan bab yang masih lemah, setiap minggu, terus dalam telefon ibu bapa. Untuk murid Tingkatan 1 hingga 5.</p>
     <div class="ctas">
-      <a class="btn utama" href="#harga">RM68 sekali bayar, 5 anak</a>
-      <a class="btn kedua" href="#video">&#9654;&nbsp; Lihat anak bermain</a>
+      <a class="btn utama daftar-app" href="https://jejaktpsains.naikgred.com/?keluarga=1">Daftar percuma dan tambah anak</a>
+      <a class="btn kedua" href="#harga">RM68 sekali bayar, 5 anak</a>
     </div>
     <div class="bukti" id="bukti" hidden></div>
     <p class="harga-kecil"><b>RM68 sekali bayar untuk seluruh keluarga</b>, sehingga 5 anak, ketiga-tiga subjek, akses sehingga anak tamat Tingkatan 5. Bab 1 dan 2 percuma.</p>
@@ -279,12 +279,14 @@ footer .ng-logo.gelap{display:none}
         <span class="siapa">Percuma</span>
         <span class="rm">RM0</span>
         <ul><li>Bab 1 dan 2 bagi setiap subjek dan tingkatan</li><li>Ringkasan mingguan asas</li></ul>
+        <a class="btn kedua daftar-app" href="https://jejaktpsains.naikgred.com/?keluarga=1">Daftar percuma</a>
       </div>
       <div class="plan utama">
         <span class="siapa">Anak NaikGred Keluarga</span>
         <span class="rm">RM68 <small>sekali bayar</small></span>
         <span class="perintis">Harga <i>Early Bird</i> sehingga 31 Dis 2026</span>
         <ul><li>Sehingga 5 anak dalam satu akaun</li><li>Akses sehingga anak tamat Tingkatan 5</li><li>Sains, Matematik dan Sejarah, Tingkatan 1 hingga 5</li><li>Akses semua bab</li><li>Laporan mingguan penuh dalam app</li></ul>
+        <a class="btn utama daftar-app" href="https://jejaktpsains.naikgred.com/?keluarga=1">Daftar dan langgan RM68</a>
       </div>
     </div>
   </div>
@@ -317,6 +319,10 @@ footer .ng-logo.gelap{display:none}
     var semua=s.bermain_semua+(m?m.semua:0),j24=s.bermain_24j+(m?m.j24:0);
     var f=function(n){return n.toLocaleString("ms-MY")};
     e.innerHTML="<div><b>"+f(semua)+"</b><span>murid sudah bermain sejak dilancarkan</span></div>"+(j24>=20?"<div><b>"+f(j24)+"</b><span>bermain dalam 24 jam lepas</span></div>":"");e.hidden=false});
+  /* Pautan daftar membawa kod ?dari= (kumpulan Facebook) ke app supaya sumber pendaftaran direkod */
+  (function(){var d=null;try{d=new URL(location.href).searchParams.get("dari");}catch(e){}
+    if(!d||!/^[a-z0-9-]{1,30}$/.test(d)) return;
+    document.querySelectorAll("a.daftar-app").forEach(function(a){ a.href+="&dari="+d; });})();
   /* Kiraan detik harga Early Bird: tarikh akhir sebenar, 31 Dis 2026 11:59 malam waktu Malaysia */
   (function(){var k=document.getElementById("kiraan");if(!k)return;
     var h=Math.ceil((new Date("2026-12-31T23:59:59+08:00")-new Date())/864e5);
