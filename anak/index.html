@@ -87,6 +87,7 @@ h1 mark{background:linear-gradient(transparent 60%,rgba(232,163,61,.45) 60%);col
 .tab-subjek{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
 .tab-subjek button{font:600 14px "Lexend",sans-serif;border:2px solid var(--teal-line);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 14px;cursor:pointer;min-height:40px}
 .tab-subjek button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn-bunyi{display:block;margin:12px auto 0;padding:10px 18px;border:0;border-radius:999px;background:#c2185b;color:#fff;font:600 15px inherit;font-family:inherit;cursor:pointer}
 .nota-video{font-size:13px;color:var(--ink2);text-align:center;margin-top:12px;max-width:300px;margin-inline:auto}
 
 /* hook */
@@ -216,6 +217,7 @@ footer .ng-logo.gelap{display:none}
     <div class="telefon"><div class="bingkai">
       <video id="vid" src="video-keluarga-math.mp4" poster="poster-keluarga-math.jpg" controls playsinline muted autoplay loop preload="auto"></video>
     </div></div>
+    <button type="button" class="btn-bunyi" id="bunyi">🔊 Pasang bunyi</button>
     <p class="nota-video">Rakaman paparan ibu bapa dalam app sebenar. Nama dan data anak ialah contoh rekaan. Soalan dan sistem TP sama seperti yang digunakan di sekolah.</p>
   </div>
 </section>
@@ -348,6 +350,8 @@ footer .ng-logo.gelap{display:none}
     k.innerHTML="<b>"+h+" hari lagi</b> untuk harga <i>Early Bird</i> RM32 setahun. Selepas itu RM59 setahun, dan pelanggan Early Bird kekal RM32.";
     k.hidden=false;
     var hk=document.querySelector(".harga-kecil");if(hk)hk.innerHTML+=" <b>Harga <i>Early Bird</i> tamat dalam "+h+" hari.</b>";})();
+  var bn=document.getElementById("bunyi");
+  bn.addEventListener("click",function(){vid.muted=!vid.muted;bn.textContent=vid.muted?"🔊 Pasang bunyi":"🔇 Senyapkan";vid.play().catch(function(){});});
   /* Tukar video ikut subjek */
   var vid=document.getElementById("vid");
   vid.muted=true; var p=vid.play(); if(p&&p.catch) p.catch(function(){});
