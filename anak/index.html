@@ -65,7 +65,7 @@ a{color:inherit}
 .hero .bukti b{font:700 2rem/1.1 "Lexend",sans-serif;color:var(--ink)}
 .hero .bukti span{font-size:.85rem;color:var(--ink2);margin-top:2px}
 .hero{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:44px;align-items:center;padding-block:24px 64px}
-@media (max-width:820px){.hero{grid-template-columns:1fr;gap:30px}}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:30px}.hero-photo{order:2;max-width:260px}}
 .hero-photo{position:relative;justify-self:center;max-width:320px;width:100%}
 .hero-photo img{width:100%;height:auto;display:block;border-radius:22px;border:7px solid var(--surface);box-shadow:var(--shadow);transform:rotate(-2deg)}
 .hero-badge{position:absolute;left:-10px;bottom:20px;background:var(--gold);color:#3A2510;font:700 13px "Lexend",sans-serif;padding:8px 13px;border-radius:12px;transform:rotate(-4deg);box-shadow:0 10px 22px -12px rgba(0,0,0,.35)}
@@ -229,7 +229,7 @@ footer .ng-logo.gelap{display:none}
 <section class="wrap video-sec">
   <div>
     <h2>Lihat apa yang ibu bapa nampak</h2>
-    <p class="intro">Anak menjawab soalan di telefon. Anda melihat Tahap Penguasaan (TP) setiap bab dan bab yang masih lemah.</p>
+    <p class="intro">Anak menjawab soalan di telefon. Anda melihat markah setiap bab dan bab yang masih lemah.</p>
     <ul class="senarai">
       <li>Satu kad untuk setiap anak, sehingga 5 anak</li>
       <li>Soalan mengikut Dokumen Standard Kurikulum dan Pentaksiran (DSKP) KSSM yang digunakan di sekolah</li>
@@ -258,7 +258,7 @@ footer .ng-logo.gelap{display:none}
       <p class="intro">Murid DLP belajar Sains dalam Bahasa Inggeris di sekolah. Sains Tingkatan 1, 2 dan 3 (32 bab) kini boleh dimainkan dalam Bahasa Inggeris, dengan soalan, rajah dan Standard Prestasi mengikut DSKP Science versi Bahasa Inggeris.</p>
       <ul class="senarai">
         <li>Anak menekan butang <b>EN</b> di bahagian atas skrin, atau anda menyalin <b>pautan versi English (DLP)</b> daripada kad anak.</li>
-        <li>Rekod TP kekal sama walaupun anak menukar bahasa. Paparan ibu bapa tetap dalam Bahasa Melayu.</li>
+        <li>Rekod markah kekal sama walaupun anak menukar bahasa. Paparan ibu bapa tetap dalam Bahasa Melayu.</li>
         <li>Termasuk dalam langganan keluarga RM32 tanpa bayaran tambahan.</li>
       </ul>
       <div class="ctas">
@@ -276,7 +276,7 @@ footer .ng-logo.gelap{display:none}
 
 <div class="wrap hook-sec">
   <div class="hook">
-    <div><h3>Kad laporan menulis TP3. Adakah anda tahu maksudnya?</h3><p>Kami menerangkan tahap penguasaan anak dalam bahasa yang mudah, beserta langkah seterusnya.</p></div>
+    <div><h3>Markah setiap bab, bukan sekadar “sudah faham”.</h3><p>Anda nampak bab yang sudah 80% dan bab yang baru 30%, beserta langkah seterusnya.</p></div>
     <div><h3>Anda tidak perlu mahir Sains atau Matematik untuk membantu anak.</h3><p>Aplikasi mencadangkan bab yang patut diulang. Lima belas minit sehari sudah memadai.</p></div>
     <div><h3>Satu harga untuk seluruh keluarga.</h3><p>Kurang daripada RM3 sebulan, tanpa yuran bulanan.</p></div>
   </div>
@@ -287,8 +287,8 @@ footer .ng-logo.gelap{display:none}
     <h2>Kelebihan untuk ibu bapa</h2>
     <p class="intro">Anda tidak perlu meneka lagi. Lihat sendiri kemajuan anak dan ketahui bab yang memerlukan bantuan.</p>
     <div class="grid">
-      <div class="kad"><i>1</i><h3>Kemajuan sentiasa terkini</h3><p>Lihat bilangan bab yang sudah dicuba, purata TP dan sama ada anak bermain dalam masa 24 jam lepas.</p></div>
-      <div class="kad"><i>2</i><h3>Memahami TP pada kad laporan</h3><p>TP1 hingga TP6 diterangkan dalam ayat yang mudah difahami oleh ibu bapa.</p></div>
+      <div class="kad"><i>1</i><h3>Kemajuan sentiasa terkini</h3><p>Lihat bilangan bab yang sudah dicuba, purata markah dan sama ada anak bermain dalam masa 24 jam lepas.</p></div>
+      <div class="kad"><i>2</i><h3>Markah yang mudah difahami</h3><p>Setiap bab dipaparkan dalam peratus, bersama label Cemerlang, Baik, Sederhana atau Perlu bantuan.</p></div>
       <div class="kad"><i>3</i><h3>Satu cadangan untuk minggu ini</h3><p>Aplikasi menyebut bab yang patut diulang anak, jadi anda tidak perlu menyusun jadual sendiri.</p></div>
       <div class="kad"><i>4</i><h3>Bab yang lemah dikesan oleh aplikasi</h3><p>Anda tidak perlu mengajar. Cukup memberi dorongan kepada anak.</p></div>
       <div class="kad"><i>5</i><h3>Sehingga 5 anak dalam satu langganan</h3><p>Setiap anak mempunyai kad kemajuan dan PIN sendiri.</p></div>
@@ -305,20 +305,9 @@ footer .ng-logo.gelap{display:none}
       <div class="kad"><i>1</i><h3>Belajar sambil bermain</h3><p>Peta, hentian dan bintang menggalakkan anak mencuba hentian seterusnya.</p></div>
       <div class="kad"><i>2</i><h3>Mengikut DSKP KSSM</h3><p>Sains 51 bab, Matematik 53 bab dan Sejarah 49 bab, Tingkatan 1 hingga 5. Sains Tingkatan 1 hingga 3 turut tersedia dalam Bahasa Inggeris untuk murid DLP.</p></div>
       <div class="kad"><i>3</i><h3>Mengulang bab yang lemah</h3><p>Anak tahu bab yang perlu diberi tumpuan, tanpa mengulang semua bab.</p></div>
-      <div class="kad"><i>4</i><h3>Mengetahui tahap sendiri</h3><p>Anak melihat TP naik, daripada Mengingat hingga Mereka cipta.</p></div>
+      <div class="kad"><i>4</i><h3>Mengetahui kemajuan sendiri</h3><p>Setiap bab ada 5 hentian, daripada mudah hingga mencabar. Anak nampak dirinya maju hentian demi hentian.</p></div>
       <div class="kad"><i>5</i><h3>Telefon atau komputer</h3><p>Dibuka terus dalam pelayar. Tidak perlu memuat turun apa-apa.</p></div>
       <div class="kad"><i>6</i><h3>Rajah dan petikan interaktif</h3><p>Rajah Matematik boleh digerakkan. Soalan Sejarah menggunakan garis masa dan petikan sumber.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec lembut">
-  <div class="wrap">
-    <h2>Cara ia berfungsi</h2>
-    <div class="langkah">
-      <div><h3>Ibu bapa daftar</h3><p>Masukkan nama anak, dan setiap anak mendapat PIN sendiri. Satu langganan untuk sehingga 5 anak.</p></div>
-      <div><h3>Anak berlatih 15 minit</h3><p>Anak menjawab soalan bab demi bab di telefon.</p></div>
-      <div><h3>Anda melihat kemajuan</h3><p>Dalam aplikasi: TP setiap bab, bab yang lemah dan satu cadangan.</p></div>
     </div>
   </div>
 </section>
@@ -328,9 +317,9 @@ footer .ng-logo.gelap{display:none}
     <h2>Cara bermula</h2>
     <p class="intro">Satu langganan keluarga membuka Sains, Matematik dan Sejarah. Gunakan e-mel yang sama di setiap subjek.</p>
     <div class="langkah">
-      <div><h3>1. Daftar dan tambah anak</h3><p>Daftar percuma dan tambah seorang anak (langgan untuk sehingga 5 anak). Setiap anak mendapat kod kelas dan PIN sendiri. Anak perlu ditambah di setiap subjek.</p></div>
-      <div><h3>2. Anak bermain</h3><p>Anak membuka pautan di telefon, memilih namanya dan bermain bab demi bab.</p></div>
-      <div><h3>3. Anda melihat bab yang lemah</h3><p>Setiap kad anak menunjukkan status bermain, TP setiap bab dan satu cadangan untuk minggu ini.</p></div>
+      <div><h3>Daftar dan tambah anak</h3><p>Daftar percuma dan tambah seorang anak (langgan untuk sehingga 5 anak). Setiap anak mendapat kod kelas dan PIN sendiri. Anak perlu ditambah di setiap subjek.</p></div>
+      <div><h3>Anak bermain</h3><p>Anak membuka pautan di telefon, memilih namanya dan bermain bab demi bab.</p></div>
+      <div><h3>Anda melihat bab yang lemah</h3><p>Setiap kad anak menunjukkan status bermain, markah setiap bab dan satu cadangan untuk minggu ini.</p></div>
     </div>
     <div class="ctas" style="margin-top:28px">
       <a class="btn utama daftar-app" href="https://jejaktpsains.naikgred.com/?keluarga=1">Mula dengan Sains</a>
@@ -368,9 +357,9 @@ footer .ng-logo.gelap{display:none}
     <h2>Soalan lazim</h2>
     <details><summary>Berapa harganya?</summary><p>Akaun percuma untuk seorang anak, Bab 1 setiap subjek. Langganan keluarga RM32 setahun, untuk sehingga 5 anak dan ketiga-tiga subjek. Ini harga <i>Early Bird</i> sehingga 31 Disember 2026. Keluarga yang melanggan sebelum 31 Disember 2026 kekal membayar RM32 setiap tahun, selagi langganan disambung dalam masa 30 hari selepas tamat. Mulai 1 Januari 2027, harga biasa ialah RM59 setahun.</p></details>
     <details><summary>Berapa peranti boleh digunakan?</summary><p>Tiada had. Anak masuk dengan kod dan PIN di mana-mana telefon, tablet atau komputer, dan kemajuannya tetap disimpan pada nama yang sama. Ibu dan bapa boleh log masuk dengan e-mel yang sama untuk melihat kemajuan anak.</p></details>
-    <details><summary>Adakah versi Bahasa Inggeris untuk murid DLP?</summary><p>Ya, bagi Sains Tingkatan 1 hingga 3 (32 bab). Anak menekan butang EN di bahagian atas skrin, atau anda menyalin pautan versi English (DLP) daripada kad anak dalam paparan ibu bapa. Rekod TP kekal sama dalam kedua-dua bahasa, dan tiada bayaran tambahan. Matematik, Sejarah dan Sains Tingkatan 4 dan 5 masih dalam Bahasa Melayu.</p></details>
+    <details><summary>Adakah versi Bahasa Inggeris untuk murid DLP?</summary><p>Ya, bagi Sains Tingkatan 1 hingga 3 (32 bab). Anak menekan butang EN di bahagian atas skrin, atau anda menyalin pautan versi English (DLP) daripada kad anak dalam paparan ibu bapa. Rekod markah kekal sama dalam kedua-dua bahasa, dan tiada bayaran tambahan. Matematik, Sejarah dan Sains Tingkatan 4 dan 5 masih dalam Bahasa Melayu.</p></details>
     <details><summary>Bagaimana membuka Matematik dan Sejarah?</summary><p>Bayar sekali di Anak NaikGred Sains. Kemudian log masuk dengan e-mel yang sama di Matematik dan Sejarah, dan langganan keluarga terbuka di sana secara automatik. Anak perlu ditambah di setiap subjek kerana setiap subjek menyimpan datanya secara berasingan.</p></details>
-    <details><summary>Apa beza Anak NaikGred dengan Jejak TP?</summary><p>Jejak TP ialah versi untuk guru di sekolah. Anak NaikGred menggunakan soalan dan sistem TP yang sama, tetapi paparannya direka untuk ibu bapa.</p></details>
+    <details><summary>Apa beza Anak NaikGred dengan Jejak TP?</summary><p>Jejak TP ialah versi untuk guru di sekolah. Anak NaikGred menggunakan soalan yang sama, tetapi paparannya direka untuk ibu bapa, dengan markah setiap bab.</p></details>
     <details><summary>Bolehkah saya meminta bayaran balik?</summary><p>Boleh. Bayaran balik penuh dalam masa 7 hari selepas membayar, tanpa perlu memberikan sebab. Hubungi kami melalui WhatsApp atau e-mel. Butiran lanjut ada dalam <a href="terma.html">terma dan bayaran balik</a>.</p></details>
     <details><summary>Adakah tahun depan saya dicaj secara automatik?</summary><p>Tidak. Tiada pembaharuan automatik. Anda hanya dicaj apabila anda sendiri membuat bayaran baharu.</p></details>
     <details><summary>Bagaimana data anak dilindungi?</summary><p>Kami tidak menyimpan gambar anak, tidak meminta e-mel atau nombor telefon anak, dan tidak menjual data kepada sesiapa. Data anak hanya dipaparkan dalam akaun anda. Baca <a href="privasi.html">dasar privasi</a> yang penuh.</p></details>
