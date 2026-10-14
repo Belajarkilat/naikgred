@@ -292,6 +292,33 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
     var s=h[0],m=h[1],e=document.getElementById("kira-murid");if(!s||!e||!(s.bermain_semua>=1))return;
     e.textContent=(s.bermain_semua+(m?m.semua:0)).toLocaleString("ms-MY");
   });
+  /* Penjejak (14 Okt 2026): satu 'utama-lawat' setiap sesi (nota = kod ?dari), dan satu
+     'utama-klik' bagi setiap jenis butang setiap sesi. Disimpan dalam lo_ping projek Sains.
+     Pelayar automatik dan localhost diabaikan supaya ujian tidak dikira sebagai lawatan. */
+  (function(){try{
+    if(navigator.webdriver||/^(localhost|127\.)/.test(location.hostname))return;
+    var ping=function(j,n){var p=localStorage.getItem("cn-peranti");
+      if(!p||!/^[a-z0-9]{8}$/.test(p)){p=Math.random().toString(36).slice(2,10).replace(/[^a-z0-9]/g,"0");while(p.length<8)p+="0";localStorage.setItem("cn-peranti",p);}
+      fetch(AWAN.url+"/rest/v1/rpc/lo_ping",{method:"POST",keepalive:true,headers:{"apikey":AWAN.kunci,"Authorization":"Bearer "+AWAN.kunci,"Content-Type":"application/json"},
+        body:JSON.stringify({p_jenis:j,p_peranti:p,p_nota:n||""})}).catch(function(){});};
+    var m=/[?&]dari=([^&#]*)/.exec(location.search),kod=m?decodeURIComponent(m[1]).toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,30):"";
+    if(!sessionStorage.getItem("ng-lawat")){sessionStorage.setItem("ng-lawat","1");ping("utama-lawat",kod);}
+    var sekali=function(n){if(sessionStorage.getItem("ng-klik-"+n))return;sessionStorage.setItem("ng-klik-"+n,"1");ping("utama-klik",n);};
+    document.addEventListener("click",function(e){try{
+      var b=e.target.closest&&e.target.closest("a");if(!b)return;
+      var h=b.getAttribute("href")||"",n="";
+      if(/^anak\/#harga/.test(h))n="anak-harga";
+      else if(/^anak\//.test(h))n="anak";
+      else if(h==="#ibu-bapa")n="tatal-ibu-bapa";
+      else if(h==="#guru")n="tatal-guru";
+      else if(/demo=cikgu/.test(h))n="demo-guru";
+      else if(/jejaktpsains/.test(h))n="guru-sains";
+      else if(/jejaktpmath/.test(h))n="guru-math";
+      else if(/jejaktpsejarah/.test(h))n="guru-sejarah";
+      else if(/wa\.me/.test(h))n="whatsapp";
+      else if(/belajarkilat/.test(h))n="kilat";
+      if(n)sekali(n);}catch(x){}});
+  }catch(e){}})();
 })();
 </script>
 </body>
