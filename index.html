@@ -3,93 +3,292 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NaikGred</title>
-<meta name="description" content="Alat pembelajaran dan pentaksiran untuk guru, murid dan ibu bapa di Malaysia.">
-<meta property="og:title" content="NaikGred">
-<meta property="og:description" content="Alat pembelajaran dan pentaksiran untuk guru, murid dan ibu bapa di Malaysia.">
-<meta name="theme-color" content="#0C3B34">
+<title>NaikGred: tahu bab yang sudah dikuasai dan yang masih lemah</title>
+<meta name="description" content="NaikGred membina alat pembelajaran mengikut DSKP untuk guru dan ibu bapa di Malaysia. Sains, Matematik dan Sejarah KSSM, Tingkatan 1 hingga 5.">
+<link rel="canonical" href="https://naikgred.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://naikgred.com/">
+<meta property="og:title" content="NaikGred: naik satu bab demi satu bab">
+<meta property="og:description" content="Murid berlatih sambil bermain. Guru dan ibu bapa nampak bab yang sudah dikuasai dan bab yang masih lemah.">
+<meta property="og:locale" content="ms_MY">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="aset/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="aset/apple-touch-icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--ground:#F4F8F6;--surface:#fff;--ink:#0F1C1A;--muted:#5B6D68;--line:#D6E2DE;--brand:#0C6B5E;--mint:#86CEBD;--star:#F0A62F;--board:#0C3B34;--chalk:#EAF6F2;--chalk2:#A9CFC5}
-@media (prefers-color-scheme:dark){:root{--ground:#0B1513;--surface:#12201C;--ink:#E4F1ED;--muted:#93A8A2;--line:#22332E;--brand:#56B39B;--board:#081F1B}}
+:root{
+  --bg:#FFFFFF; --soft:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --muted:#6E6E73; --line:#E8E8ED;
+  --brand:#0C6B5E; --brand-ink:#FFFFFF; --brand-soft:#EAF6F2; --gold:#F0A62F; --board:#0C3B34; --chalk:#BFD9D2;
+  --ok:#0E7C6F; --mid:#8A6200; --low:#B3123A; --pink:#C2185B;
+  --nav:rgba(255,255,255,.86); --shadow:0 50px 90px -40px rgba(12,59,52,.45);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0F0E; --soft:#141A19; --card:#1A2220; --ink:#F2F5F4; --muted:#9FB3AE; --line:#24302D;
+    --brand:#56B39B; --brand-ink:#06201B; --brand-soft:#16302A; --board:#081F1B;
+    --ok:#5CC9B4; --mid:#E0B24A; --low:#FF7A93; --pink:#F48FB1;
+    --nav:rgba(11,15,14,.82); --shadow:0 50px 90px -40px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0F0E; --soft:#141A19; --card:#1A2220; --ink:#F2F5F4; --muted:#9FB3AE; --line:#24302D;
+  --brand:#56B39B; --brand-ink:#06201B; --brand-soft:#16302A; --board:#081F1B;
+  --ok:#5CC9B4; --mid:#E0B24A; --low:#FF7A93; --pink:#F48FB1;
+  --nav:rgba(11,15,14,.82); --shadow:0 50px 90px -40px rgba(0,0,0,.7);
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif}
-.papan{background:var(--board);color:var(--chalk);padding:72px 20px 80px}
-.wrap{max-width:980px;margin:0 auto}
-.logo{display:flex;align-items:center;gap:14px}
-.logo svg{width:52px;height:52px}
-.wordmark{font-size:40px;letter-spacing:-.042em;line-height:1}
-.wordmark b{font-weight:700;color:var(--mint)}.wordmark strong{font-weight:800}
-h1{font-size:clamp(28px,4.5vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin:36px 0 0;max-width:20ch;text-wrap:balance;color:#fff}
-.papan p{color:var(--chalk2);font-size:18px;max-width:54ch;margin:16px 0 0}
-main{padding:56px 20px 72px}
-h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin:0 0 18px}
-.produk{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-.produk a{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
-.produk a:hover{border-color:var(--brand);transform:translateY(-2px)}
-.produk h3{margin:0;font-size:21px;font-weight:800;letter-spacing:-.02em}
-.produk p{margin:0;color:var(--muted);font-size:15px}
-.produk .untuk{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand)}
-.produk .pergi{margin-top:auto;padding-top:8px;font-weight:700;color:var(--brand)}
-footer{padding:0 20px 40px;color:var(--muted);font-size:14px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+h1,h2,h3,p{margin:0}
+h1,h2{text-wrap:balance}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+
+/* navigasi */
+.nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mark{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.03em;color:var(--brand)}
+.mark svg{width:26px;height:26px;flex:none}
+.mark span{color:#E09517;margin-left:-8px}
+.menu{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500}
+.menu a{color:var(--ink);text-decoration:none}
+.menu a:hover{color:var(--brand)}
+.pil{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--brand);color:var(--brand-ink)!important;font-weight:600;text-decoration:none}
+@media (max-width:640px){.menu .teks{display:none}}
+
+/* hero */
+.hero{text-align:center;padding-block:88px 32px}
+.eyebrow{font-size:17px;font-weight:600;color:var(--brand)}
+.hero h1{margin:14px auto 0;max-width:15ch;font-size:clamp(42px,7vw,84px);line-height:1.02;letter-spacing:-.035em;font-weight:800}
+.lede{margin:22px auto 0;max-width:34ch;font-size:clamp(19px,2.2vw,24px);line-height:1.4;color:var(--muted);font-weight:500}
+.ctas{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;font-weight:600;font-size:17px;text-decoration:none}
+.btn.utama{background:var(--brand);color:var(--brand-ink)}
+.btn.kedua{color:var(--brand);border:1.5px solid var(--brand)}
+.btn:hover{filter:brightness(1.08)}
+
+.telefon{display:flex;justify-content:center;padding:24px 20px 0}
+.telefon .bingkai{width:340px;max-width:86vw;background:#1D1D1F;border-radius:52px;padding:12px;box-shadow:var(--shadow)}
+.telefon .skrin{border-radius:41px;overflow:hidden;background:#F2F4F7;aspect-ratio:720/1240}
+.telefon img{width:100%;height:100%;object-fit:cover;display:block}
+.kapsyen{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+
+/* angka */
+.angka{margin-top:88px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media (max-width:760px){.angka{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.angka div{padding:30px 8px;text-align:center}
+.angka b{display:block;font-size:clamp(36px,5vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.angka span{display:block;margin-top:4px;color:var(--muted);font-size:15px}
+
+/* seksyen */
+.sek{padding:104px 0}
+.sek.lembut{background:var(--soft)}
+.sek h2{font-size:clamp(34px,4.6vw,56px);letter-spacing:-.03em;line-height:1.05;font-weight:800;max-width:18ch}
+.sek .intro{margin-top:14px;font-size:20px;color:var(--muted);max-width:46ch}
+.label{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+
+/* ibu bapa */
+.kad-besar{margin-top:44px;background:var(--card);border-radius:28px;padding:clamp(28px,5vw,48px);display:flex;flex-wrap:wrap;gap:36px;align-items:center;justify-content:space-between}
+.kad-besar .kiri{flex:1 1 340px;min-width:0}
+.kad-besar h3{margin-top:10px;font-size:clamp(30px,4vw,40px);letter-spacing:-.025em;font-weight:800}
+.kad-besar .kiri p{margin-top:12px;font-size:18px;color:var(--muted);max-width:40ch}
+.senarai{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:16px}
+.senarai li{display:flex;gap:10px;align-items:flex-start}
+.senarai svg{flex:none;margin-top:3px}
+.kad-besar .ctas{justify-content:flex-start;margin-top:26px}
+.markah{flex:0 1 340px;display:flex;flex-direction:column;gap:12px;width:100%}
+.markah div{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--soft);border-radius:14px;padding:14px 16px;font-size:15px}
+.markah b.ok{color:var(--ok)}.markah b.mid{color:var(--mid)}.markah b.low{color:var(--low)}
+.markah .nota{background:none;padding:0 4px;font-size:13px;color:var(--muted)}
+
+/* guru */
+.papan{background:var(--board);color:#FFFFFF}
+.papan .label{color:#86CEBD}
+.papan h2{color:#FFFFFF}
+.papan .intro{color:var(--chalk)}
+.bab{margin-top:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:rgba(255,255,255,.14);border-radius:20px;overflow:hidden}
+@media (max-width:760px){.bab{grid-template-columns:1fr}}
+.bab a{background:var(--board);padding:34px 28px;text-decoration:none;color:#FFFFFF;display:flex;flex-direction:column;gap:6px;min-height:200px}
+.bab a:hover{background:#0F463E}
+.bab b{font-size:clamp(56px,7vw,76px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.bab .nm{font-size:20px;font-weight:700;margin-top:6px}
+.bab .ket{color:var(--chalk);font-size:15px}
+.bab .pergi{margin-top:auto;padding-top:14px;color:var(--gold);font-weight:700;font-size:15px}
+.papan .ctas{justify-content:flex-start;margin-top:40px}
+.btn.emas{background:var(--gold);color:#2A1A00}
+.btn.garis{color:#FFFFFF;border:1.5px solid #FFFFFF}
+
+/* nilai */
+.nilai{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+@media (max-width:860px){.nilai{grid-template-columns:1fr;gap:32px}}
+.nilai h3{margin-top:14px;font-size:22px;font-weight:700}
+.nilai p{margin-top:8px;font-size:16px;color:var(--muted)}
+
+/* penutup */
+.akhir{background:var(--soft);padding:96px 0;text-align:center}
+.akhir h2{margin:0 auto;max-width:18ch;font-size:clamp(34px,4.6vw,56px);letter-spacing:-.03em;line-height:1.05;font-weight:800}
+.akhir p{margin:16px auto 0;max-width:40ch;font-size:19px;color:var(--muted)}
+
+footer{padding:32px 0 48px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}
+footer a{color:var(--muted)}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
 </style>
 </head>
 <body>
-<header class="papan">
+
+<header class="nav">
   <div class="wrap">
-    <div class="logo">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="12" height="18" rx="4.5" fill="#86CEBD"/><rect x="22" y="27" width="12" height="29" rx="4.5" fill="#2F9A83"/><path d="M38 20 L32.6 20 Q30 20 31.6 18 L41.8 6 Q44 3.4 46.2 6 L56.4 18 Q58 20 55.4 20 L50 20 L50 51.5 Q50 56 45.5 56 L42.5 56 Q38 56 38 51.5 Z" fill="#F0A62F"/></svg>
-      <span class="wordmark"><b>Naik</b><strong>Gred</strong></span>
-    </div>
-    <h1>Kerja guru jadi ringan. Murid naik satu tahap demi satu tahap.</h1>
-    <p>Alat pembelajaran dan pentaksiran untuk bilik darjah Malaysia, dibina bersama guru yang masih mengajar.</p>
+    <a class="mark" href="./" aria-label="NaikGred, laman utama">
+      <svg viewBox="0 0 44 40" aria-hidden="true"><rect x="0" y="24" width="9" height="16" rx="3.5" fill="#86CEBD"/><rect x="12" y="15" width="9" height="25" rx="3.5" fill="#0C6B5E"/><path d="M27 12 L23 12 Q21 12 22.4 10.4 L29.6 2 Q31 0.6 32.4 2 L39.6 10.4 Q41 12 39 12 L35 12 L35 37 Q35 40 32 40 L30 40 Q27 40 27 37 Z" fill="#F0A62F"/></svg>
+      Naik<span>Gred</span>
+    </a>
+    <nav class="menu" aria-label="Menu utama">
+      <a class="teks" href="#ibu-bapa">Ibu bapa</a>
+      <a class="teks" href="#guru">Guru</a>
+      <a class="teks" href="#tentang">Tentang kami</a>
+      <a class="pil" href="anak/">Mula percuma</a>
+    </nav>
   </div>
 </header>
+
 <main>
-  <div class="wrap">
-    <h2>Produk</h2>
-    <div class="produk">
-      <a href="anak/">
-        <span class="untuk">Untuk ibu bapa · Tingkatan 1–5</span>
-        <h3>Anak NaikGred</h3>
-        <p>Lihat bab Sains, Matematik dan Sejarah yang sudah dikuasai anak dan yang masih lemah, terus di telefon. Daftar percuma, RM32 setahun untuk 5 anak.</p>
-        <span class="pergi">Tengok →</span>
-      </a>
-      <a href="https://jejaktpsains.naikgred.com/landing.html">
-        <span class="untuk">Untuk guru · Sains Tingkatan 1–5</span>
-        <h3>Jejak TP Sains</h3>
-        <p>Murid bermain, TP terus direkod mengikut DSKP. 51 bab, Tingkatan 1 hingga 5, termasuk versi Bahasa Inggeris (DLP) Tingkatan 1 hingga 3. Bab 1 dan 2 percuma.</p>
-        <span class="pergi">Tengok →</span>
-      </a>
-      <a href="https://jejaktpmath.naikgred.com/landing.html">
-        <span class="untuk">Untuk guru · Matematik Tingkatan 1–5</span>
-        <h3>Jejak TP Matematik</h3>
-        <p>53 bab mengikut DSKP, dengan rajah interaktif. TP murid direkod bab demi bab. Bab 1 dan 2 percuma.</p>
-        <span class="pergi">Tengok →</span>
-      </a>
-      <a href="https://jejaktpsejarah.naikgred.com/landing.html">
-        <span class="untuk">Untuk guru · Sejarah Tingkatan 1–5</span>
-        <h3>Jejak TP Sejarah</h3>
-        <p>49 bab mengikut DSKP, dengan garis masa dan petikan sumber. TP murid direkod bab demi bab. Bab 1 dan 2 percuma.</p>
-        <span class="pergi">Tengok →</span>
-      </a>
-      <a href="https://belajarkilat.github.io/matematik-kilat/">
-        <span class="untuk">Untuk murid · Tahun 1–6</span>
-        <h3>Matematik Kilat</h3>
-        <p>Permainan latihan Matematik KSSR, 1,200 soalan dari Tahun 1 hingga Tahun 6.</p>
-        <span class="pergi">Main →</span>
-      </a>
-      <a href="https://belajarkilat.github.io/matematik-kilat/">
-        <span class="untuk">Untuk murid · Tahun 1–6</span>
-        <h3>Sains Kilat</h3>
-        <p>Permainan latihan Sains KSSR — hidupan, bahan, tenaga dan bumi, dalam app yang sama dengan Matematik Kilat.</p>
-        <span class="pergi">Main →</span>
-      </a>
+  <section class="wrap hero">
+    <p class="eyebrow">Sains · Matematik · Sejarah KSSM</p>
+    <h1>Naik satu bab demi satu bab.</h1>
+    <p class="lede">Murid berlatih sambil bermain. Guru dan ibu bapa nampak bab yang sudah dikuasai dan bab yang masih lemah.</p>
+    <div class="ctas">
+      <a class="btn utama" href="#ibu-bapa">Untuk ibu bapa</a>
+      <a class="btn kedua" href="#guru">Untuk guru</a>
+    </div>
+  </section>
+
+  <div class="telefon">
+    <div>
+      <div class="bingkai"><div class="skrin">
+        <img src="aset/skrin-ibubapa.jpg" alt="Paparan ibu bapa Anak NaikGred: purata markah anak, satu tindakan untuk minggu ini dan bab paling lemah" width="720" height="1240">
+      </div></div>
+      <p class="kapsyen">Paparan ibu bapa sebenar. Nama dan data ialah contoh rekaan.</p>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="angka">
+      <div><b id="kira-murid">870+</b><span>murid sudah bermain</span></div>
+      <div><b>153</b><span>bab KSSM, Tingkatan 1 hingga 5</span></div>
+      <div><b>3</b><span>subjek mengikut DSKP</span></div>
+      <div><b>RM0</b><span>untuk bermula</span></div>
+    </div>
+  </div>
+
+  <section class="sek lembut" id="ibu-bapa" style="margin-top:96px">
+    <div class="wrap">
+      <p class="label" style="color:var(--pink)">Untuk ibu bapa</p>
+      <h2 style="margin-top:10px">Anak kata “dah faham”. Kini ibu bapa boleh pastikan.</h2>
+      <div class="kad-besar">
+        <div class="kiri">
+          <p class="label" style="color:var(--pink)">Anak NaikGred</p>
+          <h3>Markah setiap bab, terus di telefon.</h3>
+          <p>Anak menjawab soalan seperti bermain permainan. Ibu bapa melihat bab yang Cemerlang dan bab yang Perlu bantuan, dengan satu cadangan untuk minggu ini.</p>
+          <ul class="senarai">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>Sehingga 5 anak dalam satu akaun</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>Sains, Matematik dan Sejarah, Tingkatan 1 hingga 5</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>Sains DLP (Bahasa Inggeris) Tingkatan 1 hingga 3</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>RM32 setahun sekeluarga, harga Early Bird hingga 31 Disember</li>
+          </ul>
+          <div class="ctas">
+            <a class="btn utama" href="anak/">Cuba percuma</a>
+            <a class="btn kedua" href="anak/#harga">Lihat harga</a>
+          </div>
+        </div>
+        <div class="markah" aria-label="Contoh markah setiap bab">
+          <div><span>Bab 1 · Sains</span><b class="ok">93% Cemerlang</b></div>
+          <div><span>Bab 3 · Sains</span><b class="mid">44% Sederhana</b></div>
+          <div><span>Bab 5 · Sains</span><b class="low">17% Perlu bantuan</b></div>
+          <p class="nota">Contoh paparan. Data rekaan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sek papan" id="guru">
+    <div class="wrap">
+      <p class="label">Untuk guru</p>
+      <h2 style="margin-top:10px">Jejak TP. Kerja PBD jadi ringan.</h2>
+      <p class="intro">Murid bermain di telefon. Tahap Penguasaan (TP) direkod terus mengikut DSKP, bab demi bab, dan sedia untuk pelaporan PBD.</p>
+      <div class="bab">
+        <a href="https://jejaktpsains.naikgred.com/landing.html"><b>51</b><span class="nm">bab Sains</span><span class="ket">Termasuk versi Bahasa Inggeris (DLP) Tingkatan 1 hingga 3</span><span class="pergi">Jejak TP Sains ›</span></a>
+        <a href="https://jejaktpmath.naikgred.com/landing.html"><b>53</b><span class="nm">bab Matematik</span><span class="ket">Dengan rajah interaktif yang boleh digerakkan</span><span class="pergi">Jejak TP Matematik ›</span></a>
+        <a href="https://jejaktpsejarah.naikgred.com/landing.html"><b>49</b><span class="nm">bab Sejarah</span><span class="ket">Dengan garis masa dan petikan sumber</span><span class="pergi">Jejak TP Sejarah ›</span></a>
+      </div>
+      <div class="ctas">
+        <a class="btn emas" href="https://jejaktpsains.naikgred.com/landing.html">Mula dengan Sains</a>
+        <a class="btn garis" href="https://jejaktpsains.naikgred.com/?demo=cikgu">Cuba kelas demo</a>
+      </div>
+      <p class="intro" style="font-size:15px;margin-top:18px">Bab 1 dan 2 percuma untuk setiap tingkatan.</p>
+    </div>
+  </section>
+
+  <section class="sek" id="tentang">
+    <div class="wrap">
+      <h2>Dibina bersama guru yang masih mengajar.</h2>
+      <div class="nilai">
+        <div>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/></svg>
+          <h3>Tepat mengikut DSKP</h3>
+          <p>Setiap soalan dipetakan kepada standard pembelajaran yang digunakan di sekolah.</p>
+        </div>
+        <div>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M3 20h18"/><path d="M6 16v-4M11 16V8M16 16v-6M20 16V5"/></svg>
+          <h3>Data yang boleh diambil tindakan</h3>
+          <p>Bukan sekadar satu markah keseluruhan. Bab yang lemah dikesan, dan satu langkah seterusnya dicadangkan.</p>
+        </div>
+        <div>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <h3>Data murid dilindungi</h3>
+          <p>Tiada gambar, e-mel atau nombor telefon murid disimpan. Data tidak dijual kepada sesiapa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="akhir">
+    <div class="wrap">
+      <h2>Mula hari ini. Percuma.</h2>
+      <p>Daftar dalam masa satu minit. Tiada aplikasi untuk dimuat turun.</p>
+      <div class="ctas">
+        <a class="btn utama" href="anak/">Untuk ibu bapa</a>
+        <a class="btn kedua" href="https://jejaktpsains.naikgred.com/landing.html">Untuk guru</a>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="wrap">© 2026 NaikGred</div></footer>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 NaikGred · Dibina di Malaysia<br>Untuk murid sekolah rendah: <a href="https://belajarkilat.github.io/matematik-kilat/">Matematik Kilat dan Sains Kilat</a></span>
+    <nav aria-label="Pautan kaki">
+      <a href="anak/privasi.html">Dasar Privasi</a>
+      <a href="anak/terma.html">Terma</a>
+      <a href="https://wa.me/60106640353">WhatsApp 010-664 0353</a>
+      <a href="mailto:belajarkilatofficial@gmail.com">E-mel</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* Pengira murid bermain (Sains + Matematik/Sejarah), sama seperti landing Anak. Jika gagal, angka asal kekal. */
+(function(){
+  var AWAN={url:"https://cqokowzzgseuvhcgpktj.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxb2tvd3p6Z3NldXZoY2dwa3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NzE5MDgsImV4cCI6MjEwMjU0NzkwOH0.AjFtow8RscN0KpIrWNrHCQu-cztcjd_ojTKZyY5GTg8"};
+  var MJ={url:"https://noaeagitwklnpmyhhhtn.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vYWVhZ2l0d2tsbnBteWhoaHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU4MDEsImV4cCI6MjEwNTczMTgwMX0.Z7ltdqSgxAlVVSlzDuPvUnFdpStY5UWHbdOqXS8BtB0"};
+  var ambil=function(c,fn){return fetch(c.url+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":c.kunci,"Authorization":"Bearer "+c.kunci,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})};
+  Promise.all([ambil(AWAN,"lo_statistik_awam"),ambil(MJ,"mj_statistik_awam")]).then(function(h){
+    var s=h[0],m=h[1],e=document.getElementById("kira-murid");if(!s||!e||!(s.bermain_semua>=1))return;
+    e.textContent=(s.bermain_semua+(m?m.semua:0)).toLocaleString("ms-MY");
+  });
+})();
+</script>
 </body>
 </html>
