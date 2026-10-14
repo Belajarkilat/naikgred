@@ -381,9 +381,9 @@ footer .ng-logo.gelap{display:none}
   var ambil=function(c,fn){return fetch(c.url+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":c.kunci,"Authorization":"Bearer "+c.kunci,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})};
   Promise.all([ambil(AWAN,"lo_statistik_awam"),ambil(MJ,"mj_statistik_awam")]).then(function(h){
     var s=h[0],m=h[1],e=document.getElementById("bukti");if(!s||!e||!(s.bermain_semua>=1))return;
-    var semua=s.bermain_semua+(m?m.semua:0),j24=s.bermain_24j+(m?m.j24:0);
+    var semua=s.bermain_semua+(m?m.semua:0);
     var f=function(n){return n.toLocaleString("ms-MY")};
-    e.innerHTML="<div><b>"+f(semua)+"</b><span>murid sudah bermain sejak dilancarkan</span></div>"+(j24>=20?"<div><b>"+f(j24)+"</b><span>bermain dalam 24 jam lepas</span></div>":"");e.hidden=false});
+    e.innerHTML="<div><b>"+f(semua)+"</b><span>murid sudah bermain sejak dilancarkan</span></div>";e.hidden=false});
   /* Penjejak (14 Okt 2026): satu 'anak-lawat' setiap sesi (nota = kod ?dari), dan satu
      'anak-klik' bagi setiap jenis butang setiap sesi. Disimpan dalam lo_ping projek Sains. */
   (function(){try{
