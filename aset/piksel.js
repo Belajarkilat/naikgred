@@ -7,7 +7,7 @@
      atau ibu bapa disahkan berjaya -> Purchase (lihat NGPiksel dalam index.html app)
    Selagi ID kosong, fail ini tidak berbuat apa-apa. */
 (function(){
-  var ID = "";
+  var ID = "1132319742906472";
   if(!ID || window.fbq) return;
 
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
