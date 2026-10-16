@@ -368,8 +368,10 @@ footer .ng-logo.gelap{display:none}
     var f=function(n){return n.toLocaleString("ms-MY")};
     e.innerHTML="<div><b>"+f(semua)+"</b><span>murid sudah bermain sejak dilancarkan</span></div>";e.hidden=false});
   /* Penjejak (14 Okt 2026): satu 'anak-lawat' setiap sesi (nota = kod ?dari), dan satu
-     'anak-klik' bagi setiap jenis butang setiap sesi. Disimpan dalam lo_ping projek Sains. */
+     'anak-klik' bagi setiap jenis butang setiap sesi. Disimpan dalam lo_ping projek Sains.
+     Pelayar automatik dan localhost diabaikan (17 Okt) supaya ujian tidak dikira sebagai lawatan. */
   (function(){try{
+    if(navigator.webdriver||/^(localhost|127.)/.test(location.hostname))return;
     var ping=function(j,n){var p=localStorage.getItem("cn-peranti");
       if(!p||!/^[a-z0-9]{8}$/.test(p)){p=Math.random().toString(36).slice(2,10).replace(/[^a-z0-9]/g,"0");while(p.length<8)p+="0";localStorage.setItem("cn-peranti",p);}
       fetch(AWAN.url+"/rest/v1/rpc/lo_ping",{method:"POST",keepalive:true,headers:{"apikey":AWAN.kunci,"Authorization":"Bearer "+AWAN.kunci,"Content-Type":"application/json"},
