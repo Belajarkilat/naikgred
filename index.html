@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NaikGred: tahu bab yang sudah dikuasai dan yang masih lemah</title>
-<meta name="description" content="NaikGred membina alat pembelajaran mengikut DSKP untuk guru dan ibu bapa di Malaysia. Sains, Matematik dan Sejarah KSSM, Tingkatan 1 hingga 5.">
+<meta name="description" content="NaikGred membina alat pembelajaran mengikut DSKP untuk guru dan ibu bapa di Malaysia. Sains, Matematik, Sejarah dan Bahasa Inggeris KSSM, Tingkatan 1 hingga 5.">
 <link rel="canonical" href="https://naikgred.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://naikgred.com/">
@@ -112,7 +112,7 @@ h1,h2{text-wrap:balance}
 .papan .label{color:#86CEBD}
 .papan h2{color:#FFFFFF}
 .papan .intro{color:var(--chalk)}
-.bab{margin-top:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:rgba(255,255,255,.14);border-radius:20px;overflow:hidden}
+.bab{margin-top:56px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:rgba(255,255,255,.14);border-radius:20px;overflow:hidden}
 @media (max-width:760px){.bab{grid-template-columns:1fr}}
 .bab a{background:var(--board);padding:34px 28px;text-decoration:none;color:#FFFFFF;display:flex;flex-direction:column;gap:6px;min-height:200px}
 .bab a:hover{background:#0F463E}
@@ -173,7 +173,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 
 <main>
   <section class="wrap hero">
-    <p class="eyebrow">Sains · Matematik · Sejarah KSSM</p>
+    <p class="eyebrow">Sains · Matematik · Sejarah · English KSSM</p>
     <h1>Naik satu bab demi satu bab.</h1>
     <p class="lede">Murid berlatih sambil bermain. Guru dan ibu bapa nampak bab yang sudah dikuasai dan bab yang masih lemah.</p>
     <div class="ctas">
@@ -193,8 +193,8 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
   <div class="wrap">
     <div class="angka">
       <div><b id="kira-murid">870+</b><span>murid sudah bermain</span></div>
-      <div><b>153</b><span>bab KSSM, Tingkatan 1 hingga 5</span></div>
-      <div><b>3</b><span>subjek mengikut DSKP</span></div>
+      <div><b>184</b><span>bab KSSM, Tingkatan 1 hingga 5</span></div>
+      <div><b>4</b><span>subjek mengikut DSKP</span></div>
       <div><b>RM0</b><span>untuk bermula</span></div>
     </div>
   </div>
@@ -237,6 +237,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
         <a href="https://jejaktpsains.naikgred.com/landing.html"><b>51</b><span class="nm">bab Sains</span><span class="ket">Termasuk versi Bahasa Inggeris (DLP) Tingkatan 1 hingga 3</span><span class="pergi">Jejak TP Sains ›</span></a>
         <a href="https://jejaktpmath.naikgred.com/landing.html"><b>53</b><span class="nm">bab Matematik</span><span class="ket">Dengan rajah interaktif yang boleh digerakkan</span><span class="pergi">Jejak TP Matematik ›</span></a>
         <a href="https://jejaktpsejarah.naikgred.com/landing.html"><b>49</b><span class="nm">bab Sejarah</span><span class="ket">Dengan garis masa dan petikan sumber</span><span class="pergi">Jejak TP Sejarah ›</span></a>
+        <a href="https://jejaktpenglish.naikgred.com/landing.html"><b>31</b><span class="nm">bab English</span><span class="ket">Dengan soalan mendengar yang dibaca oleh telefon murid</span><span class="pergi">Jejak TP English ›</span></a>
       </div>
       <div class="harga-guru" id="harga-guru">
         <div>
@@ -338,6 +339,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
       else if(/jejaktpsains/.test(h))n="guru-sains";
       else if(/jejaktpmath/.test(h))n="guru-math";
       else if(/jejaktpsejarah/.test(h))n="guru-sejarah";
+      else if(/jejaktpenglish/.test(h))n="guru-english";
       else if(/wa\.me/.test(h))n="whatsapp";
       else if(/belajarkilat/.test(h))n="kilat";
       if(n)sekali(n);}catch(x){}});
