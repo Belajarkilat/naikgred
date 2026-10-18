@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Planner Guru 2027 percuma | NaikGred</title>
+<meta name="description" content="Planner Guru 2027 percuma untuk guru sekolah menengah: takwim cuti sekolah dan cuti umum mengikut Kalendar Akademik KPM, 12 halaman bulanan dan ruang program sekolah. Nama cikgu terus di kulit depan.">
+<link rel="canonical" href="https://naikgred.com/planner/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://naikgred.com/planner/">
+<meta property="og:title" content="Planner Guru 2027 percuma">
+<meta property="og:description" content="Takwim cuti sekolah dan cuti umum 2027, 12 halaman bulanan dan ruang program sekolah. Dua gaya: korporat dan comel.">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:image" content="https://naikgred.com/planner/pratonton-comel-kulit.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="../aset/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../aset/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --soft:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --muted:#6E6E73; --line:#E8E8ED;
+  --brand:#0C6B5E; --brand-ink:#FFFFFF; --brand-soft:#EAF6F2; --gold:#F0A62F; --board:#0C3B34;
+  --nav:rgba(255,255,255,.86);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0F0E; --soft:#141A19; --card:#1A2220; --ink:#F2F5F4; --muted:#9FB3AE; --line:#24302D;
+    --brand:#56B39B; --brand-ink:#06201B; --brand-soft:#16302A; --board:#081F1B; --nav:rgba(11,15,14,.82);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0F0E; --soft:#141A19; --card:#1A2220; --ink:#F2F5F4; --muted:#9FB3AE; --line:#24302D;
+  --brand:#56B39B; --brand-ink:#06201B; --brand-soft:#16302A; --board:#081F1B; --nav:rgba(11,15,14,.82);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+.nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{height:56px;display:flex;align-items:center;justify-content:space-between}
+.mark{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.03em;color:var(--brand)}
+.mark svg{width:26px;height:26px}
+.mark span{color:#E09517;margin-left:-8px}
+
+.hero{padding-block:64px 24px;text-align:center}
+.eyebrow{font-size:16px;font-weight:600;color:var(--brand)}
+.hero h1{margin:12px auto 0;font-size:clamp(40px,6.4vw,72px);line-height:1.02;letter-spacing:-.035em;font-weight:800;text-wrap:balance}
+.lede{margin:18px auto 0;max-width:40ch;font-size:clamp(18px,2vw,21px);color:var(--muted);font-weight:500;text-wrap:balance}
+.fakta{margin:22px auto 0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:14px;font-weight:600}
+.fakta span{background:var(--brand-soft);color:var(--brand);padding:6px 12px;border-radius:999px}
+
+form{margin:40px auto 0;max-width:760px;text-align:left;display:flex;flex-direction:column;gap:28px}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;min-width:0}
+legend{padding:0;font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+legend small{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:2px}
+.gaya{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.gaya label{cursor:pointer;display:flex;flex-direction:column;gap:10px;background:var(--soft);border:2px solid transparent;border-radius:20px;padding:14px;transition:border-color .15s}
+.gaya input{position:absolute;opacity:0;pointer-events:none}
+.gaya input:checked+label{border-color:var(--brand);background:var(--brand-soft)}
+.gaya input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
+.gaya img{width:100%;height:auto;aspect-ratio:210/297;object-fit:cover;border-radius:10px;box-shadow:0 8px 24px -12px rgba(0,0,0,.35);background:#fff}
+.gaya b{font-size:17px}.gaya span{font-size:14px;color:var(--muted);margin-top:-6px}
+.medan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:560px){.medan{grid-template-columns:1fr}}
+.medan label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;min-width:0}
+input[type=text],input[type=email]{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+input[type=text]:focus,input[type=email]:focus{outline:none;border-color:var(--brand)}
+.nota{font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+.nota svg{flex:none;margin-top:3px}
+.setuju{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:16px;padding:16px;cursor:pointer}
+.setuju input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--brand);flex:none}
+.setuju b{display:block;font-size:16px}
+.setuju span{font-size:14px;color:var(--muted)}
+#kotakEmel[hidden]{display:none}
+.butang{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border-radius:999px;background:var(--brand);color:var(--brand-ink);font:inherit;font-weight:700;font-size:18px;border:0;cursor:pointer;width:100%}
+.butang:disabled{opacity:.6;cursor:wait}
+.butang:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+#status{min-height:24px;font-size:15px;text-align:center;font-weight:600}
+#status.ok{color:var(--brand)}#status.salah{color:#B3123A}
+.tip{background:#FFF4D8;color:#5A4200;border-radius:14px;padding:12px 16px;font-size:14px}
+.tip[hidden]{display:none}
+
+.isi{padding-block:72px;margin-top:72px;background:var(--soft)}
+.isi h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.03em;font-weight:800;text-align:center}
+.halaman{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
+.halaman div{background:var(--card);border-radius:18px;padding:20px}
+.halaman b{display:block;font-size:17px}.halaman p{margin-top:6px;font-size:15px;color:var(--muted)}
+.contoh{margin-top:36px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.contoh img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 30px -16px rgba(0,0,0,.35);background:#fff}
+.kongsi{padding-block:64px;text-align:center}
+.kongsi h2{font-size:clamp(26px,3.6vw,36px);letter-spacing:-.03em;font-weight:800}
+.kongsi p{margin:10px auto 0;color:var(--muted);max-width:44ch}
+.kongsi a.butang{width:auto;margin-top:20px;text-decoration:none}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-direction:column;gap:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="mark" href="../" aria-label="NaikGred, laman utama"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="12" height="18" rx="4.5" fill="#86CEBD"/><rect x="22" y="27" width="12" height="29" rx="4.5" fill="#0C6B5E"/><path d="M38 20 L32.6 20 Q30 20 31.6 18 L41.8 6 Q44 3.4 46.2 6 L56.4 18 Q58 20 55.4 20 L50 20 L50 51.5 Q50 56 45.5 56 L42.5 56 Q38 56 38 51.5 Z" fill="#F0A62F"/></svg>Naik<span>Gred</span></a>
+</div></header>
+
+<main>
+<section class="hero wrap">
+  <p class="eyebrow">Percuma untuk guru sekolah menengah</p>
+  <h1>Planner Guru 2027</h1>
+  <p class="lede">Takwim cuti sekolah dan cuti umum 2027, 12 halaman bulanan dan ruang untuk program sekolah. Nama cikgu terus di kulit depan.</p>
+  <div class="fakta"><span>Ikut Kalendar Akademik 2027 KPM</span><span>16 halaman A4</span><span>Cetak atau guna di tablet</span></div>
+
+  <form id="borang" novalidate>
+    <fieldset>
+      <legend>1. Pilih gaya</legend>
+      <div class="gaya">
+        <div><input type="radio" name="gaya" id="gayaKorporat" value="korporat" checked><label for="gayaKorporat"><img src="pratonton-korporat-kulit.jpg" alt="Kulit planner gaya korporat, hijau gelap" width="935" height="1323"><b>Korporat</b><span>Kemas dan profesional</span></label></div>
+        <div><input type="radio" name="gaya" id="gayaComel" value="comel"><label for="gayaComel"><img src="pratonton-comel-kulit.jpg" alt="Kulit planner gaya comel, warna pastel dengan maskot NaikGred" width="935" height="1323"><b>Comel</b><span>Pastel dengan pelekat kartun</span></label></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. Nama di kulit depan <small>Pilihan. Biarkan kosong jika mahu tulis sendiri.</small></legend>
+      <div class="medan">
+        <label for="nama">Nama<input type="text" id="nama" maxlength="60" autocomplete="name" placeholder="Cikgu Aminah binti Ali"></label>
+        <label for="sekolah">Sekolah<input type="text" id="sekolah" maxlength="80" autocomplete="organization" placeholder="SMK Taman Bunga Raya"></label>
+        <label for="subjek">Subjek<input type="text" id="subjek" maxlength="60" placeholder="Sains"></label>
+        <label for="kelas">Kelas<input type="text" id="kelas" maxlength="60" placeholder="1 Bestari, 2 Cemerlang"></label>
+      </div>
+      <p class="nota"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.5 8 11 4.6-1.5 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Nama ini dimasukkan ke dalam PDF di telefon atau komputer cikgu sendiri. Ia tidak dihantar kepada kami.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Wallpaper bulanan <small>Pilihan</small></legend>
+      <label class="setuju" for="langgan"><input type="checkbox" id="langgan"><div><b>Hantar wallpaper bulan baharu dan peringatan tarikh penting ke e-mel saya</b><span>Wallpaper desktop dan tablet setiap 1 haribulan, peringatan PBD, UASA dan Matriks Pembelajaran, serta kemas kini jika KPM menukar tarikh.</span></div></label>
+      <div id="kotakEmel" hidden>
+        <div class="medan" style="grid-template-columns:1fr"><label for="emel">E-mel<input type="email" id="emel" maxlength="200" autocomplete="email" placeholder="nama@contoh.com"></label></div>
+        <p class="nota" style="margin-top:10px">Jika ditanda, kami menyimpan e-mel, nama dan sekolah yang cikgu isi di atas untuk tujuan ini sahaja. Kami tidak menjual atau berkongsi data ini. Cikgu boleh berhenti bila-bila masa. <a href="../anak/privasi.html#planner">Dasar privasi</a></p>
+      </div>
+    </fieldset>
+
+    <p class="tip" id="tipApp" hidden>Jika muat turun tidak bermula, tekan menu ⋮ atau ··· dan pilih "Buka dalam Chrome" atau "Buka dalam Safari".</p>
+    <button class="butang" type="submit" id="butang"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Muat turun planner (PDF)</button>
+    <p id="status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<section class="isi"><div class="wrap">
+  <h2>Apa ada dalam planner</h2>
+  <div class="halaman">
+    <div><b>Takwim setahun</b><p>Cuti sekolah dan cuti umum 2027 diserlahkan, dengan senarai tarikh cuti.</p></div>
+    <div><b>Program sekolah 2027</b><p>Jadual 12 bulan untuk mencatat program dan aktiviti sekolah.</p></div>
+    <div><b>12 halaman bulanan</b><p>Petak besar untuk menulis, nama cuti dalam petak, ruang program dan catatan.</p></div>
+    <div><b>Kulit dengan nama cikgu</b><p>Nama, sekolah, subjek dan kelas, siap dicetak.</p></div>
+  </div>
+  <div class="contoh">
+    <img src="pratonton-korporat-bulan.jpg" alt="Contoh halaman bulan Mac gaya korporat" width="935" height="1323" loading="lazy">
+    <img src="pratonton-comel-bulan.jpg" alt="Contoh halaman bulan Mac gaya comel" width="935" height="1323" loading="lazy">
+  </div>
+</div></section>
+
+<section class="kongsi wrap">
+  <h2>Kongsi dengan rakan guru</h2>
+  <p>Planner ini percuma. Hantar pautan ini ke kumpulan WhatsApp guru di sekolah cikgu.</p>
+  <a class="butang" id="kongsiWa" href="https://wa.me/?text=Planner%20Guru%202027%20percuma%2C%20ikut%20Kalendar%20Akademik%20KPM%3A%20https%3A%2F%2Fnaikgred.com%2Fplanner%2F%3Fdari%3Dwa">Kongsi di WhatsApp</a>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>Tarikh cuti mengikut Kalendar Akademik 2027 KPM untuk Kumpulan B (Johor, Melaka, Negeri Sembilan, Pahang, Perak, Perlis, Pulau Pinang, Sabah, Sarawak, Selangor dan Wilayah Persekutuan). Versi Kumpulan A (Kedah, Kelantan, Terengganu) akan menyusul. Cuti negeri tidak dimasukkan.</span>
+  <span>&copy; 2026 NaikGred · <a href="../">naikgred.com</a> · <a href="../anak/privasi.html#planner">Dasar privasi</a></span>
+</div></footer>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+<script src="https://naikgred.com/aset/piksel.js" defer></script>
+<script>
+(function(){
+  var AWAN = {url:"https://cqokowzzgseuvhcgpktj.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxb2tvd3p6Z3NldXZoY2dwa3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NzE5MDgsImV4cCI6MjEwMjU0NzkwOH0.AjFtow8RscN0KpIrWNrHCQu-cztcjd_ojTKZyY5GTg8"};
+  var rpc = function(fn, body){ return fetch(AWAN.url + "/rest/v1/rpc/" + fn, {method:"POST", keepalive:true, headers:{"apikey":AWAN.kunci,"Authorization":"Bearer "+AWAN.kunci,"Content-Type":"application/json"}, body:JSON.stringify(body)}); };
+  var ua = navigator.userAgent || "";
+  var ROBOT = (function(){ try { return !!navigator.webdriver || /bot|crawl|spider|slurp|facebookexternalhit|meta-externalagent|facebookcatalog|headlesschrome|lighthouse/i.test(ua) || /^(localhost|127\.)/.test(location.hostname); } catch(e) { return true; } })();
+  var m = /[?&]dari=([^&#]*)/.exec(location.search);
+  var kod = m ? decodeURIComponent(m[1]).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 30) : "";
+  /* Rujukan (18 Okt 2026): hos laman yang membawa pelawat, atau 'langsung', ditambah '|app-<nama>' jika dalam pelayar app. */
+  var app = /FBAN|FBAV|FB_IAB/.test(ua) ? "facebook" : /Instagram/.test(ua) ? "instagram" : /Barcelona/.test(ua) ? "threads" : /musical_ly|BytedanceWebview|TikTok/i.test(ua) ? "tiktok" : /Telegram/i.test(ua) ? "telegram" : /\bLine\//.test(ua) ? "line" : "";
+  var rujuk = (function(){ var r = document.referrer || "", h = ""; if (r) { try { var u = new URL(r); h = (u.protocol === "android-app:" ? "android-app:" : "") + u.hostname.replace(/^www\./, ""); } catch(x) {} } return (h || "langsung") + (app ? "|app-" + app : ""); })();
+  var peranti = function(){ var p = localStorage.getItem("cn-peranti"); if (!p || !/^[a-z0-9]{8}$/.test(p)) { p = Math.random().toString(36).slice(2, 10).replace(/[^a-z0-9]/g, "0"); while (p.length < 8) p += "0"; localStorage.setItem("cn-peranti", p); } return p; };
+  var ping = function(jenis, nota, r){ if (ROBOT) return; try { rpc("lo_ping", {p_jenis:jenis, p_peranti:peranti(), p_nota:nota || "", p_rujuk:r || ""}).catch(function(){}); } catch(e) {} };
+  try { if (!sessionStorage.getItem("pl-lawat")) { sessionStorage.setItem("pl-lawat", "1"); ping("planner-lawat", kod, rujuk); } } catch(e) {}
+  if (app) document.getElementById("tipApp").hidden = false;
+
+  var langgan = document.getElementById("langgan"), kotakEmel = document.getElementById("kotakEmel");
+  langgan.addEventListener("change", function(){ kotakEmel.hidden = !langgan.checked; if (langgan.checked) document.getElementById("emel").focus(); });
+
+  /* Kedudukan garisan medan pada kulit (titik PDF dari atas) dan warna teks bagi setiap gaya. */
+  var KULIT = {
+    korporat: {x:128, garis:[707.2, 735.0, 762.8, 789.8], lebar:412, warna:[1, 1, 1], fon:"jakarta-700.ttf"},
+    comel: {x:151, garis:[689.2, 716.2, 743.2, 770.2], lebar:368, warna:[0.047, 0.231, 0.204], fon:"fredoka-600.ttf"}
+  };
+  var status = document.getElementById("status"), butang = document.getElementById("butang");
+  var lapor = function(t, k){ status.textContent = t; status.className = k || ""; };
+  var bersih = function(s){ return String(s || "").replace(/[^ -ɏ‘-”]/g, "").replace(/\s+/g, " ").trim(); };
+  var simpan = function(bait, nama){
+    var blob = new Blob([bait], {type:"application/pdf"}), url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = nama; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+  };
+
+  document.getElementById("borang").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var gaya = document.querySelector("input[name=gaya]:checked").value, k = KULIT[gaya];
+    var isi = ["nama", "sekolah", "subjek", "kelas"].map(function(id){ return bersih(document.getElementById(id).value); });
+    var emel = document.getElementById("emel").value.trim();
+    if (langgan.checked && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emel)) { lapor("Sila isi e-mel yang betul, atau buang tanda pada kotak wallpaper bulanan.", "salah"); document.getElementById("emel").focus(); return; }
+    butang.disabled = true; lapor("Menyediakan planner…");
+    try {
+      var bait = await (await fetch("Planner-Guru-2027-" + gaya + ".pdf")).arrayBuffer();
+      var peribadi = isi.some(Boolean);
+      if (peribadi) {
+        var doc = await PDFLib.PDFDocument.load(bait);
+        doc.registerFontkit(fontkit);
+        var fon = await doc.embedFont(await (await fetch(k.fon)).arrayBuffer(), {subset:true});
+        var hal = doc.getPage(0), tinggi = hal.getHeight();
+        isi.forEach(function(t, i){
+          if (!t) return;
+          var saiz = 13;
+          while (saiz > 7 && fon.widthOfTextAtSize(t, saiz) > k.lebar) saiz -= 0.5;
+          hal.drawText(t, {x:k.x, y:tinggi - (k.garis[i] - 3.5), size:saiz, font:fon, color:PDFLib.rgb(k.warna[0], k.warna[1], k.warna[2])});
+        });
+        doc.setTitle("Planner Guru 2027" + (isi[0] ? " · " + isi[0] : ""));
+        bait = await doc.save();
+      }
+      simpan(bait, "Planner-Guru-2027-" + gaya + ".pdf");
+      ping("planner-muat", gaya + "-" + (peribadi ? "nama" : "kosong"));
+      if (window.fbq) try { fbq("trackCustom", "MuatPlanner", {gaya:gaya}); } catch(x) {}
+      if (langgan.checked) {
+        var r = await rpc("ng_planner_langgan", {p_emel:emel, p_nama:isi[0] || null, p_sekolah:isi[1] || null, p_gaya:gaya, p_sumber:kod || "terus"});
+        var okLanggan = r.ok && (await r.json()) === true;
+        if (okLanggan && window.fbq) try { fbq("track", "Lead", {content_name:"planner-2027"}); } catch(x) {}
+        lapor(okLanggan ? "Planner sedang dimuat turun. Wallpaper bulan Januari akan dihantar ke " + emel + "." : "Planner sedang dimuat turun. E-mel belum dapat disimpan, sila cuba sekali lagi nanti.", okLanggan ? "ok" : "salah");
+      } else {
+        lapor("Planner sedang dimuat turun. Semak folder Muat Turun (Downloads).", "ok");
+      }
+    } catch (err) {
+      lapor("Maaf, planner tidak dapat disediakan. Sila cuba lagi, atau buka halaman ini dalam Chrome atau Safari.", "salah");
+    }
+    butang.disabled = false;
+  });
+
+  document.getElementById("kongsiWa").addEventListener("click", function(){ ping("planner-muat", "kongsi-wa"); });
+})();
+</script>
+</body>
+</html>
