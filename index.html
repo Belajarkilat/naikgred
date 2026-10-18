@@ -321,10 +321,16 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
      Pelayar automatik dan localhost diabaikan supaya ujian tidak dikira sebagai lawatan. */
   (function(){try{
     if(navigator.webdriver||/bot|crawl|spider|slurp|facebookexternalhit|meta-externalagent|facebookcatalog|headlesschrome|lighthouse/i.test(navigator.userAgent||"")||/^(localhost|127\.)/.test(location.hostname))return;
+    /* Rujukan (18 Okt 2026): hos laman yang membawa pelawat, atau 'langsung', ditambah '|app-<nama>' jika dalam pelayar app; hanya untuk ping lawat. */
+    var rujuk=(function(){try{var ua=navigator.userAgent||"",a="",r=document.referrer||"",h="";
+      if(/FBAN|FBAV|FB_IAB/.test(ua))a="facebook";else if(/Instagram/.test(ua))a="instagram";else if(/Barcelona/.test(ua))a="threads";
+      else if(/musical_ly|BytedanceWebview|TikTok/i.test(ua))a="tiktok";else if(/Telegram/i.test(ua))a="telegram";else if(/\bLine\//.test(ua))a="line";
+      if(r){try{var u=new URL(r);h=(u.protocol==="android-app:"?"android-app:":"")+u.hostname.replace(/^www\./,"");}catch(x){}}
+      return (h||"langsung")+(a?"|app-"+a:"");}catch(e){return "";}})();
     var ping=function(j,n){var p=localStorage.getItem("cn-peranti");
       if(!p||!/^[a-z0-9]{8}$/.test(p)){p=Math.random().toString(36).slice(2,10).replace(/[^a-z0-9]/g,"0");while(p.length<8)p+="0";localStorage.setItem("cn-peranti",p);}
       fetch(AWAN.url+"/rest/v1/rpc/lo_ping",{method:"POST",keepalive:true,headers:{"apikey":AWAN.kunci,"Authorization":"Bearer "+AWAN.kunci,"Content-Type":"application/json"},
-        body:JSON.stringify({p_jenis:j,p_peranti:p,p_nota:n||""})}).catch(function(){});};
+        body:JSON.stringify({p_jenis:j,p_peranti:p,p_nota:n||"",p_rujuk:/-lawat$/.test(j)?rujuk:""})}).catch(function(){});};
     var m=/[?&]dari=([^&#]*)/.exec(location.search),kod=m?decodeURIComponent(m[1]).toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,30):"";
     if(!sessionStorage.getItem("ng-lawat")){sessionStorage.setItem("ng-lawat","1");ping("utama-lawat",kod);}
     var sekali=function(n){if(sessionStorage.getItem("ng-klik-"+n))return;sessionStorage.setItem("ng-klik-"+n,"1");ping("utama-klik",n);};
