@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bahan Post Telegram Planner</title>
+<style>
+:root{--bg:#FFF7E8;--kad:#fff;--ink:#0C3B34;--ink2:#5c6b66;--hijau:#0C6B5E;--emas:#F0A62F;--garis:#EADFC8}
+@media (prefers-color-scheme:dark){:root{--bg:#10201d;--kad:#18302b;--ink:#EAF4F1;--ink2:#a9bdb7;--hijau:#2FC2AE;--garis:#2a4640}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+main{max-width:520px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:22px;margin:0 0 4px}p.k{color:var(--ink2);margin:0 0 18px;font-size:15px}
+.kad{background:var(--kad);border:1px solid var(--garis);border-radius:16px;padding:16px;margin-bottom:16px}
+h2{font-size:17px;margin:0 0 10px}h2 span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--emas);color:#3A2A00;font-size:14px;margin-right:8px}
+video{width:100%;max-height:60vh;border-radius:12px;background:#000;display:block}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;margin-top:12px;border:0;border-radius:12px;background:var(--hijau);color:#fff;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit}
+pre{white-space:pre-wrap;word-break:break-word;font-family:inherit;font-size:14.5px;background:var(--bg);border:1px solid var(--garis);border-radius:12px;padding:12px;margin:0;max-height:340px;overflow:auto}
+ol{margin:0;padding-left:20px}li{margin-bottom:6px}
+</style>
+</head>
+<body>
+<main>
+<h1>Bahan post Telegram: Planner Guru 2027</h1>
+<p class="k">Untuk kumpulan guru Sains. Video di atas, teks sebagai kapsyen di bawah.</p>
+
+<div class="kad">
+<h2><span>1</span>Muat turun video</h2>
+<video src="Planner-Guru-2027-video-telegram.mp4" controls playsinline preload="metadata"></video>
+<a class="btn" href="Planner-Guru-2027-video-telegram.mp4" download="Planner-Guru-2027-video-telegram.mp4">Muat turun video (3.8 MB)</a>
+</div>
+
+<div class="kad">
+<h2><span>2</span>Salin teks kapsyen</h2>
+<pre id="teks">🎁 PERCUMA untuk cikgu Sains: Planner Guru 2027
+
+Assalamualaikum WBT dan salam sejahtera, cikgu-cikgu Sains.
+
+Saya dan pasukan NaikGred sediakan planner supaya cikgu boleh merancang 2027 dari awal:
+
+📒 16 halaman A4, ikut Kalendar Akademik KPM 2027
+📅 Cuti persekolahan dan cuti umum sudah ditanda dalam petak
+✏️ 12 halaman bulanan dengan petak besar untuk program sekolah, PBD dan catatan
+👤 Nama dan sekolah cikgu tercetak pada kulit depan
+🎨 Dua gaya: Korporat atau Comel
+
+Cara mendapatkannya (lebih kurang 2 minit):
+1️⃣ Tekan pautan di bawah
+2️⃣ Daftar akaun guru Jejak TP Sains (percuma, boleh guna akaun Google)
+3️⃣ Tekan &quot;Muat turun planner&quot;, pilih gaya, dan PDF siap dengan nama cikgu
+
+👉 https://jejaktpsains.naikgred.com/?planner&amp;dari=tg
+
+Kenapa perlu daftar? Planner ini hadiah untuk guru yang mencuba Jejak TP Sains, permainan PBD Sains Tingkatan 1 hingga 5. Murid bermain, TP terjana sendiri. Bab 1 dan 2 percuma.
+
+Nota: ikut Kumpulan B. Kumpulan A (Kedah, Kelantan, Terengganu) belum tersedia.</pre>
+<button class="btn" id="salin" type="button">Salin teks</button>
+</div>
+
+<div class="kad">
+<h2><span>3</span>Post dalam Telegram</h2>
+<ol>
+<li>Buka kumpulan guru Sains, tekan ikon klip 📎.</li>
+<li>Pilih video yang baru dimuat turun (dalam Galeri atau Fail).</li>
+<li>Pada ruang kapsyen, tekan lama dan pilih <b>Tampal</b>.</li>
+<li>Tekan hantar. Video akan keluar di atas dan teks di bawah.</li>
+</ol>
+</div>
+</main>
+<script>
+document.getElementById("salin").addEventListener("click", function(){
+  var b = this, t = document.getElementById("teks").textContent;
+  var ok = function(){ b.textContent = "Disalin ✓"; setTimeout(function(){ b.textContent = "Salin teks"; }, 2500); };
+  var lama = function(){ var a = document.createElement("textarea"); a.value = t; a.setAttribute("readonly", ""); a.style.position = "fixed"; a.style.opacity = "0"; document.body.appendChild(a); a.select(); try { document.execCommand("copy"); ok(); } catch(e) {} a.remove(); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(ok, lama); else lama();
+});
+</script>
+</body>
+</html>
