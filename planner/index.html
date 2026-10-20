@@ -191,6 +191,14 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   var ping = function(jenis, nota, r){ if (ROBOT) return; try { rpc("lo_ping", {p_jenis:jenis, p_peranti:peranti(), p_nota:nota || "", p_rujuk:r || ""}).catch(function(){}); } catch(e) {} };
   try { if (!sessionStorage.getItem("pl-lawat")) { sessionStorage.setItem("pl-lawat", "1"); ping("planner-lawat", kod, rujuk); } } catch(e) {}
   if (app) document.getElementById("tipApp").hidden = false;
+  /* Isian awal dari Jejak TP (20 Okt 2026): #nama=..&sekolah=..&subjek=.. dalam # supaya tidak sampai ke pelayan; # dibuang selepas dibaca. */
+  try {
+    if (/^#.*=/.test(location.hash)) {
+      var h = new URLSearchParams(location.hash.slice(1));
+      ["nama", "sekolah", "subjek"].forEach(function(id){ var v = (h.get(id) || "").trim(); if (v) document.getElementById(id).value = v.slice(0, id === "sekolah" ? 80 : 60); });
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+  } catch(e) {}
 
   var langgan = document.getElementById("langgan"), kotakEmel = document.getElementById("kotakEmel");
   langgan.addEventListener("change", function(){ kotakEmel.hidden = !langgan.checked; if (langgan.checked) document.getElementById("emel").focus(); });
