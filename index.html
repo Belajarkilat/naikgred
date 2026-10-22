@@ -20,337 +20,894 @@
 <link rel="apple-touch-icon" href="aset/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+/* Susun atur: babak 3D tetap di belakang (desktop), panel kandungan skrol di depan; di telefon 3D hanya di hero. */
 :root{
-  --bg:#FFFFFF; --soft:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --muted:#6E6E73; --line:#E8E8ED;
-  --brand:#0C6B5E; --brand-ink:#FFFFFF; --brand-soft:#EAF6F2; --gold:#F0A62F; --board:#0C3B34; --chalk:#BFD9D2;
-  --ok:#0E7C6F; --mid:#8A6200; --low:#B3123A; --pink:#C2185B;
-  --nav:rgba(255,255,255,.86); --shadow:0 50px 90px -40px rgba(12,59,52,.45);
+  --bg:#F3F6F4; --ink:#13201B; --mute:#56645E; --garis:#DCE4E0; --panel:rgba(255,255,255,.86);
+  --hijau:#0C6B5E; --hijau2:#14A38B; --emas:#E0A526; --meja:#E6ECE8;
+  --sains:#14A38B; --math:#2F6FD6; --sejarah:#C9822B; --english:#6B54D6; --anak:#D9577E; --planner:#47605A;
+  --f-papar:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"JetBrains Mono",ui-monospace,Consolas,monospace;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0B0F0E; --soft:#141A19; --card:#1A2220; --ink:#F2F5F4; --muted:#9FB3AE; --line:#24302D;
-    --brand:#56B39B; --brand-ink:#06201B; --brand-soft:#16302A; --board:#081F1B;
-    --ok:#5CC9B4; --mid:#E0B24A; --low:#FF7A93; --pink:#F48FB1;
-    --nav:rgba(11,15,14,.82); --shadow:0 50px 90px -40px rgba(0,0,0,.7);
-  }
-}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C1311; --ink:#EAF2EE; --mute:#97A7A0; --garis:#22302B; --panel:rgba(18,28,25,.86); --meja:#1A2522; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0B0F0E; --soft:#141A19; --card:#1A2220; --ink:#F2F5F4; --muted:#9FB3AE; --line:#24302D;
-  --brand:#56B39B; --brand-ink:#06201B; --brand-soft:#16302A; --board:#081F1B;
-  --ok:#5CC9B4; --mid:#E0B24A; --low:#FF7A93; --pink:#F48FB1;
-  --nav:rgba(11,15,14,.82); --shadow:0 50px 90px -40px rgba(0,0,0,.7);
-}
+  --bg:#0C1311; --ink:#EAF2EE; --mute:#97A7A0; --garis:#22302B; --panel:rgba(18,28,25,.86); --meja:#1A2522; color-scheme:dark}
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--brand)}
-h1,h2,h3,p{margin:0}
-h1,h2{text-wrap:balance}
-.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-papar);font-size:16px;line-height:1.55;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+#dunia{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;transition:opacity .5s}
+.latar2d{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 50% at 80% 20%,color-mix(in srgb,var(--hijau2) 22%,transparent),transparent 70%),
+             radial-gradient(50% 40% at 10% 90%,color-mix(in srgb,var(--emas) 14%,transparent),transparent 70%)}
+.ringan #dunia{display:none}
 
-/* navigasi */
-.nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line)}
-.nav .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.mark{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.03em;color:var(--brand)}
-.mark svg{width:26px;height:26px;flex:none}
-.mark span{color:#E09517;margin-left:-8px}
-.menu{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500}
-.menu a{color:var(--ink);text-decoration:none}
-.menu a:hover{color:var(--brand)}
-.pil{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--brand);color:var(--brand-ink)!important;font-weight:600;text-decoration:none}
-@media (max-width:640px){.menu .teks{display:none}}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--garis)}
+.kepala{max-width:1180px;margin:auto;display:flex;align-items:center;gap:10px;padding-block:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;margin-right:auto;color:var(--ink);text-decoration:none}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--hijau),var(--hijau2));display:grid;place-items:center;color:#fff;font-style:normal;font-size:14px}
+.tukar{display:flex;border:1px solid var(--garis);border-radius:999px;overflow:hidden}
+.tukar button{border:0;background:transparent;color:var(--mute);font:600 13px var(--f-papar);padding:6px 10px;cursor:pointer}
+.tukar button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn-ringan{border:1px solid var(--garis);background:transparent;color:var(--mute);font:600 13px var(--f-papar);padding:6px 10px;border-radius:999px;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--hijau);color:#fff;font-weight:800;text-decoration:none;border-radius:999px;padding:12px 20px;border:0;cursor:pointer;font-family:var(--f-papar);font-size:15px;transition:transform .2s;box-shadow:0 10px 26px -12px var(--hijau)}
+.btn:hover{transform:translateY(-2px)}
+.btn.kedua{background:transparent;color:var(--ink);border:1.5px solid var(--garis);box-shadow:none}
+.kepala .btn{padding:8px 14px;font-size:14px}
+:focus-visible{outline:3px solid var(--emas);outline-offset:2px}
 
-/* hero */
-.hero{text-align:center;padding-block:88px 32px}
-.eyebrow{font-size:17px;font-weight:600;color:var(--brand)}
-.hero h1{margin:14px auto 0;max-width:15ch;font-size:clamp(42px,7vw,84px);line-height:1.02;letter-spacing:-.035em;font-weight:800}
-.lede{margin:22px auto 0;max-width:34ch;font-size:clamp(19px,2.2vw,24px);line-height:1.4;color:var(--muted);font-weight:500}
-.ctas{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;font-weight:600;font-size:17px;text-decoration:none}
-.btn.utama{background:var(--brand);color:var(--brand-ink)}
-.btn.kedua{color:var(--brand);border:1.5px solid var(--brand)}
-.btn:hover{filter:brightness(1.08)}
+main{position:relative;z-index:1}
+section{min-height:88vh;display:flex;align-items:center;padding-block:72px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.isi{max-width:1180px;width:100%;margin:auto}
+.panel{max-width:540px;background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--garis);border-radius:24px;padding:28px;min-width:0}
+.kanan .panel{margin-left:auto}
+.label{font:700 12px var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--hijau2)}
+h1,h2{text-wrap:balance;letter-spacing:-.03em;margin:10px 0 0}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.02;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--hijau),var(--hijau2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(28px,4vw,44px);line-height:1.08;font-weight:800}
+p{margin:14px 0 0;color:var(--mute);max-width:34em}
 
-.telefon{display:flex;justify-content:center;padding:24px 20px 0}
-.telefon .bingkai{width:340px;max-width:86vw;background:#1D1D1F;border-radius:52px;padding:12px;box-shadow:var(--shadow)}
-.telefon .skrin{border-radius:41px;overflow:hidden;background:#F2F4F7;aspect-ratio:720/1240}
-.telefon img{width:100%;height:100%;object-fit:cover;display:block}
-.kapsyen{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+.persona{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.persona button{border:1.5px solid var(--garis);background:var(--panel);color:var(--ink);font:700 14px var(--f-papar);padding:9px 14px;border-radius:999px;cursor:pointer;transition:all .2s}
+.persona button[aria-pressed="true"]{border-color:var(--hijau2);background:color-mix(in srgb,var(--hijau2) 16%,var(--panel))}
+.tindakan{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;align-items:center}
+.nota{font-size:13px;color:var(--mute);margin-top:12px}
+.pil{display:inline-block;font:700 12px var(--f-data);padding:5px 10px;border-radius:999px;background:color-mix(in srgb,var(--emas) 22%,transparent);color:var(--ink)}
 
-/* angka */
-.angka{margin-top:88px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-@media (max-width:760px){.angka{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.angka div{padding:30px 8px;text-align:center}
-.angka b{display:block;font-size:clamp(36px,5vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.angka span{display:block;margin-top:4px;color:var(--muted);font-size:15px}
+.kira{display:grid;gap:16px;margin-top:22px}
+.kira label{display:flex;justify-content:space-between;font-weight:700;font-size:14px}
+.kira output{font-family:var(--f-data)}
+.kira input[type=range]{width:100%;accent-color:var(--hijau2)}
+.hasil{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.hasil div{border:1px solid var(--garis);border-radius:16px;padding:14px;min-width:0}
+.hasil b{display:block;font:700 30px var(--f-data);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hasil .jimat{background:color-mix(in srgb,var(--hijau2) 14%,transparent);border-color:color-mix(in srgb,var(--hijau2) 40%,transparent)}
+.hasil small{color:var(--mute);font-size:13px}
 
-/* seksyen */
-.sek{padding:104px 0}
-.sek.lembut{background:var(--soft)}
-.sek h2{font-size:clamp(34px,4.6vw,56px);letter-spacing:-.03em;line-height:1.05;font-weight:800;max-width:18ch}
-.sek .intro{margin-top:14px;font-size:20px;color:var(--muted);max-width:46ch}
-.label{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+/* Laporan ibu bapa */
+.laporan{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:start;margin-top:20px}
+.laporan img{width:150px;border-radius:16px;border:1px solid var(--garis);box-shadow:0 20px 40px -24px #0006}
+.laporan ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.laporan li{display:grid;gap:2px}
+.laporan li b{font-size:15px}
+.laporan li span{color:var(--mute);font-size:14px}
 
-/* ibu bapa */
-.kad-besar{margin-top:44px;background:var(--card);border-radius:28px;padding:clamp(28px,5vw,48px);display:flex;flex-wrap:wrap;gap:36px;align-items:center;justify-content:space-between}
-.kad-besar .kiri{flex:1 1 340px;min-width:0}
-.kad-besar h3{margin-top:10px;font-size:clamp(30px,4vw,40px);letter-spacing:-.025em;font-weight:800}
-.kad-besar .kiri p{margin-top:12px;font-size:18px;color:var(--muted);max-width:40ch}
-.senarai{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:16px}
-.senarai li{display:flex;gap:10px;align-items:flex-start}
-.senarai svg{flex:none;margin-top:3px}
-.kad-besar .ctas{justify-content:flex-start;margin-top:26px}
-.markah{flex:0 1 340px;display:flex;flex-direction:column;gap:12px;width:100%}
-.markah div{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--soft);border-radius:14px;padding:14px 16px;font-size:15px}
-.markah b.ok{color:var(--ok)}.markah b.mid{color:var(--mid)}.markah b.low{color:var(--low)}
-.markah .nota{background:none;padding:0 4px;font-size:13px;color:var(--muted)}
+.angka{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.angka div{min-width:0}
+.angka b{display:block;font:700 clamp(26px,4vw,40px) var(--f-data);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.angka small{color:var(--mute);font-size:13px;line-height:1.3;display:block}
+.hidup{display:inline-flex;align-items:center;gap:6px;font:700 11px var(--f-data);letter-spacing:.08em;color:var(--hijau2);text-transform:uppercase}
+.hidup::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--hijau2);box-shadow:0 0 0 0 var(--hijau2);animation:denyut 1.8s infinite}
+@keyframes denyut{70%{box-shadow:0 0 0 8px transparent}}
+.suara{display:grid;gap:12px;margin-top:22px}
+.suara blockquote{margin:0;border-left:3px solid var(--hijau2);padding:4px 0 4px 14px}
+.suara blockquote p{margin:0;color:var(--ink);font-size:15px}
+.suara cite{font-style:normal;font-size:13px;color:var(--mute)}
 
-/* guru */
-.papan{background:var(--board);color:#FFFFFF}
-.papan .label{color:#86CEBD}
-.papan h2{color:#FFFFFF}
-.papan .intro{color:var(--chalk)}
-.bab{margin-top:56px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:rgba(255,255,255,.14);border-radius:20px;overflow:hidden}
-@media (max-width:760px){.bab{grid-template-columns:1fr}}
-.bab a{background:var(--board);padding:34px 28px;text-decoration:none;color:#FFFFFF;display:flex;flex-direction:column;gap:6px;min-height:200px}
-.bab a:hover{background:#0F463E}
-.bab b{font-size:clamp(56px,7vw,76px);font-weight:800;letter-spacing:-.04em;line-height:1}
-.bab .nm{font-size:20px;font-weight:700;margin-top:6px}
-.bab .ket{color:var(--chalk);font-size:15px}
-.bab .pergi{margin-top:auto;padding-top:14px;color:var(--gold);font-weight:700;font-size:15px}
-.papan .ctas{justify-content:flex-start;margin-top:40px}
-.btn.emas{background:var(--gold);color:#2A1A00}
-.harga-guru{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:16px}
-@media (max-width:760px){.harga-guru{grid-template-columns:1fr}}
-.harga-guru>div{border:1.5px solid rgba(255,255,255,.22);border-radius:20px;padding:26px 28px}
-.harga-guru .utama{border-color:var(--gold)}
-.harga-guru .siapa{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk)}
-.harga-guru .rm{display:block;margin-top:6px;font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.harga-guru .rm small{font-size:17px;font-weight:600;color:var(--chalk);letter-spacing:0;white-space:nowrap}
-@media (max-width:480px){.harga-guru .rm small{display:block;margin-top:2px}}
-.harga-guru .eb{display:inline-block;margin-top:8px;background:var(--gold);color:#2A1A00;font-size:13px;font-weight:700;padding:4px 11px;border-radius:999px}
-.harga-guru ul{margin:14px 0 0;padding-left:20px;color:var(--chalk);font-size:15.5px}
-.harga-guru li{margin:5px 0}
-.btn.garis{color:#FFFFFF;border:1.5px solid #FFFFFF}
+/* Produk: senarai di kiri, pentas 3D di kanan */
+#produk{min-height:100vh}
+.produk-isi{max-width:1180px;width:100%;margin:auto}
+.senarai{display:grid;gap:10px;margin-top:22px;max-width:500px}
+.kad{--w:var(--sains);background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--garis);border-radius:18px;min-width:0;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+.kad::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--w)}
+.kad.aktif{border-color:var(--w)}
+.kad-kepala{all:unset;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:2px 12px;width:100%;padding:12px 14px 12px 20px;cursor:pointer}
+.kad-kepala:focus-visible{outline:3px solid var(--emas);outline-offset:-3px}
+.kad .jenis{grid-column:1/-1;font:700 11px var(--f-data);letter-spacing:.1em;text-transform:uppercase;color:var(--w)}
+.kad .t{margin:0;font-size:18px;font-weight:700;letter-spacing:-.02em}
+.kad .ringkas{grid-column:1;font-size:13px;color:var(--mute)}
+.kad .harga{grid-row:2;grid-column:2;font:700 17px var(--f-data);text-align:right;white-space:nowrap}
+.kad .harga small{font:500 11px var(--f-data);color:var(--mute);display:block}
+.kad .anak-panah{grid-row:2/4;grid-column:3;width:22px;height:22px;transition:transform .25s;color:var(--mute)}
+.kad.aktif .anak-panah{transform:rotate(180deg)}
+.kad-badan{display:none;padding:0 14px 16px 20px}
+.kad.aktif .kad-badan{display:grid;gap:10px}
+.kad-badan .gbr{display:none}
+.kad-badan .pilih{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kad-badan .btn{padding:11px 12px;font-size:14px;background:var(--w);box-shadow:none}
+.kad-badan .btn.kedua{background:transparent;color:var(--ink)}
+.kad-badan .pautan{font-size:13px;color:var(--mute)}
+.kad-badan .pautan a{color:inherit}
+.kad-badan small{color:var(--mute);font-size:12px}
 
-/* nilai */
-.nilai{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
-@media (max-width:860px){.nilai{grid-template-columns:1fr;gap:32px}}
-.nilai h3{margin-top:14px;font-size:22px;font-weight:700}
-.nilai p{margin-top:8px;font-size:16px;color:var(--muted)}
+.peringkat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.peringkat div{border:1px solid var(--garis);border-radius:16px;padding:16px;min-width:0;display:grid;gap:4px}
+.peringkat b{font:700 28px var(--f-data);display:block}
+.peringkat small.kemudian{color:var(--mute);font-size:13px}
+.peringkat .btn{margin-top:8px;padding:10px 12px;font-size:14px}
+.subjek{display:flex;align-items:center;gap:10px;margin-top:18px;font-weight:700;font-size:14px;flex-wrap:wrap}
+.subjek select{font:600 15px var(--f-papar);padding:8px 12px;border-radius:12px;border:1.5px solid var(--garis);background:var(--panel);color:var(--ink)}
+.detik{font-family:var(--f-data);font-weight:700;color:var(--hijau2)}
 
-/* penutup */
-.akhir{background:var(--soft);padding:96px 0;text-align:center}
-.akhir h2{margin:0 auto;max-width:18ch;font-size:clamp(34px,4.6vw,56px);letter-spacing:-.03em;line-height:1.05;font-weight:800}
-.akhir p{margin:16px auto 0;max-width:40ch;font-size:19px;color:var(--muted)}
+footer{position:relative;z-index:1;border-top:1px solid var(--garis);background:var(--bg);padding-block:28px 110px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+footer .isi{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:var(--mute)}
+footer a{color:inherit}
+footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 
-footer{padding:32px 0 48px;font-size:13px;color:var(--muted)}
-footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}
-footer a{color:var(--muted)}
-footer nav{display:flex;gap:18px;flex-wrap:wrap}
+.bar-beli{position:fixed;left:0;right:0;bottom:0;z-index:25;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--garis);
+  padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-beli .isi{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.bar-beli span{font-size:14px;font-weight:600;min-width:0}
+.bar-beli span b{color:var(--hijau2)}
+.bar-beli .btn{white-space:nowrap;flex:none}
+@media (min-width:861px){.bar-beli{transform:translateY(110%);transition:transform .35s}.lepas .bar-beli{transform:none}}
+.petunjuk{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:5;font:600 12px var(--f-data);color:var(--mute);pointer-events:none}
+
+@media (max-width:860px){
+  section{min-height:auto;padding-block:40px}
+  .hero{min-height:auto;padding-top:34vh}
+  .ringan .hero{padding-top:40px}
+  .kanan .panel{margin-left:0}
+  .senarai{max-width:none}
+  .petunjuk{display:none}
+  #produk{min-height:auto}
+  .kad.aktif .kad-badan .gbr{display:block;width:100%;max-height:260px;object-fit:cover;object-position:top;border-radius:14px;border:1px solid var(--garis)}
+}
+@media (max-width:560px){
+  .angka{gap:8px}
+  .panel{padding:20px}
+  .btn-ringan,.kepala .btn{display:none}
+  .bar-beli span{font-size:13px}
+  .laporan{grid-template-columns:100px minmax(0,1fr);gap:14px}
+  .laporan img{width:100px}
+  .peringkat{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
-<script src="https://naikgred.com/aset/piksel.js" defer></script>
-<meta name="facebook-domain-verification" content="xitunnt43kaz3t3i8ycjypjcqylqbm" />
 </head>
 <body>
 
-<header class="nav">
-  <div class="wrap">
-    <a class="mark" href="./" aria-label="NaikGred, laman utama">
-      <svg viewBox="0 0 44 40" aria-hidden="true"><rect x="0" y="24" width="9" height="16" rx="3.5" fill="#86CEBD"/><rect x="12" y="15" width="9" height="25" rx="3.5" fill="#0C6B5E"/><path d="M27 12 L23 12 Q21 12 22.4 10.4 L29.6 2 Q31 0.6 32.4 2 L39.6 10.4 Q41 12 39 12 L35 12 L35 37 Q35 40 32 40 L30 40 Q27 40 27 37 Z" fill="#F0A62F"/></svg>
-      Naik<span>Gred</span>
-    </a>
-    <nav class="menu" aria-label="Menu utama">
-      <a class="teks" href="#ibu-bapa">Ibu bapa</a>
-      <a class="teks" href="#guru">Guru</a>
-      <a class="teks" href="#tentang">Tentang kami</a>
-      <a class="pil" href="anak/">Mula percuma</a>
-    </nav>
+<div class="latar2d" aria-hidden="true"></div>
+<canvas id="dunia" aria-hidden="true"></canvas>
+
+<header>
+  <div class="kepala">
+    <a class="logo" href="#atas"><i>N</i>NaikGred</a>
+    <div class="tukar" role="group" aria-label="Bahasa">
+      <button id="bm" aria-pressed="true">BM</button>
+      <button id="en" aria-pressed="false">EN</button>
+    </div>
+    <button class="btn-ringan" id="ringan">Mod ringan</button>
+    <a class="btn" href="#produk" data-t="mula">Mula percuma</a>
   </div>
 </header>
 
 <main>
-  <section class="wrap hero">
-    <p class="eyebrow">Sains · Matematik · Sejarah · English KSSM</p>
-    <h1>Naik satu bab demi satu bab.</h1>
-    <p class="lede">Murid berlatih sambil bermain. Guru dan ibu bapa nampak bab yang sudah dikuasai dan bab yang masih lemah.</p>
-    <div class="ctas">
-      <a class="btn utama" href="#ibu-bapa">Ibu bapa</a>
-      <a class="btn kedua" href="#guru">Guru</a>
+  <section class="hero" id="atas" data-kam="0">
+    <div class="isi">
+      <div class="panel">
+        <div class="persona" role="group" aria-label="Saya ialah">
+          <button data-p="guru" aria-pressed="true" data-t="p.guru">Saya guru</button>
+          <button data-p="ibubapa" aria-pressed="false" data-t="p.ibubapa">Saya ibu bapa</button>
+        </div>
+        <span class="pil" id="h-pil"></span>
+        <h1 id="h-tajuk"></h1>
+        <p id="h-sub"></p>
+        <div class="tindakan">
+          <a class="btn" id="h-cta" href="#"></a>
+          <a class="btn kedua" href="#produk" id="h-dua"></a>
+        </div>
+        <div class="nota" id="h-nota"></div>
+      </div>
     </div>
   </section>
 
-  <div class="telefon">
-    <div>
-      <div class="bingkai"><div class="skrin">
-        <img src="aset/skrin-ibubapa.jpg" alt="Paparan ibu bapa Anak NaikGred: purata markah anak, satu tindakan untuk minggu ini dan bab paling lemah" width="720" height="1240">
-      </div></div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="angka">
-      <div><b id="kira-murid">870+</b><span>murid sudah bermain</span></div>
-      <div><b>184</b><span>bab KSSM, Tingkatan 1 hingga 5</span></div>
-      <div><b>4</b><span>subjek mengikut DSKP</span></div>
-      <div><b>RM0</b><span>untuk bermula</span></div>
-    </div>
-  </div>
-
-  <section class="sek lembut" id="ibu-bapa" style="margin-top:96px">
-    <div class="wrap">
-      <p class="label" style="color:var(--pink)">Ibu bapa</p>
-      <h2 style="margin-top:10px">Anak kata “dah faham”. Kini ibu bapa boleh pastikan.</h2>
-      <div class="kad-besar">
-        <div class="kiri">
-          <p class="label" style="color:var(--pink)">Anak NaikGred</p>
-          <h3>Markah setiap bab, terus di telefon.</h3>
-          <p>Anak menjawab soalan seperti bermain permainan. Ibu bapa melihat bab yang Cemerlang dan bab yang Perlu bantuan, dengan satu cadangan untuk minggu ini.</p>
-          <ul class="senarai">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>Sehingga 5 anak dalam satu akaun</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>Sains, Matematik, Sejarah dan English, Tingkatan 1 hingga 5</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>Sains DLP (Bahasa Inggeris) Tingkatan 1 hingga 3</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M5 12l5 5L20 7"/></svg>RM32 setahun sekeluarga, harga Early Bird hingga 31 Disember</li>
-          </ul>
-          <div class="ctas">
-            <a class="btn utama" href="anak/">Cuba percuma</a>
-            <a class="btn kedua" href="anak/#harga">Lihat harga</a>
+  <section class="kanan" id="masa" data-kam="1" data-untuk="guru">
+    <div class="isi">
+      <div class="panel">
+        <div class="label" data-t="m.label">Masa yang hilang</div>
+        <h2 data-t="m.tajuk">Berapa jam anda habiskan untuk TP setiap penggal?</h2>
+        <div class="kira">
+          <label for="r-murid"><span data-t="m.murid">Bilangan murid</span><output id="o-murid">40</output></label>
+          <input type="range" id="r-murid" min="20" max="300" step="10" value="40">
+          <label for="r-bab"><span data-t="m.bab">Bab setiap penggal</span><output id="o-bab">4</output></label>
+          <input type="range" id="r-bab" min="1" max="8" step="1" value="4">
+          <div class="hasil">
+            <div><b id="j-manual">8</b><small data-t="m.manual">jam secara manual</small></div>
+            <div class="jimat"><b id="j-jimat">7</b><small data-t="m.jimat">jam dijimatkan dengan Jejak TP</small></div>
           </div>
         </div>
-        <div class="markah" aria-label="Contoh markah setiap bab">
-          <div><span>Bab 1 · Sains</span><b class="ok">93% Cemerlang</b></div>
-          <div><span>Bab 3 · Sains</span><b class="mid">44% Sederhana</b></div>
-          <div><span>Bab 5 · Sains</span><b class="low">17% Perlu bantuan</b></div>
-        </div>
+        <a class="btn" href="#produk" style="margin-top:18px" data-jejak="kira-cuba" data-t="m.cta">Cuba percuma dengan satu kelas →</a>
+        <p class="nota" data-t="m.nota"></p>
       </div>
     </div>
   </section>
 
-  <section class="sek papan" id="guru">
-    <div class="wrap">
-      <p class="label">Guru</p>
-      <h2 style="margin-top:10px">Jejak TP. Kerja PBD jadi ringan.</h2>
-      <p class="intro">Murid bermain di telefon. Tahap Penguasaan (TP) direkod terus mengikut DSKP, bab demi bab, dan sedia untuk pelaporan PBD.</p>
-      <div class="bab">
-        <a href="https://jejaktpsains.naikgred.com/landing.html"><b>51</b><span class="nm">bab Sains</span><span class="ket">Termasuk versi Bahasa Inggeris (DLP) Tingkatan 1 hingga 3</span><span class="pergi">Jejak TP Sains ›</span></a>
-        <a href="https://jejaktpmath.naikgred.com/landing.html"><b>53</b><span class="nm">bab Matematik</span><span class="ket">Dengan rajah interaktif yang boleh digerakkan</span><span class="pergi">Jejak TP Matematik ›</span></a>
-        <a href="https://jejaktpsejarah.naikgred.com/landing.html"><b>49</b><span class="nm">bab Sejarah</span><span class="ket">Dengan garis masa dan petikan sumber</span><span class="pergi">Jejak TP Sejarah ›</span></a>
-        <a href="https://jejaktpenglish.naikgred.com/landing.html"><b>31</b><span class="nm">bab English</span><span class="ket">Dengan soalan mendengar yang dibaca oleh telefon murid</span><span class="pergi">Jejak TP English ›</span></a>
-      </div>
-      <div class="harga-guru" id="harga-guru">
-        <div>
-          <span class="siapa">Percuma</span>
-          <span class="rm">RM0</span>
-          <ul><li>Bab 1 dan 2 bagi setiap tingkatan</li><li>Rekod TP murid mengikut DSKP</li><li>Kelas demo untuk dicuba dahulu</li></ul>
+  <section class="kanan" id="laporan" data-kam="1" data-untuk="ibubapa" hidden>
+    <div class="isi">
+      <div class="panel">
+        <div class="label" data-t="l.label">Laporan anak</div>
+        <h2 data-t="l.tajuk">Anda nampak apa yang guru nampak.</h2>
+        <div class="laporan">
+          <img id="l-gbr" alt="Contoh laporan markah anak dalam Anak NaikGred" width="150" height="258">
+          <ul>
+            <li><b data-t="l.1">Markah setiap bab</b><span data-t="l.1s">Peratus dan label: Cemerlang, Baik, Sederhana atau Perlu bantuan.</span></li>
+            <li><b data-t="l.2">Bab paling lemah</b><span data-t="l.2s">Disusun dari yang paling perlu dibantu.</span></li>
+            <li><b data-t="l.3">Satu tindakan minggu ini</b><span data-t="l.3s">Contohnya: minta anak ulang Bab 5.</span></li>
+          </ul>
         </div>
-        <div class="utama">
-          <span class="siapa">Premium · setiap subjek</span>
-          <span class="rm">RM23 <small>setahun bagi setiap peringkat</small></span>
-          <span class="eb">Harga Early Bird hingga 31 Dis 2026</span>
-          <ul><li>Menengah rendah (Tingkatan 1 hingga 3) atau Menengah atas (Tingkatan 4&nbsp;dan&nbsp;5)</li><li>Semua bab dibuka, 5 kelas dengan 60 murid setiap kelas</li><li>RM23 dikunci setiap tahun selagi langganan tidak terputus. Mulai 1 Januari 2027, RM59 setahun</li></ul>
-        </div>
-      </div>
-      <div class="ctas">
-        <a class="btn emas" href="https://jejaktpsains.naikgred.com/landing.html">Mula dengan Sains</a>
-        <a class="btn garis" href="https://jejaktpsains.naikgred.com/?demo=cikgu">Cuba kelas demo</a>
+        <p class="nota" data-t="l.nota">Contoh sebenar daripada app. Nama dan markah ialah data contoh.</p>
       </div>
     </div>
   </section>
 
-  <section class="sek" id="tentang">
-    <div class="wrap">
-      <h2>Dibina bersama guru yang masih mengajar.</h2>
-      <div class="nilai">
-        <div>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/></svg>
-          <h3>Tepat mengikut DSKP</h3>
-          <p>Setiap soalan dipetakan kepada standard pembelajaran yang digunakan di sekolah.</p>
+  <section id="bukti" data-kam="2">
+    <div class="isi">
+      <div class="panel">
+        <div class="label" data-t="b.label">Sudah digunakan di sekolah</div>
+        <h2 id="b-tajuk"></h2>
+        <div class="angka">
+          <div><b id="n-main">1,088</b><small data-t="b.main">murid sudah menjawab</small></div>
+          <div><b id="n-sekolah">75+</b><small data-t="b.sekolah">sekolah sudah mendaftar</small></div>
+          <div><b id="n-24j">137</b><small data-t="b.24j">murid bermain dalam 24 jam</small></div>
         </div>
-        <div>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><path d="M3 20h18"/><path d="M6 16v-4M11 16V8M16 16v-6M20 16V5"/></svg>
-          <h3>Data yang boleh diambil tindakan</h3>
-          <p>Bukan sekadar satu markah keseluruhan. Bab yang lemah dikesan, dan satu langkah seterusnya dicadangkan.</p>
-        </div>
-        <div>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand)"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <h3>Data murid dilindungi</h3>
-          <p>Tiada gambar, e-mel atau nombor telefon murid disimpan. Data tidak dijual kepada sesiapa.</p>
-        </div>
+        <div class="tindakan" style="margin-top:14px"><span class="hidup" id="b-hidup" hidden data-t="b.hidup">Angka hidup</span></div>
+        <div class="suara" id="suara" hidden></div>
+        <p class="nota" id="b-nota" data-t="b.nota">Semua subjek Jejak TP, setakat 21 Oktober 2026.</p>
       </div>
     </div>
   </section>
 
-  <section class="akhir">
-    <div class="wrap">
-      <h2>Mula hari ini. Percuma.</h2>
-      <p>Daftar dalam masa satu minit. Tiada aplikasi untuk dimuat turun.</p>
-      <div class="ctas">
-        <a class="btn utama" href="anak/">Ibu bapa</a>
-        <a class="btn kedua" href="https://jejaktpsains.naikgred.com/landing.html">Guru</a>
+  <section id="produk" data-kam="3">
+    <div class="produk-isi">
+      <div class="label" data-t="pr.label">Produk NaikGred</div>
+      <h2 id="pr-tajuk"></h2>
+      <div class="senarai" id="senarai"></div>
+    </div>
+  </section>
+
+  <section class="kanan" id="harga" data-kam="4" data-untuk="guru">
+    <div class="isi">
+      <div class="panel">
+        <div class="label" data-t="h.label">Harga perintis</div>
+        <h2 data-t="h.tajuk">RM23 setahun. Harga ini tamat 31 Disember.</h2>
+        <label class="subjek" for="h-subjek"><span data-t="h.subjek">Subjek</span>
+          <select id="h-subjek"></select>
+        </label>
+        <div class="peringkat">
+          <div><small data-t="h.rendah">Menengah rendah (T1–T3)</small><b>RM23</b><small class="kemudian" data-t="h.kemudian">RM59 mulai 2027</small><a class="btn" id="h-rendah" target="_blank" rel="noopener" data-t="h.langgan">Langgan</a></div>
+          <div><small data-t="h.atas">Menengah atas (T4–T5)</small><b>RM23</b><small class="kemudian" data-t="h.kemudian">RM59 mulai 2027</small><a class="btn" id="h-atas" target="_blank" rel="noopener" data-t="h.langgan">Langgan</a></div>
+        </div>
+        <p><span data-t="h.baki">Baki tempoh harga perintis:</span> <span class="detik" id="detik">—</span></p>
+        <div class="nota" data-t="h.nota"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kanan" id="harga-anak" data-kam="4" data-untuk="ibubapa" hidden>
+    <div class="isi">
+      <div class="panel">
+        <div class="label" data-t="ha.label">Harga awal</div>
+        <h2 data-t="ha.tajuk">RM32 setahun. Kurang daripada RM3 sebulan.</h2>
+        <label class="subjek" for="ha-subjek"><span data-t="ha.subjek">Subjek anak</span>
+          <select id="ha-subjek"></select>
+        </label>
+        <div class="tindakan">
+          <a class="btn" id="ha-cta" target="_blank" rel="noopener" data-t="ha.cta">Daftar anak saya</a>
+        </div>
+        <p><span data-t="ha.baki">Harga RM32 tamat dalam:</span> <span class="detik" id="detik2">—</span></p>
+        <div class="nota" data-t="ha.nota"></div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <span>© 2026 NaikGred · Dibina di Malaysia<br>Untuk murid sekolah rendah: <a href="https://belajarkilat.github.io/matematik-kilat/">Matematik Kilat dan Sains Kilat</a></span>
-    <nav aria-label="Pautan kaki">
-      <a href="anak/privasi.html">Dasar Privasi</a>
-      <a href="anak/terma.html">Terma</a>
-      <a href="https://wa.me/60106640353">WhatsApp 010-664 0353</a>
-      <a href="mailto:belajarkilatofficial@gmail.com">E-mel</a>
-    </nav>
+  <div class="isi">
+    <span>By NaikGred · naikgred.com</span>
+    <span><span data-t="f.wa">WhatsApp</span>: <a href="https://wa.me/60106640353" target="_blank" rel="noopener"><code>010-664 0353</code></a> · <a href="mailto:belajarkilatofficial@gmail.com">belajarkilatofficial@gmail.com</a></span>
+    <span><a href="anak/privasi.html" data-t="f.privasi">Privasi</a> · <a href="anak/terma.html" data-t="f.terma">Terma</a> · <a href="https://belajarkilat.github.io/matematik-kilat/" target="_blank" rel="noopener" data-t="f.kilat">Matematik Kilat (Tahun 1–6)</a></span>
   </div>
 </footer>
 
+<div class="bar-beli">
+  <div class="isi">
+    <span id="bar-teks"></span>
+    <a class="btn" id="bar-cta" href="#produk" style="padding:10px 16px"></a>
+  </div>
+</div>
+<div class="petunjuk" id="petunjuk" hidden></div>
+
+<script src="aset/web3d-gambar.js"></script>
 <script>
-/* Pengira murid bermain (Sains + Matematik/Sejarah), sama seperti landing Anak. Jika gagal, angka asal kekal. */
-(function(){
-  var AWAN={url:"https://cqokowzzgseuvhcgpktj.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxb2tvd3p6Z3NldXZoY2dwa3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NzE5MDgsImV4cCI6MjEwMjU0NzkwOH0.AjFtow8RscN0KpIrWNrHCQu-cztcjd_ojTKZyY5GTg8"};
-  var MJ={url:"https://noaeagitwklnpmyhhhtn.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vYWVhZ2l0d2tsbnBteWhoaHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU4MDEsImV4cCI6MjEwNTczMTgwMX0.Z7ltdqSgxAlVVSlzDuPvUnFdpStY5UWHbdOqXS8BtB0"};
-  var ambil=function(c,fn){return fetch(c.url+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":c.kunci,"Authorization":"Bearer "+c.kunci,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})};
-  Promise.all([ambil(AWAN,"lo_statistik_awam"),ambil(MJ,"mj_statistik_awam")]).then(function(h){
-    var s=h[0],m=h[1],e=document.getElementById("kira-murid");if(!s||!e||!(s.bermain_semua>=1))return;
-    e.textContent=(s.bermain_semua+(m?m.semua:0)).toLocaleString("ms-MY");
+/* ---------- Pautan sebenar ke app ---------- */
+const APP = {sains:"https://jejaktpsains.naikgred.com", math:"https://jejaktpmath.naikgred.com", sejarah:"https://jejaktpsejarah.naikgred.com", english:"https://jejaktpenglish.naikgred.com"};
+/* Kod ?dari yang membawa pelawat ke laman ini diteruskan ke app, supaya sumber guru kekal tepat. */
+const DARI = (() => { const m = /[?&]dari=([^&#]*)/.exec(location.search); return m ? decodeURIComponent(m[1]).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 30) : "web"; })();
+const pautan = {
+  cuba: k => `${APP[k]}/?daftar&dari=${DARI}`,
+  beli: (k, p) => `${APP[k]}/?cikgu&naik=${p}&dari=${DARI}`,
+  anak: k => `${APP[k]}/?keluarga=1&dari=${DARI}`,
+  landing: k => `${APP[k]}/landing.html?dari=${DARI}`,
+  planner: () => `https://naikgred.com/planner/?dari=${DARI}`,
+  anakLanding: () => `https://naikgred.com/anak/?dari=${DARI}`
+};
+
+/* ---------- Kandungan dwibahasa ---------- */
+const T = {
+  ms: {
+    ringan:"Mod ringan", ringanOff:"Mod 3D", mula:"Mula percuma", tatal:"Tatal untuk meneroka ↓",
+    "p.guru":"Saya guru","p.ibubapa":"Saya ibu bapa",
+    hero:{
+      guru:{pil:"Bab 1 & 2 percuma, semua subjek",h:"TP 40 murid.<br><em>Siap sendiri.</em>",s:"Murid menjawab soalan di telefon. TP dan ulasan PBD setiap murid terisi secara automatik, sedia untuk dieksport.",cta:"Pilih subjek, cuba percuma",dua:"Kira masa anda",nota:"TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English"},
+      ibubapa:{pil:"RM32 setahun · harga awal",h:"Tahu markah sebenar anak.<br><em>Setiap bab.</em>",s:"Anak menjawab soalan mengikut sukatan pelajaran sekolah. Anda nampak markah dan bab yang perlu dibantu, terus dari telefon.",cta:"Daftar anak saya",dua:"Lihat contoh laporan",nota:"Sains, Matematik, Sejarah dan English · Tingkatan 1–5"}
+    },
+    "m.label":"Masa yang hilang","m.tajuk":"Berapa jam anda habiskan untuk TP setiap penggal?","m.murid":"Bilangan murid","m.bab":"Bab setiap penggal",
+    "m.manual":"jam secara manual","m.jimat":"jam dijimatkan dengan Jejak TP","m.cta":"Cuba percuma dengan satu kelas →",
+    "m.nota":"Anggaran kasar: 3 minit setiap murid setiap bab untuk menentukan TP dan menulis ulasan, berbanding kira-kira 30 saat untuk menyemak TP yang dicadangkan.",
+    "l.label":"Laporan anak","l.tajuk":"Anda nampak apa yang guru nampak.","l.1":"Markah setiap bab","l.1s":"Peratus dan label: Cemerlang, Baik, Sederhana atau Perlu bantuan.",
+    "l.2":"Bab paling lemah","l.2s":"Disusun bermula dengan bab yang paling perlu dibantu.","l.3":"Satu tindakan minggu ini","l.3s":"Contohnya: minta anak mengulang Bab 5.","l.nota":"Tangkapan skrin sebenar daripada app. Nama dan markah ialah data contoh.",
+    "b.label":"Sudah digunakan di sekolah", bTajuk:{guru:"Guru sebenar. Murid sebenar. Bukan demo.",ibubapa:"Soalan yang sama digunakan oleh guru di sekolah."},
+    "b.main":"murid sudah menjawab","b.sekolah":"sekolah sudah mendaftar","b.24j":"murid bermain dalam 24 jam","b.hidup":"Angka hidup","b.nota":"Semua subjek Jejak TP, setakat 21 Oktober 2026.","b.notaHidup":"Dikemas kini setiap kali halaman dibuka.",
+    "pr.label":"Produk NaikGred", prTajuk:{guru:"Pilih subjek. Bab 1 dan 2 percuma.",ibubapa:"Anak NaikGred untuk ibu bapa."},
+    cuba:"Cuba Bab 1 & 2 percuma", langgan:"Langgan", rendah:"T1–T3", atas:"T4–T5", landing:"Lihat butiran penuh", setahun:"setahun", percuma:"Percuma",
+    pilihAnak:"Pilih subjek anak untuk mendaftar:", contohLaporan:"Lihat contoh laporan", muatPlanner:"Muat turun Planner percuma",
+    notaBayar:"Bayar melalui FPX (caj FPX RM1). Daftar atau log masuk dahulu, kemudian halaman bayaran terbuka dengan sendirinya.", kemudian:"mulai 2027",
+    produk:{
+      sains:{j:"Jejak TP",t:"Sains",d:"T1–T5 · rajah dan soalan ikut DSKP"},
+      math:{j:"Jejak TP",t:"Matematik",d:"T1–T5 · 53 bab, jalan kira ditunjukkan"},
+      sejarah:{j:"Jejak TP",t:"Sejarah",d:"T1–T5 · 49 bab, soalan sumber dan peristiwa"},
+      english:{j:"Jejak TP",t:"English",d:"Form 1–5 · reading, grammar, listening"},
+      anak:{j:"Ibu bapa",t:"Anak NaikGred",d:"Markah anak setiap bab, dalam telefon anda"},
+      planner:{j:"Percuma",t:"Planner Guru 2027",d:"Takwim KPM 2027 (Kumpulan B), nama anda di kulit"}
+    },
+    "h.label":"Harga perintis","h.tajuk":"RM23 setahun. Harga ini tamat 31 Disember.","h.subjek":"Subjek","h.rendah":"Menengah rendah (T1–T3)","h.atas":"Menengah atas (T4–T5)","h.langgan":"Langgan",
+    "h.kemudian":"RM59 mulai 2027","h.baki":"Baki tempoh harga perintis:","h.nota":"Langgan sebelum 31 Disember dan harga anda kekal RM23 setiap tahun, selagi langganan disambung dalam tempoh 30 hari selepas tamat. Mulai 1 Januari 2027, pelanggan baharu membayar RM59 setiap peringkat. Bayar melalui FPX (caj FPX RM1). Belum pasti? Cuba Bab 1 dan 2 percuma dahulu.",
+    "ha.label":"Harga awal","ha.tajuk":"RM32 setahun. Kurang daripada RM3 sebulan.","ha.subjek":"Subjek anak","ha.cta":"Daftar anak saya","ha.baki":"Harga RM32 tamat dalam:","ha.nota":"Harga biasa RM59 setahun mulai 1 Januari 2027.",
+    "f.wa":"WhatsApp","f.privasi":"Privasi","f.terma":"Terma","f.kilat":"Matematik Kilat (Tahun 1–6)", hari:"hari",
+    bar:{guru:["<b>Bab 1 & 2 percuma</b> · RM23 sebelum 31 Dis","Mula percuma"],ibubapa:["<b>Anak NaikGred</b> · RM32 setahun","Daftar anak"]},
+    subjek:{sains:"Sains",math:"Matematik",sejarah:"Sejarah",english:"English"}
+  },
+  en: {
+    ringan:"Lite mode", ringanOff:"3D mode", mula:"Start free", tatal:"Scroll to explore ↓",
+    "p.guru":"I'm a teacher","p.ibubapa":"I'm a parent",
+    hero:{
+      guru:{pil:"Chapters 1 & 2 free, every subject",h:"TP for 40 students.<br><em>Filled in for you.</em>",s:"Students answer questions on their phones. Each student's TP and PBD comment fill in automatically, ready to export.",cta:"Pick a subject, try free",dua:"Count your hours",nota:"TP suggested, teacher confirms · Science, Maths, History, English"},
+      ibubapa:{pil:"RM32 a year · early price",h:"Know your child's real marks.<br><em>Every chapter.</em>",s:"Your child answers questions that follow the school syllabus. You see the marks and the chapters that need help, right on your phone.",cta:"Register my child",dua:"See a sample report",nota:"Science, Maths, History and English · Form 1–5"}
+    },
+    "m.label":"Lost time","m.tajuk":"How many hours do you spend on TP each term?","m.murid":"Number of students","m.bab":"Chapters per term",
+    "m.manual":"hours by hand","m.jimat":"hours saved with Jejak TP","m.cta":"Try free with one class →",
+    "m.nota":"Rough estimate: 3 minutes per student per chapter to decide TP and write a comment, against about 30 seconds to check a suggested TP.",
+    "l.label":"Your child's report","l.tajuk":"You see what the teacher sees.","l.1":"Marks for every chapter","l.1s":"A percentage and a label: Excellent, Good, Fair or Needs help.",
+    "l.2":"Weakest chapters first","l.2s":"Sorted from the chapter that needs the most help.","l.3":"One action this week","l.3s":"For example: ask your child to redo Chapter 5.","l.nota":"Real screenshot from the app (in Malay). The name and marks are sample data.",
+    "b.label":"Already used in schools", bTajuk:{guru:"Real teachers. Real students. Not a demo.",ibubapa:"The same questions teachers use in school."},
+    "b.main":"students have answered","b.sekolah":"schools signed up","b.24j":"students played in the last 24 hours","b.hidup":"Live numbers","b.nota":"All Jejak TP subjects, as of 21 October 2026.","b.notaHidup":"Updated every time this page opens.",
+    "pr.label":"NaikGred products", prTajuk:{guru:"Pick a subject. Chapters 1 and 2 are free.",ibubapa:"Anak NaikGred for parents."},
+    cuba:"Try Chapters 1 & 2 free", langgan:"Subscribe", rendah:"F1–F3", atas:"F4–F5", landing:"See full details", setahun:"a year", percuma:"Free",
+    pilihAnak:"Pick your child's subject to register:", contohLaporan:"See a sample report", muatPlanner:"Download the free Planner",
+    notaBayar:"Pay by FPX (RM1 FPX fee). Sign up or log in first, then the payment page opens by itself.", kemudian:"from 2027",
+    produk:{
+      sains:{j:"Jejak TP",t:"Science",d:"F1–F5 · diagrams and DSKP-aligned questions"},
+      math:{j:"Jejak TP",t:"Maths",d:"F1–F5 · 53 chapters, working shown"},
+      sejarah:{j:"Jejak TP",t:"History",d:"F1–F5 · 49 chapters, sources and events"},
+      english:{j:"Jejak TP",t:"English",d:"Form 1–5 · reading, grammar, listening"},
+      anak:{j:"Parents",t:"Anak NaikGred",d:"Your child's marks per chapter, on your phone"},
+      planner:{j:"Free",t:"Teacher Planner 2027",d:"KPM 2027 calendar (Group B), your name on the cover"}
+    },
+    "h.label":"Founding price","h.tajuk":"RM23 a year. This price ends 31 December.","h.subjek":"Subject","h.rendah":"Lower secondary (F1–F3)","h.atas":"Upper secondary (F4–F5)","h.langgan":"Subscribe",
+    "h.kemudian":"RM59 from 2027","h.baki":"Founding price ends in:","h.nota":"Subscribe before 31 December and your price stays RM23 every year, as long as you renew within 30 days of expiry. From 1 January 2027, new subscribers pay RM59 per level. Pay by FPX (RM1 FPX fee). Not sure yet? Try Chapters 1 and 2 free first.",
+    "ha.label":"Early price","ha.tajuk":"RM32 a year. Under RM3 a month.","ha.subjek":"Your child's subject","ha.cta":"Register my child","ha.baki":"The RM32 price ends in:","ha.nota":"Regular price RM59 a year from 1 January 2027.",
+    "f.wa":"WhatsApp","f.privasi":"Privacy","f.terma":"Terms","f.kilat":"Matematik Kilat (Year 1–6)", hari:"days",
+    bar:{guru:["<b>Chapters 1 & 2 free</b> · RM23 before 31 Dec","Start free"],ibubapa:["<b>Anak NaikGred</b> · RM32 a year","Register child"]},
+    subjek:{sains:"Science",math:"Maths",sejarah:"History",english:"English"}
+  }
+};
+/* Ayat guru sebenar (dengan izin). Kosong = bahagian ini tidak dipaparkan. Format: {ms:"…", en:"…", nama:"Cikgu …, SMK …"} */
+const SUARA = [];
+const SUSUN = {guru:["sains","math","sejarah","english","planner","anak"], ibubapa:["anak"]};
+const SUBJEK = ["sains","math","sejarah","english"];
+const HARGA = {anak:["RM32","RM59"], planner:null};
+const WARNA = k => getComputedStyle(document.documentElement).getPropertyValue("--"+k).trim();
+
+let bahasa = "ms", persona = "guru", kadAktif = "sains";
+try { bahasa = localStorage.getItem("ng-bahasa") || "ms"; persona = localStorage.getItem("ng-persona") || "guru"; } catch (e) {}
+if (!SUSUN[persona]) persona = "guru";
+
+const $ = id => document.getElementById(id);
+const PANAH = `<svg class="anak-panah" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+
+function badanKad(k, L) {
+  const gbr = window.GAMBAR && GAMBAR[k] ? `<img class="gbr" src="${GAMBAR[k]}" alt="" loading="lazy">` : "";
+  if (k === "planner") return `${gbr}<a class="btn" data-jejak="planner" href="${pautan.planner()}" target="_blank" rel="noopener">${L.muatPlanner} →</a>`;
+  if (k === "anak") return `${gbr}<small>${L.pilihAnak}</small><div class="pilih">${SUBJEK.map(s => `<a class="btn" data-jejak="anak-${s}" href="${pautan.anak(s)}" target="_blank" rel="noopener">${L.subjek[s]}</a>`).join("")}</div>
+    <span class="pautan"><a data-jejak="anak-contoh" href="${pautan.anakLanding()}" target="_blank" rel="noopener">${L.contohLaporan} ↗</a></span>`;
+  return `${gbr}<div class="pilih">
+      <a class="btn" data-jejak="beli-${k}-rendah" href="${pautan.beli(k, "rendah")}" target="_blank" rel="noopener">${L.langgan} ${L.rendah}</a>
+      <a class="btn" data-jejak="beli-${k}-atas" href="${pautan.beli(k, "atas")}" target="_blank" rel="noopener">${L.langgan} ${L.atas}</a></div>
+    <a class="btn kedua" data-jejak="cuba-${k}" href="${pautan.cuba(k)}" target="_blank" rel="noopener">${L.cuba} →</a>
+    <small>${L.notaBayar}</small>
+    <span class="pautan"><a data-jejak="landing-${k}" href="${pautan.landing(k)}" target="_blank" rel="noopener">${L.landing} ↗</a></span>`;
+}
+
+function lukis() {
+  const L = T[bahasa];
+  document.documentElement.lang = bahasa;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = L[el.dataset.t]; if (typeof v === "string") el.textContent = v; });
+  $("ringan").textContent = document.body.classList.contains("ringan") ? L.ringanOff : L.ringan;
+  $("petunjuk").textContent = L.tatal;
+  $("bm").setAttribute("aria-pressed", bahasa === "ms"); $("en").setAttribute("aria-pressed", bahasa === "en");
+  document.querySelectorAll(".persona button").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === persona));
+  document.querySelectorAll("[data-untuk]").forEach(s => { s.hidden = s.dataset.untuk !== persona; });
+
+  const h = L.hero[persona];
+  $("h-pil").textContent = h.pil; $("h-tajuk").innerHTML = h.h; $("h-sub").textContent = h.s;
+  $("h-cta").textContent = h.cta + " →";
+  $("h-cta").href = persona === "guru" ? "#produk" : "#harga-anak";
+  $("h-cta").dataset.jejak = persona === "guru" ? "hero-cuba" : "hero-anak";
+  $("h-dua").textContent = h.dua; $("h-dua").href = persona === "guru" ? "#masa" : "#laporan";
+  $("h-nota").textContent = h.nota;
+  $("b-tajuk").textContent = L.bTajuk[persona];
+  $("pr-tajuk").textContent = L.prTajuk[persona];
+  $("bar-teks").innerHTML = L.bar[persona][0];
+  $("bar-cta").textContent = L.bar[persona][1];
+  $("bar-cta").href = persona === "guru" ? "#produk" : "#harga-anak";
+  $("l-gbr").src = window.GAMBAR ? GAMBAR.anak : "";
+
+  /* Senarai produk ikut persona */
+  if (!SUSUN[persona].includes(kadAktif)) kadAktif = SUSUN[persona][0];
+  $("senarai").innerHTML = SUSUN[persona].map(k => {
+    const p = L.produk[k], hg = k in HARGA ? HARGA[k] : ["RM23", "RM59"];
+    const harga = hg ? `${hg[0]}<small>${hg[1]} ${L.kemudian}</small>` : L.percuma;
+    return `<article class="kad${k === kadAktif ? " aktif" : ""}" data-k="${k}" style="--w:var(--${k})">
+      <button class="kad-kepala" aria-expanded="${k === kadAktif}">
+        <span class="jenis">${p.j}</span><span class="t">${p.t}</span><span class="harga">${harga}</span>${PANAH}<span class="ringkas">${p.d}</span>
+      </button>
+      <div class="kad-badan">${badanKad(k, L)}</div></article>`;
+  }).join("");
+  $("senarai").querySelectorAll(".kad-kepala").forEach(b => b.onclick = () => bukaKad(b.parentElement.dataset.k, true));
+  /* Tetikus atas kad: pratonton buku; keluar senarai: kembali kepada kad yang dibuka */
+  $("senarai").querySelectorAll(".kad").forEach(kd => kd.onmouseenter = () => window.pilihBuku && pilihBuku(kd.dataset.k));
+  $("senarai").onmouseleave = () => window.pilihBuku && pilihBuku(kadAktif);
+  window.pilihBuku && pilihBuku(kadAktif);
+
+  /* Pilihan subjek di bahagian harga */
+  [["h-subjek", kemasHarga], ["ha-subjek", kemasHargaAnak]].forEach(([id, fn]) => {
+    const s = $(id), lama = s.value || "sains";
+    s.innerHTML = SUBJEK.map(k => `<option value="${k}">${L.subjek[k]}</option>`).join("");
+    s.value = lama; s.onchange = fn; fn();
   });
-  /* Penjejak (14 Okt 2026): satu 'utama-lawat' setiap sesi (nota = kod ?dari), dan satu
-     'utama-klik' bagi setiap jenis butang setiap sesi. Disimpan dalam lo_ping projek Sains.
-     Pelayar automatik dan localhost diabaikan supaya ujian tidak dikira sebagai lawatan. */
-  (function(){try{
-    if(navigator.webdriver||/bot|crawl|spider|slurp|facebookexternalhit|meta-externalagent|facebookcatalog|headlesschrome|lighthouse/i.test(navigator.userAgent||"")||/^(localhost|127\.)/.test(location.hostname))return;
-    /* Rujukan (18 Okt 2026): hos laman yang membawa pelawat, atau 'langsung', ditambah '|app-<nama>' jika dalam pelayar app; hanya untuk ping lawat. */
-    var rujuk=(function(){try{var ua=navigator.userAgent||"",a="",r=document.referrer||"",h="";
-      if(/FBAN|FBAV|FB_IAB/.test(ua))a="facebook";else if(/Instagram/.test(ua))a="instagram";else if(/Barcelona/.test(ua))a="threads";
-      else if(/musical_ly|BytedanceWebview|TikTok/i.test(ua))a="tiktok";else if(/Telegram/i.test(ua))a="telegram";else if(/\bLine\//.test(ua))a="line";
-      if(r){try{var u=new URL(r);h=(u.protocol==="android-app:"?"android-app:":"")+u.hostname.replace(/^www\./,"");}catch(x){}}
-      return (h||"langsung")+(a?"|app-"+a:"");}catch(e){return "";}})();
-    var ping=function(j,n){var p=localStorage.getItem("cn-peranti");
-      if(!p||!/^[a-z0-9]{8}$/.test(p)){p=Math.random().toString(36).slice(2,10).replace(/[^a-z0-9]/g,"0");while(p.length<8)p+="0";localStorage.setItem("cn-peranti",p);}
-      fetch(AWAN.url+"/rest/v1/rpc/lo_ping",{method:"POST",keepalive:true,headers:{"apikey":AWAN.kunci,"Authorization":"Bearer "+AWAN.kunci,"Content-Type":"application/json"},
-        body:JSON.stringify({p_jenis:j,p_peranti:p,p_nota:n||"",p_rujuk:/-lawat$/.test(j)?rujuk:""})}).catch(function(){});};
-    var m=/[?&]dari=([^&#]*)/.exec(location.search),kod=m?decodeURIComponent(m[1]).toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,30):"";
-    if(!sessionStorage.getItem("ng-lawat")){sessionStorage.setItem("ng-lawat","1");ping("utama-lawat",kod);}
-    var sekali=function(n){if(sessionStorage.getItem("ng-klik-"+n))return;sessionStorage.setItem("ng-klik-"+n,"1");ping("utama-klik",n);};
-    document.addEventListener("click",function(e){try{
-      var b=e.target.closest&&e.target.closest("a");if(!b)return;
-      var h=b.getAttribute("href")||"",n="";
-      if(/^anak\/#harga/.test(h))n="anak-harga";
-      else if(/^anak\//.test(h))n="anak";
-      else if(h==="#ibu-bapa")n="tatal-ibu-bapa";
-      else if(h==="#guru")n="tatal-guru";
-      else if(/demo=cikgu/.test(h))n="demo-guru";
-      else if(/jejaktpsains/.test(h))n="guru-sains";
-      else if(/jejaktpmath/.test(h))n="guru-math";
-      else if(/jejaktpsejarah/.test(h))n="guru-sejarah";
-      else if(/jejaktpenglish/.test(h))n="guru-english";
-      else if(/wa\.me/.test(h))n="whatsapp";
-      else if(/belajarkilat/.test(h))n="kilat";
-      if(n)sekali(n);}catch(x){}});
-  }catch(e){}})();
-})();
+  detik();
+}
+function bukaKad(k, olehPelawat) {
+  const kd = document.querySelector(`.kad[data-k="${k}"]`); if (!kd) return;
+  const sudah = kd.classList.contains("aktif");
+  document.querySelectorAll(".kad").forEach(x => { const on = x === kd && !(sudah && olehPelawat); x.classList.toggle("aktif", on); x.querySelector(".kad-kepala").setAttribute("aria-expanded", on); });
+  kadAktif = k;
+  window.pilihBuku && pilihBuku(k);
+  if (olehPelawat) jejak("kad-" + k);
+}
+function kemasHarga() {
+  const k = $("h-subjek").value;
+  $("h-rendah").href = pautan.beli(k, "rendah"); $("h-rendah").dataset.jejak = `beli-${k}-rendah`;
+  $("h-atas").href = pautan.beli(k, "atas"); $("h-atas").dataset.jejak = `beli-${k}-atas`;
+}
+function kemasHargaAnak() { const k = $("ha-subjek").value; $("ha-cta").href = pautan.anak(k); $("ha-cta").dataset.jejak = `anak-${k}`; }
+function simpan(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+$("bm").onclick = () => { bahasa = "ms"; simpan("ng-bahasa", "ms"); lukis(); window.labelBuku && labelBuku(); };
+$("en").onclick = () => { bahasa = "en"; simpan("ng-bahasa", "en"); lukis(); window.labelBuku && labelBuku(); jejak("bahasa-en"); };
+document.querySelectorAll(".persona button").forEach(b => b.onclick = () => { persona = b.dataset.p; simpan("ng-persona", persona); lukis(); jejak("persona-" + persona); });
+
+function kira() {
+  const m = +$("r-murid").value, b = +$("r-bab").value;
+  $("o-murid").value = m; $("o-bab").value = b;
+  const manual = m * b * 3 / 60, semak = m * b * .5 / 60;
+  $("j-manual").textContent = Math.round(manual); $("j-jimat").textContent = Math.round(manual - semak);
+  window.tinggiTP && tinggiTP(m);
+}
+$("r-murid").oninput = kira; $("r-bab").oninput = kira;
+function detik() {
+  const hari = Math.max(0, Math.ceil((new Date("2027-01-01T00:00:00+08:00") - Date.now()) / 864e5)) + " " + T[bahasa].hari;
+  $("detik").textContent = hari; $("detik2").textContent = hari;
+}
+
+/* ---------- Penjejak dan angka hidup (hanya di naikgred.com) ---------- */
+const DI_LAMAN = /(^|\.)naikgred\.com$/.test(location.hostname);
+const AWAN = {url:"https://cqokowzzgseuvhcgpktj.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxb2tvd3p6Z3NldXZoY2dwa3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NzE5MDgsImV4cCI6MjEwMjU0NzkwOH0.AjFtow8RscN0KpIrWNrHCQu-cztcjd_ojTKZyY5GTg8"};
+const MJ = {url:"https://noaeagitwklnpmyhhhtn.supabase.co",kunci:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vYWVhZ2l0d2tsbnBteWhoaHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU4MDEsImV4cCI6MjEwNTczMTgwMX0.Z7ltdqSgxAlVVSlzDuPvUnFdpStY5UWHbdOqXS8BtB0"};
+const BOT = navigator.webdriver || /bot|crawl|spider|slurp|facebookexternalhit|meta-externalagent|facebookcatalog|headlesschrome|lighthouse/i.test(navigator.userAgent || "");
+function rujuk() { try { const ua = navigator.userAgent || "", r = document.referrer || ""; let a = "", h = "";
+  if (/FBAN|FBAV|FB_IAB/.test(ua)) a = "facebook"; else if (/Instagram/.test(ua)) a = "instagram"; else if (/Barcelona/.test(ua)) a = "threads";
+  else if (/musical_ly|BytedanceWebview|TikTok/i.test(ua)) a = "tiktok"; else if (/Telegram/i.test(ua)) a = "telegram"; else if (/\bLine\//.test(ua)) a = "line";
+  if (r) { try { const u = new URL(r); h = (u.protocol === "android-app:" ? "android-app:" : "") + u.hostname.replace(/^www\./, ""); } catch (x) {} }
+  return (h || "langsung") + (a ? "|app-" + a : ""); } catch (e) { return ""; } }
+function ping(jenis, nota) {
+  if (!DI_LAMAN || BOT) return;
+  try {
+    let p = localStorage.getItem("cn-peranti");
+    if (!p || !/^[a-z0-9]{8}$/.test(p)) { p = Math.random().toString(36).slice(2, 10).replace(/[^a-z0-9]/g, "0").padEnd(8, "0"); localStorage.setItem("cn-peranti", p); }
+    fetch(AWAN.url + "/rest/v1/rpc/lo_ping", {method: "POST", keepalive: true, headers: {apikey: AWAN.kunci, Authorization: "Bearer " + AWAN.kunci, "Content-Type": "application/json"},
+      body: JSON.stringify({p_jenis: jenis, p_peranti: p, p_nota: nota || "", p_rujuk: /-lawat$/.test(jenis) ? rujuk() : ""})}).catch(() => {});
+  } catch (e) {}
+}
+/* Satu klik setiap jenis setiap sesi, nota bermula 'web3d-' supaya laman baharu dapat dibezakan. */
+function jejak(n) { try { if (sessionStorage.getItem("ng3-" + n)) return; sessionStorage.setItem("ng3-" + n, "1"); } catch (e) {} ping("utama-klik", "web3d-" + n); }
+try { if (!sessionStorage.getItem("ng-lawat")) { sessionStorage.setItem("ng-lawat", "1"); ping("utama-lawat", DARI === "web" ? "" : DARI); } } catch (e) {}
+document.addEventListener("click", e => { const a = e.target.closest && e.target.closest("[data-jejak]"); if (a) jejak(a.dataset.jejak); });
+if (DI_LAMAN && !BOT) { const s = document.createElement("script"); s.src = "https://naikgred.com/aset/piksel.js"; s.defer = true; document.head.appendChild(s); }
+
+function angkaHidup() {
+  if (!DI_LAMAN) return;
+  const ambil = (c, fn) => fetch(c.url + "/rest/v1/rpc/" + fn, {method: "POST", headers: {apikey: c.kunci, Authorization: "Bearer " + c.kunci, "Content-Type": "application/json"}, body: "{}"}).then(r => r.ok ? r.json() : null).catch(() => null);
+  Promise.all([ambil(AWAN, "lo_statistik_awam"), ambil(MJ, "mj_statistik_awam")]).then(([s, m]) => {
+    if (!s || !(s.bermain_semua >= 1)) return;
+    const f = n => n.toLocaleString("ms-MY");
+    $("n-main").textContent = f(s.bermain_semua + (m && m.semua ? m.semua : 0));
+    if (s.bermain_24j >= 0) $("n-24j").textContent = f(s.bermain_24j);
+    $("b-hidup").hidden = false; $("b-nota").textContent = T[bahasa]["b.notaHidup"];
+  });
+}
+
+function suara() {
+  const el = $("suara"); if (!SUARA.length) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = SUARA.map(s => `<blockquote><p>“${s[bahasa] || s.ms}”</p><cite>${s.nama}</cite></blockquote>`).join("");
+}
+
+/* Mod ringan */
+let ringan = false;
+try { ringan = localStorage.getItem("ng-ringan") === "1"; } catch (e) {}
+const lemah = (navigator.connection && navigator.connection.saveData) || (navigator.deviceMemory && navigator.deviceMemory <= 2) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (lemah) ringan = true;
+document.body.classList.toggle("ringan", ringan);
+$("ringan").onclick = () => { ringan = !ringan; simpan("ng-ringan", ringan ? "1" : "0"); document.body.classList.toggle("ringan", ringan); lukis(); jejak(ringan ? "ringan" : "3d"); if (!ringan) mula3D(); };
+
+const lepasHero = () => document.body.classList.toggle("lepas", scrollY > innerHeight * .6);
+addEventListener("scroll", lepasHero, {passive: true}); lepasHero();
+lukis(); kira(); suara(); angkaHidup();
+
+/* ---------- Dunia 3D ---------- */
+let sudah3D = false;
+const muatGambar = src => new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; });
+
+function bentukBulat(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+function tekstur(cv, r) {
+  const t = new THREE.CanvasTexture(cv);
+  t.encoding = THREE.sRGBEncoding; t.anisotropy = r.capabilities.getMaxAnisotropy();
+  return t;
+}
+
+/* Telefon (atau helaian kertas untuk planner) dengan tangkapan skrin app sebenar */
+function telefon3D(img, r, kertas) {
+  const g = new THREE.Group();
+  const nisbah = img ? img.height / img.width : 2;
+  const w = .62, h = Math.min(1.34, w * nisbah + (kertas ? 0 : .08));
+  const badan = new THREE.Mesh(
+    new THREE.ExtrudeGeometry(bentukBulat(w, h, kertas ? .02 : .09), {depth: kertas ? .008 : .045, bevelEnabled: !kertas, bevelThickness: .014, bevelSize: .014, bevelSegments: 4, curveSegments: 12}),
+    kertas ? new THREE.MeshStandardMaterial({color: 0xfbfaf6, roughness: .9})
+           : new THREE.MeshPhysicalMaterial({color: 0x141a18, roughness: .32, metalness: .55, clearcoat: 1, clearcoatRoughness: .2}));
+  badan.geometry.center(); badan.castShadow = true; g.add(badan);
+  const cv = document.createElement("canvas"); cv.width = 400; cv.height = Math.round(400 * (h - .05) / (w - .05));
+  const x = cv.getContext("2d");
+  x.save(); x.beginPath();
+  const rad = kertas ? 6 : 34;
+  x.moveTo(rad, 0); x.arcTo(cv.width, 0, cv.width, cv.height, rad); x.arcTo(cv.width, cv.height, 0, cv.height, rad); x.arcTo(0, cv.height, 0, 0, rad); x.arcTo(0, 0, cv.width, 0, rad); x.closePath(); x.clip();
+  x.fillStyle = "#fff"; x.fillRect(0, 0, cv.width, cv.height);
+  if (img) { const s = cv.width / img.width; x.drawImage(img, 0, 0, cv.width, img.height * s); }
+  x.restore();
+  const skrin = new THREE.Mesh(new THREE.PlaneGeometry(w - .05, h - .05), new THREE.MeshBasicMaterial({map: tekstur(cv, r), transparent: true, toneMapped: false}));
+  skrin.position.z = (kertas ? .005 : .037); g.add(skrin);
+  if (!kertas) {
+    const kilat = new THREE.Mesh(new THREE.PlaneGeometry(w - .05, h - .05), new THREE.MeshPhysicalMaterial({color: 0xffffff, transparent: true, opacity: .06, roughness: .05, clearcoat: 1}));
+    kilat.position.z = .039; g.add(kilat);
+  }
+  return g;
+}
+
+/* Kulit buku: kecerunan, ikon subjek, tajuk, label emas */
+function lukisIkon(x, k, cx, cy) {
+  x.save(); x.translate(cx, cy); x.strokeStyle = "rgba(255,255,255,.92)"; x.fillStyle = "rgba(255,255,255,.92)"; x.lineWidth = 9; x.lineCap = "round"; x.lineJoin = "round";
+  if (k === "sains") {
+    for (let i = 0; i < 3; i++) { x.save(); x.rotate(i * Math.PI / 3); x.beginPath(); x.ellipse(0, 0, 92, 34, 0, 0, Math.PI * 2); x.stroke(); x.restore(); }
+    x.beginPath(); x.arc(0, 0, 15, 0, Math.PI * 2); x.fill();
+  } else if (k === "math") {
+    x.font = "800 150px 'Plus Jakarta Sans', sans-serif"; x.textAlign = "center"; x.textBaseline = "middle"; x.fillText("π", -18, 0);
+    x.font = "700 52px 'JetBrains Mono', monospace"; x.fillText("²", 62, -46);
+  } else if (k === "sejarah") {
+    x.beginPath(); x.moveTo(-80, -52); x.lineTo(0, -92); x.lineTo(80, -52); x.closePath(); x.stroke();
+    [-56, -19, 19, 56].forEach(px => { x.beginPath(); x.moveTo(px, -40); x.lineTo(px, 52); x.stroke(); });
+    x.beginPath(); x.moveTo(-92, 70); x.lineTo(92, 70); x.stroke();
+  } else if (k === "english") {
+    x.font = "800 140px 'Plus Jakarta Sans', sans-serif"; x.textAlign = "center"; x.textBaseline = "middle"; x.fillText("Aa", 0, 4);
+  } else if (k === "anak") {
+    x.beginPath(); x.moveTo(0, 70); x.bezierCurveTo(-110, -10, -60, -100, 0, -46); x.bezierCurveTo(60, -100, 110, -10, 0, 70); x.fill();
+    x.fillStyle = "rgba(0,0,0,.18)"; x.font = "800 42px 'Plus Jakarta Sans', sans-serif"; x.textAlign = "center"; x.fillText("A+", 0, 4);
+  } else {
+    x.beginPath(); x.roundRect ? x.roundRect(-86, -70, 172, 150, 18) : x.rect(-86, -70, 172, 150); x.stroke();
+    x.beginPath(); x.moveTo(-86, -28); x.lineTo(86, -28); x.stroke();
+    [-44, 44].forEach(px => { x.beginPath(); x.moveTo(px, -92); x.lineTo(px, -54); x.stroke(); });
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) { x.beginPath(); x.arc(-54 + c * 36, 6 + r * 38, 7, 0, Math.PI * 2); x.fill(); }
+  }
+  x.restore();
+}
+function kulitBuku(k, r) {
+  const cv = document.createElement("canvas"); cv.width = 512; cv.height = 704; const x = cv.getContext("2d");
+  const p = T[bahasa].produk[k], w = WARNA(k), hg = k in HARGA ? HARGA[k] : ["RM23"];
+  x.fillStyle = w; x.fillRect(0, 0, 512, 704);
+  const g = x.createLinearGradient(0, 0, 512, 704); g.addColorStop(0, "rgba(255,255,255,.22)"); g.addColorStop(.55, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(0,0,0,.28)");
+  x.fillStyle = g; x.fillRect(0, 0, 512, 704);
+  for (let i = 0; i < 2600; i++) { x.fillStyle = Math.random() < .5 ? "rgba(255,255,255,.035)" : "rgba(0,0,0,.035)"; x.fillRect(Math.random() * 512, Math.random() * 704, 2, 2); }
+  x.fillStyle = "rgba(0,0,0,.16)"; x.fillRect(0, 0, 30, 704);
+  x.fillStyle = "rgba(255,255,255,.12)"; x.fillRect(30, 0, 3, 704);
+  x.strokeStyle = "rgba(255,255,255,.28)"; x.lineWidth = 2; x.strokeRect(58, 30, 426, 644);
+  x.font = "700 21px 'JetBrains Mono', monospace"; const lbl = p.j.toUpperCase(), lw = x.measureText(lbl).width + 32;
+  x.fillStyle = "#E9C463"; x.beginPath(); x.roundRect ? x.roundRect(82, 62, lw, 40, 20) : x.rect(82, 62, lw, 40); x.fill();
+  x.fillStyle = "#2B2205"; x.fillText(lbl, 98, 89);
+  lukisIkon(x, k, 271, 255);
+  x.fillStyle = "#fff"; x.font = "800 56px 'Plus Jakarta Sans', sans-serif";
+  const kata = p.t.split(" "), baris = []; let b = "";
+  kata.forEach(wd => { const c = b ? b + " " + wd : wd; if (x.measureText(c).width > 370) { baris.push(b); b = wd; } else b = c; }); baris.push(b);
+  let y = 470 - (baris.length - 1) * 30;
+  x.shadowColor = "rgba(0,0,0,.25)"; x.shadowBlur = 12; x.shadowOffsetY = 3;
+  baris.forEach(l => { x.fillText(l, 82, y); y += 62; });
+  x.shadowColor = "transparent";
+  const sub = {anak: bahasa === "ms" ? "Untuk ibu bapa" : "For parents", planner: bahasa === "ms" ? "Edisi 2027" : "2027 edition"}[k] || (bahasa === "ms" ? "Tingkatan 1–5" : "Form 1–5");
+  x.font = "600 26px 'Plus Jakarta Sans', sans-serif"; x.fillStyle = "rgba(255,255,255,.85)"; x.fillText(sub, 82, y + 2);
+  x.font = "800 24px 'Plus Jakarta Sans', sans-serif"; x.fillStyle = "rgba(255,255,255,.9)"; x.fillText("NaikGred", 82, 644);
+  x.font = "700 24px 'JetBrains Mono', monospace"; x.textAlign = "right";
+  x.fillText(hg ? hg[0] : T[bahasa].percuma, 456, 644);
+  return tekstur(cv, r);
+}
+function teksturHalaman(r) {
+  const cv = document.createElement("canvas"); cv.width = 32; cv.height = 256; const x = cv.getContext("2d");
+  x.fillStyle = "#F6F1E4"; x.fillRect(0, 0, 32, 256);
+  for (let y = 0; y < 256; y += 3) { x.fillStyle = y % 6 ? "#E7DEC9" : "#EFE8D6"; x.fillRect(0, y, 32, 1); }
+  const t = tekstur(cv, r); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
+}
+
+function bukuBaru(k, r, halaman, img) {
+  const W = 1, H = 1.38, TB = .16, KL = .028, warna = new THREE.Color(WARNA(k));
+  const akar = new THREE.Group();
+  const kulitMat = new THREE.MeshPhysicalMaterial({color: warna, roughness: .55, clearcoat: .35, clearcoatRoughness: .5});
+  const muka = new THREE.MeshPhysicalMaterial({map: kulitBuku(k, r), roughness: .5, clearcoat: .5, clearcoatRoughness: .35});
+  const dalam = new THREE.MeshStandardMaterial({color: 0xF3EEE2, roughness: .9});
+  const hal = new THREE.MeshStandardMaterial({map: halaman, roughness: .95});
+  const krim = new THREE.MeshStandardMaterial({color: 0xF6F1E4, roughness: .95});
+  /* Blok halaman */
+  const blok = new THREE.Mesh(new THREE.BoxGeometry(W - .05, H - .06, TB), [hal, krim, hal, hal, krim, krim]);
+  blok.position.x = .015; blok.castShadow = true; akar.add(blok);
+  /* Kulit belakang */
+  const bel = new THREE.Mesh(new THREE.BoxGeometry(W, H, KL), [kulitMat, kulitMat, kulitMat, kulitMat, dalam, kulitMat]);
+  bel.position.z = -(TB / 2 + KL / 2); bel.castShadow = true; akar.add(bel);
+  /* Tulang buku melengkung */
+  const R = TB / 2 + KL;
+  const tulang = new THREE.Mesh(new THREE.CylinderGeometry(R, R, H, 20, 1, true, Math.PI, Math.PI), new THREE.MeshPhysicalMaterial({color: warna.clone().multiplyScalar(.82), roughness: .5, clearcoat: .4, side: THREE.DoubleSide}));
+  tulang.position.x = -W / 2; tulang.castShadow = true; akar.add(tulang);
+  /* Kulit depan pada engsel */
+  const engsel = new THREE.Group(); engsel.position.set(-W / 2, 0, TB / 2 + KL / 2); akar.add(engsel);
+  const dep = new THREE.Mesh(new THREE.BoxGeometry(W, H, KL), [kulitMat, kulitMat, kulitMat, kulitMat, muka, dalam]);
+  dep.position.x = W / 2; dep.castShadow = true; engsel.add(dep);
+  /* Reben penanda */
+  const reben = new THREE.Mesh(new THREE.BoxGeometry(.06, .32, .006), new THREE.MeshStandardMaterial({color: 0xC8323C, roughness: .6}));
+  reben.position.set(.22, -H / 2 - .12, .02); akar.add(reben);
+  /* Skrin app yang naik keluar */
+  const skrin = telefon3D(img, r, k === "planner");
+  skrin.scale.setScalar(.001); akar.add(skrin);
+  akar.userData = {engsel, skrin, muka, buka: 0};
+  return akar;
+}
+
+const muatSkrip = src => new Promise((ok, gagal) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = gagal; document.head.appendChild(s); });
+async function mula3D() {
+  if (sudah3D || ringan) return;
+  sudah3D = true;
+  /* Three.js dimuat hanya bila 3D digunakan; mod ringan tidak memuat apa-apa */
+  if (!window.THREE) { try { await muatSkrip("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; } }
+  const kanvas = $("dunia");
+  let r;
+  try { r = new THREE.WebGLRenderer({canvas: kanvas, antialias: !(innerWidth < 760), alpha: true, powerPreference: "low-power"}); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; }
+  try { await Promise.all([document.fonts.load("800 56px 'Plus Jakarta Sans'"), document.fonts.load("600 26px 'Plus Jakarta Sans'"), document.fonts.load("700 21px 'JetBrains Mono'")]); } catch (e) {}
+  const kunci = ["sains", "math", "sejarah", "english", "anak", "planner"];
+  const img = {}; await Promise.all(kunci.concat("soalan").map(async k => { img[k] = window.GAMBAR ? await muatGambar(GAMBAR[k]) : null; }));
+
+  const telefon = innerWidth < 760;
+  r.setPixelRatio(Math.min(devicePixelRatio, telefon ? 1.5 : 2));
+  r.outputEncoding = THREE.sRGBEncoding; r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.08;
+  r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap;
+  const babak = new THREE.Scene();
+  const kam = new THREE.PerspectiveCamera(38, 1, .1, 100);
+
+  babak.add(new THREE.HemisphereLight(0xffffff, 0xB9C6C0, .7));
+  const utama = new THREE.DirectionalLight(0xFFF1DC, 1.05);
+  utama.position.set(4, 8, 6); utama.castShadow = true; utama.shadow.mapSize.set(telefon ? 1024 : 2048, telefon ? 1024 : 2048);
+  utama.shadow.radius = 6; utama.shadow.bias = -.0004;
+  Object.assign(utama.shadow.camera, {left: -7, right: 7, top: 7, bottom: -7}); babak.add(utama);
+  const isi = new THREE.DirectionalLight(0xD8E8FF, .35); isi.position.set(-6, 3, 3); babak.add(isi);
+  const tepi = new THREE.DirectionalLight(0xffffff, .45); tepi.position.set(0, 5, -7); babak.add(tepi);
+
+  const c = k => new THREE.Color(WARNA(k));
+
+  /* Meja dengan bucu lembut */
+  const mejaMat = new THREE.MeshStandardMaterial({color: c("meja"), roughness: .8});
+  const meja = new THREE.Mesh(new THREE.ExtrudeGeometry(bentukBulat(10, 5.6, .5), {depth: .3, bevelEnabled: true, bevelThickness: .05, bevelSize: .05, bevelSegments: 3}), mejaMat);
+  meja.rotation.x = -Math.PI / 2; meja.position.y = -.35; meja.receiveShadow = true; babak.add(meja);
+
+  /* Telefon murid di atas meja: skrin soalan sebenar */
+  const tel = telefon3D(img.soalan, r, false);
+  tel.rotation.set(-Math.PI / 2, 0, .38); tel.position.set(-2.0, .06, 1.0); babak.add(tel);
+
+  /* Lajur TP: setiap lajur seorang murid */
+  const warnaTP = [null, "#B9C4BF", "#9DB3D9", "#E0A526", "#14A38B", "#0C6B5E", "#5B4BD6"];
+  const lajur = [];
+  [5, 4, 6, 3, 4, 5, 2, 6, 4, 5].forEach((tp, i) => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(.11, .11, 1, 28), new THREE.MeshPhysicalMaterial({color: warnaTP[tp], roughness: .35, clearcoat: .6}));
+    m.position.set(.5 + (i % 5) * .36, 0, .5 + Math.floor(i / 5) * .42); m.scale.y = .01; m.castShadow = true;
+    m.userData = {tp, mula: i * .18}; babak.add(m); lajur.push(m);
+  });
+  let skalaTP = 1;
+  window.tinggiTP = n => { skalaTP = .6 + Math.min(n, 300) / 300 * .9; };
+  tinggiTP(+$("r-murid").value);
+
+  /* Buku produk dalam lengkung */
+  const halaman = teksturHalaman(r);
+  const buku = {};
+  kunci.forEach((k, i) => {
+    const b = bukuBaru(k, r, halaman, img[k]);
+    const sudut = (i - 2.5) * .2;
+    b.position.set(Math.sin(sudut) * 6.6, .69 - .35 + .35, -1.7 - (1 - Math.cos(sudut)) * 6.6);
+    b.position.y = .69;
+    b.rotation.y = -sudut;
+    Object.assign(b.userData, {asal: b.position.clone(), rotAsal: -sudut, i, k});
+    babak.add(b); buku[k] = b;
+  });
+  window.labelBuku = () => kunci.forEach(k => { const m = buku[k].userData.muka; m.map.dispose(); m.map = kulitBuku(k, r); m.needsUpdate = true; });
+  let bukuAktif = kadAktif;
+  window.pilihBuku = k => { bukuAktif = k; };
+
+  /* Klik buku dalam 3D */
+  const sinar = new THREE.Raycaster(), titik = new THREE.Vector2();
+  addEventListener("click", e => {
+    if (e.target.closest("a,button,input,.panel,.kad,header,.bar-beli")) return;
+    titik.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+    sinar.setFromCamera(titik, kam);
+    const kena = sinar.intersectObjects(Object.values(buku), true)[0];
+    if (!kena) return;
+    let o = kena.object; while (o && !o.userData.k) o = o.parent;
+    if (o && SUSUN[persona].includes(o.userData.k)) { if (kadAktif !== o.userData.k || !document.querySelector(".kad.aktif")) bukaKad(o.userData.k, false); jejak("buku-" + o.userData.k); }
+  });
+
+  /* Habuk kapur */
+  const n = telefon ? 120 : 240, pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) { pos[i*3] = (Math.random() - .5) * 14; pos[i*3+1] = Math.random() * 6; pos[i*3+2] = (Math.random() - .5) * 10; }
+  const gHabuk = new THREE.BufferGeometry(); gHabuk.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const habuk = new THREE.Points(gHabuk, new THREE.PointsMaterial({color: c("hijau2"), size: .04, transparent: true, opacity: .5}));
+  babak.add(habuk);
+
+  /* Laluan kamera: satu titik setiap bahagian */
+  const lebar = () => innerWidth >= 860;
+  const KAM = () => lebar() ? [
+    {p:[ 0, 4.3, 10.4], l:[ 0, .5, -.9], o:.24},
+    {p:[ 3.6, 2.4, 3.9], l:[ 2.8, .5, .5]},
+    {p:[-1.2, 6.4, 4.6], l:[-.4, 0, -.2]},
+    {p:[ 0, 2.1, 4.9],   l:[ 0, 1.1, -1.9]},
+    {p:[ 3.2, 1.7, 2.6], l:[ 1.7, 1.0, -1.8]},
+  ] : [
+    {p:[-1.9, 5.2, 8.6], l:[-1.9, -1.1, -.6]},
+    {p:[ 1.7, 3.4, 4.8], l:[ 1.2, 1.5, .4]},
+    {p:[ 0, 7.4, 5.4],   l:[ 0, 1.2, -.2]},
+    {p:[ 0, 2.8, 6.6],   l:[ 0, 2.0, -1.9]},
+    {p:[ 1.2, 2.4, 4.4], l:[ 0, 1.7, -1.8]},
+  ];
+  /* Kemajuan skrol antara bahagian yang kelihatan sahaja (persona menyorok sebahagian) */
+  function kemajuan() {
+    const vis = [...document.querySelectorAll("[data-kam]")].filter(b => !b.hidden), tengah = innerHeight / 2;
+    const pusat = vis.map(b => { const r = b.getBoundingClientRect(); return r.top + r.height / 2; });
+    const kam = i => +vis[i].dataset.kam;
+    if (pusat[0] >= tengah) return [0, 0, 0, 0];
+    for (let i = 1; i < vis.length; i++) if (pusat[i] >= tengah) return [kam(i-1), kam(i), (tengah - pusat[i-1]) / (pusat[i] - pusat[i-1]), i - 1 + (tengah - pusat[i-1]) / (pusat[i] - pusat[i-1])];
+    return [kam(vis.length-1), kam(vis.length-1), 0, vis.length - 1];
+  }
+  const lancar = t => t * t * (3 - 2 * t);
+  let anjak = 0, fokus = 0;
+  const kp = new THREE.Vector3(), kl = new THREE.Vector3(), sasP = new THREE.Vector3(), sasL = new THREE.Vector3(), tmp = new THREE.Vector3();
+  const tetikus = {x: 0, y: 0};
+  addEventListener("pointermove", e => { tetikus.x = e.clientX / innerWidth - .5; tetikus.y = e.clientY / innerHeight - .5; });
+
+  function saiz() { r.setSize(innerWidth, innerHeight, false); kam.aspect = innerWidth / innerHeight; kam.updateProjectionMatrix(); }
+  addEventListener("resize", saiz); saiz();
+
+  function tema() { mejaMat.color = c("meja"); habuk.material.color = c("hijau2"); }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", tema);
+  new MutationObserver(tema).observe(document.documentElement, {attributes: true, attributeFilter: ["data-theme"]});
+
+  const jam = new THREE.Clock(); let mulaKitar = 0, pertama = true, legap = 1;
+  function bingkai() {
+    if (ringan) { sudah3D = false; r.dispose(); return; }
+    requestAnimationFrame(bingkai);
+    if (document.hidden) return;
+    const t = jam.getElapsedTime();
+    const k = KAM(), [a, b, fk, pr] = kemajuan(), f = lancar(Math.min(1, Math.max(0, fk)));
+    /* Telefon: 3D hanya di hero, kemudian pudar dan berhenti melukis untuk jimat bateri */
+    const sasLegap = (!lebar() && pr > .55) ? 0 : 1;
+    if (sasLegap !== legap) { legap = sasLegap; kanvas.style.opacity = legap; }
+    if (!legap && kanvas.style.opacity === "0" && !pertama) return;
+    sasP.set(...k[a].p).lerp(tmp.set(...k[b].p), f);
+    sasL.set(...k[a].l).lerp(tmp.set(...k[b].l), f);
+    sasP.x += tetikus.x * .5; sasP.y -= tetikus.y * .3;
+
+    /* Di bahagian produk: buku bagi kad yang dipilih terbuka */
+    const diProduk = (a === 3 && f > .5) || (b === 3 && f > .5) || (a === 3 && b === 3);
+    const aktifSah = diProduk && document.querySelector(".kad.aktif, .kad:hover") ? bukuAktif : null;
+    if (aktifSah && lebar()) { const bk = buku[aktifSah].userData.asal; sasP.set(bk.x - 1.2, 2.5, bk.z + 7.4); sasL.set(bk.x - 1.95, 1.35, bk.z); }
+    /* Anjakan pandangan: hero desktop ditolak ke kanan supaya tidak terlindung panel */
+    const sasAnjak = aktifSah ? 0 : (k[a].o || 0) * (1 - f) + (k[b].o || 0) * f;
+    if (pertama) { kp.copy(sasP); kl.copy(sasL); anjak = sasAnjak; pertama = false; }
+    anjak += (sasAnjak - anjak) * .06;
+    kam.setViewOffset(innerWidth, innerHeight, -anjak * innerWidth, 0, innerWidth, innerHeight);
+    fokus += ((aktifSah ? 1 : 0) - fokus) * .07;
+    kp.lerp(sasP, .06); kl.lerp(sasL, .06);
+    kam.position.copy(kp); kam.lookAt(kl);
+
+    /* Lajur TP tumbuh berkitar */
+    const masa = t - mulaKitar;
+    lajur.forEach(m => {
+      const s = Math.min(1, Math.max(0, (masa - m.userData.mula) / .6));
+      const h = m.userData.tp * .17 * skalaTP * lancar(s);
+      m.scale.y += (Math.max(.01, h) - m.scale.y) * .2; m.position.y = m.scale.y / 2;
+    });
+    if (masa > 6) mulaKitar = t;
+    tel.position.y = .06 + Math.sin(t * 1.4) * .015;
+
+    /* Buku: buka kulit, angkat skrin app */
+    kunci.forEach(kk => {
+      const bk = buku[kk], u = bk.userData, aktif = kk === aktifSah;
+      u.buka += ((aktif ? 1 : 0) - u.buka) * .07;
+      const e = lancar(Math.min(1, u.buka));
+      u.engsel.rotation.y = -2.25 * e;
+      const undur = aktif ? 0 : lancar(Math.min(1, fokus));
+      bk.position.y = u.asal.y + Math.sin(t * 1.1 + u.i) * .035 + e * .2 - undur * .5;
+      bk.position.z = u.asal.z + e * .45 - undur * 2.2;
+      bk.rotation.y = u.rotAsal * (1 - e) + Math.sin(t * .8) * .04 * e;
+      const s = Math.max(.001, e);
+      u.skrin.scale.setScalar(s * 1.45);
+      u.skrin.position.set(.22 * e, .55 * e, .42 * e + .02);
+      u.skrin.rotation.set(-.12 * e, -.15 * e, .04 * Math.sin(t * 1.3) * e);
+      u.skrin.visible = e > .02;
+    });
+    habuk.rotation.y = t * .015;
+    r.render(babak, kam);
+  }
+  bingkai();
+  $("petunjuk").hidden = false;
+  addEventListener("scroll", () => { if (scrollY > 80) $("petunjuk").hidden = true; }, {passive: true});
+}
+if (ringan) $("petunjuk").hidden = true;
+mula3D();
 </script>
+
 </body>
 </html>
