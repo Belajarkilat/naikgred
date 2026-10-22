@@ -50,7 +50,8 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backdrop-filt
 .kepala{max-width:1180px;margin:auto;display:flex;align-items:center;gap:10px;padding-block:10px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .logo{font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;margin-right:auto;color:var(--ink);text-decoration:none}
-.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--hijau),var(--hijau2));display:grid;place-items:center;color:#fff;font-style:normal;font-size:14px}
+.logo-ikon{flex:none;display:block}
+footer .logo{font-size:17px;margin-right:0}
 .tukar{display:flex;border:1px solid var(--garis);border-radius:999px;overflow:hidden}
 .tukar button{border:0;background:transparent;color:var(--mute);font:600 13px var(--f-papar);padding:6px 10px;cursor:pointer}
 .tukar button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
@@ -99,7 +100,7 @@ p{margin:14px 0 0;color:var(--mute);max-width:34em}
 .laporan li b{font-size:15px}
 .laporan li span{color:var(--mute);font-size:14px}
 
-.angka{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.angka{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px;max-width:380px}
 .angka div{min-width:0}
 .angka b{display:block;font:700 clamp(26px,4vw,40px) var(--f-data);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .angka small{color:var(--mute);font-size:13px;line-height:1.3;display:block}
@@ -162,6 +163,7 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 .petunjuk{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:5;font:600 12px var(--f-data);color:var(--mute);pointer-events:none}
 
 @media (max-width:860px){
+  .panel{background:color-mix(in srgb,var(--bg) 95%,transparent)}
   section{min-height:auto;padding-block:40px}
   .hero{min-height:auto;padding-top:34vh}
   .ringan .hero{padding-top:40px}
@@ -190,7 +192,7 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 
 <header>
   <div class="kepala">
-    <a class="logo" href="#atas"><i>N</i>NaikGred</a>
+    <a class="logo" href="#atas"><svg class="logo-ikon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0C6B5E"/><g transform="translate(9.6 9.6) scale(0.7)"><rect x="6" y="38" width="12" height="18" rx="4.5" fill="#3E9C89"/><rect x="22" y="27" width="12" height="29" rx="4.5" fill="#93E0CD"/><path d="M38 20 L32.6 20 Q30 20 31.6 18 L41.8 6 Q44 3.4 46.2 6 L56.4 18 Q58 20 55.4 20 L50 20 L50 51.5 Q50 56 45.5 56 L42.5 56 Q38 56 38 51.5 Z" fill="#FFC24D"/></g></svg>NaikGred</a>
     <div class="tukar" role="group" aria-label="Bahasa">
       <button id="bm" aria-pressed="true">BM</button>
       <button id="en" aria-pressed="false">EN</button>
@@ -205,8 +207,8 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
     <div class="isi">
       <div class="panel">
         <div class="persona" role="group" aria-label="Saya ialah">
-          <button data-p="guru" aria-pressed="true" data-t="p.guru">Saya guru</button>
-          <button data-p="ibubapa" aria-pressed="false" data-t="p.ibubapa">Saya ibu bapa</button>
+          <button data-p="guru" aria-pressed="true" data-t="p.guru">Guru</button>
+          <button data-p="ibubapa" aria-pressed="false" data-t="p.ibubapa">Ibu bapa</button>
         </div>
         <span class="pil" id="h-pil"></span>
         <h1 id="h-tajuk"></h1>
@@ -265,13 +267,12 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
         <div class="label" data-t="b.label">Sudah digunakan di sekolah</div>
         <h2 id="b-tajuk"></h2>
         <div class="angka">
-          <div><b id="n-main">1,088</b><small data-t="b.main">murid sudah menjawab</small></div>
-          <div><b id="n-sekolah">75+</b><small data-t="b.sekolah">sekolah sudah mendaftar</small></div>
-          <div><b id="n-24j">137</b><small data-t="b.24j">murid bermain dalam 24 jam</small></div>
+          <div><b id="n-main">1,095</b><small data-t="b.main">murid sudah menjawab</small></div>
+          <div><b id="n-sekolah">80</b><small data-t="b.sekolah">sekolah sudah mendaftar</small></div>
         </div>
         <div class="tindakan" style="margin-top:14px"><span class="hidup" id="b-hidup" hidden data-t="b.hidup">Angka hidup</span></div>
         <div class="suara" id="suara" hidden></div>
-        <p class="nota" id="b-nota" data-t="b.nota">Semua subjek Jejak TP, setakat 21 Oktober 2026.</p>
+        <p class="nota" id="b-nota" data-t="b.nota">Semua subjek Jejak TP, setakat 22 Oktober 2026.</p>
       </div>
     </div>
   </section>
@@ -322,9 +323,9 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 
 <footer>
   <div class="isi">
-    <span>By NaikGred · naikgred.com</span>
+    <a class="logo" href="#atas" aria-label="NaikGred, kembali ke atas"><svg class="logo-ikon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0C6B5E"/><g transform="translate(9.6 9.6) scale(0.7)"><rect x="6" y="38" width="12" height="18" rx="4.5" fill="#3E9C89"/><rect x="22" y="27" width="12" height="29" rx="4.5" fill="#93E0CD"/><path d="M38 20 L32.6 20 Q30 20 31.6 18 L41.8 6 Q44 3.4 46.2 6 L56.4 18 Q58 20 55.4 20 L50 20 L50 51.5 Q50 56 45.5 56 L42.5 56 Q38 56 38 51.5 Z" fill="#FFC24D"/></g></svg>NaikGred</a>
     <span><span data-t="f.wa">WhatsApp</span>: <a href="https://wa.me/60106640353" target="_blank" rel="noopener"><code>010-664 0353</code></a> · <a href="mailto:belajarkilatofficial@gmail.com">belajarkilatofficial@gmail.com</a></span>
-    <span><a href="anak/privasi.html" data-t="f.privasi">Privasi</a> · <a href="anak/terma.html" data-t="f.terma">Terma</a> · <a href="https://belajarkilat.github.io/matematik-kilat/" target="_blank" rel="noopener" data-t="f.kilat">Matematik Kilat (Tahun 1–6)</a></span>
+    <span><a href="anak/privasi.html" data-t="f.privasi">Privasi</a> · <a href="anak/terma.html" data-t="f.terma">Terma</a></span>
   </div>
 </footer>
 
@@ -355,7 +356,7 @@ const pautan = {
 const T = {
   ms: {
     ringan:"Mod ringan", ringanOff:"Mod 3D", mula:"Mula percuma", tatal:"Tatal untuk meneroka ↓",
-    "p.guru":"Saya guru","p.ibubapa":"Saya ibu bapa",
+    "p.guru":"Guru","p.ibubapa":"Ibu bapa",
     hero:{
       guru:{pil:"Bab 1 & 2 percuma, semua subjek",h:"TP 40 murid.<br><em>Siap sendiri.</em>",s:"Murid menjawab soalan di telefon. TP dan ulasan PBD setiap murid terisi secara automatik, sedia untuk dieksport.",cta:"Pilih subjek, cuba percuma",dua:"Kira masa anda",nota:"TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English"},
       ibubapa:{pil:"RM32 setahun · harga awal",h:"Tahu markah sebenar anak.<br><em>Setiap bab.</em>",s:"Anak menjawab soalan mengikut sukatan pelajaran sekolah. Anda nampak markah dan bab yang perlu dibantu, terus dari telefon.",cta:"Daftar anak saya",dua:"Lihat contoh laporan",nota:"Sains, Matematik, Sejarah dan English · Tingkatan 1–5"}
@@ -366,7 +367,7 @@ const T = {
     "l.label":"Laporan anak","l.tajuk":"Anda nampak apa yang guru nampak.","l.1":"Markah setiap bab","l.1s":"Peratus dan label: Cemerlang, Baik, Sederhana atau Perlu bantuan.",
     "l.2":"Bab paling lemah","l.2s":"Disusun bermula dengan bab yang paling perlu dibantu.","l.3":"Satu tindakan minggu ini","l.3s":"Contohnya: minta anak mengulang Bab 5.","l.nota":"Tangkapan skrin sebenar daripada app. Nama dan markah ialah data contoh.",
     "b.label":"Sudah digunakan di sekolah", bTajuk:{guru:"Guru sebenar. Murid sebenar. Bukan demo.",ibubapa:"Soalan yang sama digunakan oleh guru di sekolah."},
-    "b.main":"murid sudah menjawab","b.sekolah":"sekolah sudah mendaftar","b.24j":"murid bermain dalam 24 jam","b.hidup":"Angka hidup","b.nota":"Semua subjek Jejak TP, setakat 21 Oktober 2026.","b.notaHidup":"Dikemas kini setiap kali halaman dibuka.",
+    "b.main":"murid sudah menjawab","b.sekolah":"sekolah sudah mendaftar","b.hidup":"Angka hidup","b.nota":"Semua subjek Jejak TP, setakat 22 Oktober 2026.","b.notaHidup":"Dikemas kini setiap kali halaman dibuka.",
     "pr.label":"Produk NaikGred", prTajuk:{guru:"Pilih subjek. Bab 1 dan 2 percuma.",ibubapa:"Anak NaikGred untuk ibu bapa."},
     cuba:"Cuba Bab 1 & 2 percuma", langgan:"Langgan", rendah:"T1–T3", atas:"T4–T5", landing:"Lihat butiran penuh", setahun:"setahun", percuma:"Percuma",
     pilihAnak:"Pilih subjek anak untuk mendaftar:", contohLaporan:"Lihat contoh laporan", muatPlanner:"Muat turun Planner percuma",
@@ -382,13 +383,13 @@ const T = {
     "h.label":"Harga perintis","h.tajuk":"RM23 setahun. Harga ini tamat 31 Disember.","h.subjek":"Subjek","h.rendah":"Menengah rendah (T1–T3)","h.atas":"Menengah atas (T4–T5)","h.langgan":"Langgan",
     "h.kemudian":"RM59 mulai 2027","h.baki":"Baki tempoh harga perintis:","h.nota":"Langgan sebelum 31 Disember dan harga anda kekal RM23 setiap tahun, selagi langganan disambung dalam tempoh 30 hari selepas tamat. Mulai 1 Januari 2027, pelanggan baharu membayar RM59 setiap peringkat. Bayar melalui FPX (caj FPX RM1). Belum pasti? Cuba Bab 1 dan 2 percuma dahulu.",
     "ha.label":"Harga awal","ha.tajuk":"RM32 setahun. Kurang daripada RM3 sebulan.","ha.subjek":"Subjek anak","ha.cta":"Daftar anak saya","ha.baki":"Harga RM32 tamat dalam:","ha.nota":"Harga biasa RM59 setahun mulai 1 Januari 2027.",
-    "f.wa":"WhatsApp","f.privasi":"Privasi","f.terma":"Terma","f.kilat":"Matematik Kilat (Tahun 1–6)", hari:"hari",
+    "f.wa":"WhatsApp","f.privasi":"Privasi","f.terma":"Terma", hari:"hari",
     bar:{guru:["<b>Bab 1 & 2 percuma</b> · RM23 sebelum 31 Dis","Mula percuma"],ibubapa:["<b>Anak NaikGred</b> · RM32 setahun","Daftar anak"]},
     subjek:{sains:"Sains",math:"Matematik",sejarah:"Sejarah",english:"English"}
   },
   en: {
     ringan:"Lite mode", ringanOff:"3D mode", mula:"Start free", tatal:"Scroll to explore ↓",
-    "p.guru":"I'm a teacher","p.ibubapa":"I'm a parent",
+    "p.guru":"Teacher","p.ibubapa":"Parent",
     hero:{
       guru:{pil:"Chapters 1 & 2 free, every subject",h:"TP for 40 students.<br><em>Filled in for you.</em>",s:"Students answer questions on their phones. Each student's TP and PBD comment fill in automatically, ready to export.",cta:"Pick a subject, try free",dua:"Count your hours",nota:"TP suggested, teacher confirms · Science, Maths, History, English"},
       ibubapa:{pil:"RM32 a year · early price",h:"Know your child's real marks.<br><em>Every chapter.</em>",s:"Your child answers questions that follow the school syllabus. You see the marks and the chapters that need help, right on your phone.",cta:"Register my child",dua:"See a sample report",nota:"Science, Maths, History and English · Form 1–5"}
@@ -399,7 +400,7 @@ const T = {
     "l.label":"Your child's report","l.tajuk":"You see what the teacher sees.","l.1":"Marks for every chapter","l.1s":"A percentage and a label: Excellent, Good, Fair or Needs help.",
     "l.2":"Weakest chapters first","l.2s":"Sorted from the chapter that needs the most help.","l.3":"One action this week","l.3s":"For example: ask your child to redo Chapter 5.","l.nota":"Real screenshot from the app (in Malay). The name and marks are sample data.",
     "b.label":"Already used in schools", bTajuk:{guru:"Real teachers. Real students. Not a demo.",ibubapa:"The same questions teachers use in school."},
-    "b.main":"students have answered","b.sekolah":"schools signed up","b.24j":"students played in the last 24 hours","b.hidup":"Live numbers","b.nota":"All Jejak TP subjects, as of 21 October 2026.","b.notaHidup":"Updated every time this page opens.",
+    "b.main":"students have answered","b.sekolah":"schools signed up","b.hidup":"Live numbers","b.nota":"All Jejak TP subjects, as of 22 October 2026.","b.notaHidup":"Updated every time this page opens.",
     "pr.label":"NaikGred products", prTajuk:{guru:"Pick a subject. Chapters 1 and 2 are free.",ibubapa:"Anak NaikGred for parents."},
     cuba:"Try Chapters 1 & 2 free", langgan:"Subscribe", rendah:"F1–F3", atas:"F4–F5", landing:"See full details", setahun:"a year", percuma:"Free",
     pilihAnak:"Pick your child's subject to register:", contohLaporan:"See a sample report", muatPlanner:"Download the free Planner",
@@ -415,7 +416,7 @@ const T = {
     "h.label":"Founding price","h.tajuk":"RM23 a year. This price ends 31 December.","h.subjek":"Subject","h.rendah":"Lower secondary (F1–F3)","h.atas":"Upper secondary (F4–F5)","h.langgan":"Subscribe",
     "h.kemudian":"RM59 from 2027","h.baki":"Founding price ends in:","h.nota":"Subscribe before 31 December and your price stays RM23 every year, as long as you renew within 30 days of expiry. From 1 January 2027, new subscribers pay RM59 per level. Pay by FPX (RM1 FPX fee). Not sure yet? Try Chapters 1 and 2 free first.",
     "ha.label":"Early price","ha.tajuk":"RM32 a year. Under RM3 a month.","ha.subjek":"Your child's subject","ha.cta":"Register my child","ha.baki":"The RM32 price ends in:","ha.nota":"Regular price RM59 a year from 1 January 2027.",
-    "f.wa":"WhatsApp","f.privasi":"Privacy","f.terma":"Terms","f.kilat":"Matematik Kilat (Year 1–6)", hari:"days",
+    "f.wa":"WhatsApp","f.privasi":"Privacy","f.terma":"Terms", hari:"days",
     bar:{guru:["<b>Chapters 1 & 2 free</b> · RM23 before 31 Dec","Start free"],ibubapa:["<b>Anak NaikGred</b> · RM32 a year","Register child"]},
     subjek:{sains:"Science",math:"Maths",sejarah:"History",english:"English"}
   }
@@ -556,11 +557,12 @@ if (DI_LAMAN && !BOT) { const s = document.createElement("script"); s.src = "htt
 function angkaHidup() {
   if (!DI_LAMAN) return;
   const ambil = (c, fn) => fetch(c.url + "/rest/v1/rpc/" + fn, {method: "POST", headers: {apikey: c.kunci, Authorization: "Bearer " + c.kunci, "Content-Type": "application/json"}, body: "{}"}).then(r => r.ok ? r.json() : null).catch(() => null);
-  Promise.all([ambil(AWAN, "lo_statistik_awam"), ambil(MJ, "mj_statistik_awam")]).then(([s, m]) => {
+  Promise.all([ambil(AWAN, "lo_statistik_awam"), ambil(MJ, "mj_statistik_awam"), ambil(AWAN, "ng_sekolah_awam"), ambil(MJ, "ng_sekolah_awam")]).then(([s, m, sa, sb]) => {
     if (!s || !(s.bermain_semua >= 1)) return;
     const f = n => n.toLocaleString("ms-MY");
     $("n-main").textContent = f(s.bermain_semua + (m && m.semua ? m.semua : 0));
-    if (s.bermain_24j >= 0) $("n-24j").textContent = f(s.bermain_24j);
+    /* Sekolah unik merentas semua subjek: kedua-dua pangkalan data memulangkan cincang nama sekolah */
+    if (Array.isArray(sa)) $("n-sekolah").textContent = f(new Set(sa.concat(Array.isArray(sb) ? sb : [])).size);
     $("b-hidup").hidden = false; $("b-nota").textContent = T[bahasa]["b.notaHidup"];
   });
 }
@@ -812,7 +814,7 @@ async function mula3D() {
   const KAM = () => lebar() ? [
     {p:[ 0, 4.3, 10.4], l:[ 0, .5, -.9], o:.24},
     {p:[ 3.6, 2.4, 3.9], l:[ 2.8, .5, .5]},
-    {p:[-1.2, 6.4, 4.6], l:[-.4, 0, -.2]},
+    {p:[ 1.4, 3.4, 7.2], l:[ .6, .7, -.6], o:.22},
     {p:[ 0, 2.1, 4.9],   l:[ 0, 1.1, -1.9]},
     {p:[ 3.2, 1.7, 2.6], l:[ 1.7, 1.0, -1.8]},
   ] : [
