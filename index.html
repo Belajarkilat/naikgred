@@ -151,6 +151,9 @@ footer{position:relative;z-index:1;border-top:1px solid var(--garis);background:
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 footer .isi{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:var(--mute)}
 footer a{color:inherit}
+footer .sosial{display:flex;gap:16px}
+footer .sosial a{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+footer .sosial a:hover{color:var(--ink)}
 footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 
 .bar-beli{position:fixed;left:0;right:0;bottom:0;z-index:25;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--garis);
@@ -270,7 +273,6 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
           <div><b id="n-main">1,095</b><small data-t="b.main">murid sudah menjawab</small></div>
           <div><b id="n-sekolah">80</b><small data-t="b.sekolah">sekolah sudah mendaftar</small></div>
         </div>
-        <div class="tindakan" style="margin-top:14px"><span class="hidup" id="b-hidup" hidden data-t="b.hidup">Angka hidup</span></div>
         <div class="suara" id="suara" hidden></div>
         <p class="nota" id="b-nota" data-t="b.nota">Semua subjek Jejak TP, setakat 22 Oktober 2026.</p>
       </div>
@@ -325,6 +327,7 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
   <div class="isi">
     <a class="logo" href="#atas" aria-label="NaikGred, kembali ke atas"><svg class="logo-ikon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0C6B5E"/><g transform="translate(9.6 9.6) scale(0.7)"><rect x="6" y="38" width="12" height="18" rx="4.5" fill="#3E9C89"/><rect x="22" y="27" width="12" height="29" rx="4.5" fill="#93E0CD"/><path d="M38 20 L32.6 20 Q30 20 31.6 18 L41.8 6 Q44 3.4 46.2 6 L56.4 18 Q58 20 55.4 20 L50 20 L50 51.5 Q50 56 45.5 56 L42.5 56 Q38 56 38 51.5 Z" fill="#FFC24D"/></g></svg>NaikGred</a>
     <span><span data-t="f.wa">WhatsApp</span>: <a href="https://wa.me/60106640353" target="_blank" rel="noopener"><code>010-664 0353</code></a> · <a href="mailto:belajarkilatofficial@gmail.com">belajarkilatofficial@gmail.com</a></span>
+    <span class="sosial"><a href="https://www.facebook.com/NaikGred" target="_blank" rel="noopener" aria-label="NaikGred di Facebook"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.5 1.6-1.5h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V14h2.7v8z"/></svg>Facebook</a><a href="https://www.instagram.com/naikgred/" target="_blank" rel="noopener" aria-label="NaikGred di Instagram"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9A3.1 3.1 0 1 1 12 8.9a3.1 3.1 0 0 1 0 6.2Zm6.1-8.1a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM21.9 8.1c-.1-1.6-.4-3-1.6-4.2S17.5 2.3 15.9 2.2C14.3 2.1 9.7 2.1 8.1 2.2 6.5 2.3 5.1 2.6 3.9 3.8S2.3 6.5 2.2 8.1C2.1 9.7 2.1 14.3 2.2 15.9c.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.6.1 6.2.1 7.8 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.6.1-6.2 0-7.8Zm-2 9.5a3.2 3.2 0 0 1-1.8 1.8c-1.3.5-4.3.4-5.7.4s-4.4.1-5.7-.4a3.2 3.2 0 0 1-1.8-1.8c-.5-1.3-.4-4.3-.4-5.7s-.1-4.4.4-5.7A3.2 3.2 0 0 1 6.3 4.5c1.3-.5 4.3-.4 5.7-.4s4.4-.1 5.7.4a3.2 3.2 0 0 1 1.8 1.8c.5 1.3.4 4.3.4 5.7s.1 4.4-.4 5.7Z"/></svg>Instagram</a></span>
     <span><a href="anak/privasi.html" data-t="f.privasi">Privasi</a> · <a href="anak/terma.html" data-t="f.terma">Terma</a></span>
   </div>
 </footer>
@@ -563,7 +566,7 @@ function angkaHidup() {
     $("n-main").textContent = f(s.bermain_semua + (m && m.semua ? m.semua : 0));
     /* Sekolah unik merentas semua subjek: kedua-dua pangkalan data memulangkan cincang nama sekolah */
     if (Array.isArray(sa)) $("n-sekolah").textContent = f(new Set(sa.concat(Array.isArray(sb) ? sb : [])).size);
-    $("b-hidup").hidden = false; $("b-nota").textContent = T[bahasa]["b.notaHidup"];
+    $("b-nota").textContent = T[bahasa]["b.notaHidup"];
   });
 }
 
@@ -657,17 +660,33 @@ function lukisIkon(x, k, cx, cy) {
   x.restore();
 }
 function kulitBuku(k, r) {
-  const cv = document.createElement("canvas"); cv.width = 512; cv.height = 704; const x = cv.getContext("2d");
+  /* Dilukis 2x (1024x1408) supaya tulisan tidak bergerigi; koordinat kekal 512x704 */
+  const cv = document.createElement("canvas"); cv.width = 1024; cv.height = 1408; const x = cv.getContext("2d"); x.scale(2, 2);
   const p = T[bahasa].produk[k], w = WARNA(k), hg = k in HARGA ? HARGA[k] : ["RM23"];
   x.fillStyle = w; x.fillRect(0, 0, 512, 704);
-  const g = x.createLinearGradient(0, 0, 512, 704); g.addColorStop(0, "rgba(255,255,255,.22)"); g.addColorStop(.55, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(0,0,0,.28)");
+  const g = x.createLinearGradient(0, 0, 512, 704); g.addColorStop(0, "rgba(255,255,255,.14)"); g.addColorStop(.55, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(0,0,0,.2)");
   x.fillStyle = g; x.fillRect(0, 0, 512, 704);
-  for (let i = 0; i < 2600; i++) { x.fillStyle = Math.random() < .5 ? "rgba(255,255,255,.035)" : "rgba(0,0,0,.035)"; x.fillRect(Math.random() * 512, Math.random() * 704, 2, 2); }
-  x.fillStyle = "rgba(0,0,0,.16)"; x.fillRect(0, 0, 30, 704);
-  x.fillStyle = "rgba(255,255,255,.12)"; x.fillRect(30, 0, 3, 704);
-  x.strokeStyle = "rgba(255,255,255,.28)"; x.lineWidth = 2; x.strokeRect(58, 30, 426, 644);
+  /* Tenunan kain kulit keras: garis halus melintang dan menegak */
+  x.lineWidth = .5;
+  for (let i = 0; i < 704; i += 1.5) { x.strokeStyle = `rgba(${i % 3 ? "0,0,0" : "255,255,255"},${.025 + Math.random() * .03})`; x.beginPath(); x.moveTo(0, i); x.lineTo(512, i + Math.random() - .5); x.stroke(); }
+  for (let i = 0; i < 512; i += 1.5) { x.strokeStyle = `rgba(${i % 3 ? "255,255,255" : "0,0,0"},${.018 + Math.random() * .025})`; x.beginPath(); x.moveTo(i, 0); x.lineTo(i + Math.random() - .5, 704); x.stroke(); }
+  for (let i = 0; i < 5000; i++) { x.fillStyle = Math.random() < .5 ? "rgba(255,255,255,.04)" : "rgba(0,0,0,.05)"; x.fillRect(Math.random() * 512, Math.random() * 704, 1, 1); }
+  /* Haus di tepi: bucu dan sisi sedikit pudar */
+  const v = x.createRadialGradient(256, 352, 260, 256, 352, 470); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.22)");
+  x.fillStyle = v; x.fillRect(0, 0, 512, 704);
+  for (let i = 0; i < 260; i++) { const s = Math.random() * 4, tepi = Math.random() < .5; x.fillStyle = `rgba(255,255,255,${.05 + Math.random() * .08})`;
+    x.fillRect(tepi ? (Math.random() < .5 ? Math.random() * 5 : 507 + Math.random() * 5) : Math.random() * 512, tepi ? Math.random() * 704 : (Math.random() < .5 ? Math.random() * 5 : 699 + Math.random() * 5), s, s); }
+  /* Alur engsel kulit keras */
+  x.fillStyle = "rgba(0,0,0,.14)"; x.fillRect(0, 0, 26, 704);
+  x.fillStyle = "rgba(0,0,0,.22)"; x.fillRect(26, 0, 2, 704);
+  x.fillStyle = "rgba(255,255,255,.14)"; x.fillRect(29, 0, 2, 704);
+  /* Bingkai timbul (emboss) */
+  x.strokeStyle = "rgba(0,0,0,.18)"; x.lineWidth = 2; x.strokeRect(59, 31, 426, 644);
+  x.strokeStyle = "rgba(255,255,255,.3)"; x.lineWidth = 1.5; x.strokeRect(58, 30, 426, 644);
+  /* Label kerajang emas */
   x.font = "700 21px 'JetBrains Mono', monospace"; const lbl = p.j.toUpperCase(), lw = x.measureText(lbl).width + 32;
-  x.fillStyle = "#E9C463"; x.beginPath(); x.roundRect ? x.roundRect(82, 62, lw, 40, 20) : x.rect(82, 62, lw, 40); x.fill();
+  const emas = x.createLinearGradient(82, 62, 82 + lw, 102); emas.addColorStop(0, "#C99A3A"); emas.addColorStop(.35, "#F4DB8E"); emas.addColorStop(.6, "#D9AE4E"); emas.addColorStop(1, "#B8862C");
+  x.fillStyle = emas; x.beginPath(); x.roundRect ? x.roundRect(82, 62, lw, 40, 20) : x.rect(82, 62, lw, 40); x.fill();
   x.fillStyle = "#2B2205"; x.fillText(lbl, 98, 89);
   lukisIkon(x, k, 271, 255);
   x.fillStyle = "#fff"; x.font = "800 56px 'Plus Jakarta Sans', sans-serif";
@@ -685,41 +704,76 @@ function kulitBuku(k, r) {
   return tekstur(cv, r);
 }
 function teksturHalaman(r) {
-  const cv = document.createElement("canvas"); cv.width = 32; cv.height = 256; const x = cv.getContext("2d");
-  x.fillStyle = "#F6F1E4"; x.fillRect(0, 0, 32, 256);
-  for (let y = 0; y < 256; y += 3) { x.fillStyle = y % 6 ? "#E7DEC9" : "#EFE8D6"; x.fillRect(0, y, 32, 1); }
+  /* Hujung halaman: helaian nipis dengan ketebalan tidak sekata */
+  const cv = document.createElement("canvas"); cv.width = 64; cv.height = 1024; const x = cv.getContext("2d");
+  x.fillStyle = "#F4EFE2"; x.fillRect(0, 0, 64, 1024);
+  for (let y = 0; y < 1024; y += 2 + Math.random() * 2) { x.fillStyle = `rgba(120,100,70,${.08 + Math.random() * .14})`; x.fillRect(0, y, 64, .8); }
+  const s = x.createLinearGradient(0, 0, 64, 0); s.addColorStop(0, "rgba(0,0,0,.06)"); s.addColorStop(.5, "rgba(0,0,0,0)"); s.addColorStop(1, "rgba(0,0,0,.06)");
+  x.fillStyle = s; x.fillRect(0, 0, 64, 1024);
   const t = tekstur(cv, r); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
 }
+/* Butiran permukaan kain (bump + kekasaran) dikongsi semua kulit buku */
+let butiranKain = null;
+function teksturButiran(r) {
+  if (butiranKain) return butiranKain;
+  const cv = document.createElement("canvas"); cv.width = cv.height = 256; const x = cv.getContext("2d");
+  x.fillStyle = "#808080"; x.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 256; i += 2) { x.fillStyle = `rgba(255,255,255,${.06 + Math.random() * .06})`; x.fillRect(0, i, 256, 1); x.fillStyle = `rgba(0,0,0,${.05 + Math.random() * .06})`; x.fillRect(i, 0, 1, 256); }
+  for (let i = 0; i < 3000; i++) { const c = Math.random() * 255 | 0; x.fillStyle = `rgba(${c},${c},${c},.25)`; x.fillRect(Math.random() * 256, Math.random() * 256, 1, 1); }
+  butiranKain = new THREE.CanvasTexture(cv); butiranKain.wrapS = butiranKain.wrapT = THREE.RepeatWrapping; butiranKain.repeat.set(3, 4);
+  butiranKain.anisotropy = r.capabilities.getMaxAnisotropy();
+  return butiranKain;
+}
+/* Papan kulit keras dengan bucu bulat; muka depan dan dalam ialah satah nipis di atasnya */
+function papanKulit(W, H, KL, kulitMat, mukaMat, dalamMat) {
+  const g = new THREE.Group(), b = .006;
+  const papan = new THREE.Mesh(new THREE.ExtrudeGeometry(bentukBulat(W - 2 * b, H - 2 * b, .03), {depth: KL - 2 * b, bevelEnabled: true, bevelThickness: b, bevelSize: b, bevelSegments: 3, curveSegments: 8}), kulitMat);
+  papan.geometry.center(); papan.castShadow = true; papan.receiveShadow = true; g.add(papan);
+  const muka = new THREE.Mesh(new THREE.PlaneGeometry(W - .024, H - .024), mukaMat);
+  muka.position.z = KL / 2 + .0004; muka.receiveShadow = true; g.add(muka);
+  const dalam = new THREE.Mesh(new THREE.PlaneGeometry(W - .024, H - .024), dalamMat);
+  dalam.position.z = -KL / 2 - .0004; dalam.rotation.y = Math.PI; dalam.receiveShadow = true; g.add(dalam);
+  return g;
+}
 
+let bayangTapak = null;
 function bukuBaru(k, r, halaman, img) {
   const W = 1, H = 1.38, TB = .16, KL = .028, warna = new THREE.Color(WARNA(k));
   const akar = new THREE.Group();
-  const kulitMat = new THREE.MeshPhysicalMaterial({color: warna, roughness: .55, clearcoat: .35, clearcoatRoughness: .5});
-  const muka = new THREE.MeshPhysicalMaterial({map: kulitBuku(k, r), roughness: .5, clearcoat: .5, clearcoatRoughness: .35});
-  const dalam = new THREE.MeshStandardMaterial({color: 0xF3EEE2, roughness: .9});
+  /* Kulit keras berlapis kain: kekasaran sederhana, salutan tipis, butiran timbul */
+  const butir = teksturButiran(r);
+  const kulitMat = new THREE.MeshPhysicalMaterial({color: warna.clone().multiplyScalar(.9), roughness: .62, roughnessMap: butir, bumpMap: butir, bumpScale: .0025, clearcoat: .18, clearcoatRoughness: .55});
+  const muka = new THREE.MeshPhysicalMaterial({map: kulitBuku(k, r), roughness: .55, roughnessMap: butir, bumpMap: butir, bumpScale: .0025, clearcoat: .22, clearcoatRoughness: .45});
+  const dalam = new THREE.MeshStandardMaterial({color: 0xF1EBDD, roughness: .92});
   const hal = new THREE.MeshStandardMaterial({map: halaman, roughness: .95});
-  const krim = new THREE.MeshStandardMaterial({color: 0xF6F1E4, roughness: .95});
-  /* Blok halaman */
-  const blok = new THREE.Mesh(new THREE.BoxGeometry(W - .05, H - .06, TB), [hal, krim, hal, hal, krim, krim]);
-  blok.position.x = .015; blok.castShadow = true; akar.add(blok);
+  const krim = new THREE.MeshStandardMaterial({color: 0xF4EFE2, roughness: .95});
+  /* Blok halaman: sedikit lebih kecil daripada kulit, seperti buku sebenar */
+  const blok = new THREE.Mesh(new THREE.BoxGeometry(W - .045, H - .05, TB), [hal, krim, hal, hal, krim, krim]);
+  blok.position.x = .012; blok.castShadow = true; blok.receiveShadow = true; akar.add(blok);
   /* Kulit belakang */
-  const bel = new THREE.Mesh(new THREE.BoxGeometry(W, H, KL), [kulitMat, kulitMat, kulitMat, kulitMat, dalam, kulitMat]);
-  bel.position.z = -(TB / 2 + KL / 2); bel.castShadow = true; akar.add(bel);
+  const bel = papanKulit(W, H, KL, kulitMat, dalam, kulitMat);
+  bel.position.z = -(TB / 2 + KL / 2); akar.add(bel);
   /* Tulang buku melengkung */
   const R = TB / 2 + KL;
-  const tulang = new THREE.Mesh(new THREE.CylinderGeometry(R, R, H, 20, 1, true, Math.PI, Math.PI), new THREE.MeshPhysicalMaterial({color: warna.clone().multiplyScalar(.82), roughness: .5, clearcoat: .4, side: THREE.DoubleSide}));
+  const tulang = new THREE.Mesh(new THREE.CylinderGeometry(R, R, H - .004, 28, 1, true, Math.PI, Math.PI), new THREE.MeshPhysicalMaterial({color: warna.clone().multiplyScalar(.78), roughness: .6, roughnessMap: butir, bumpMap: butir, bumpScale: .0025, clearcoat: .18, clearcoatRoughness: .55, side: THREE.DoubleSide}));
   tulang.position.x = -W / 2; tulang.castShadow = true; akar.add(tulang);
   /* Kulit depan pada engsel */
   const engsel = new THREE.Group(); engsel.position.set(-W / 2, 0, TB / 2 + KL / 2); akar.add(engsel);
-  const dep = new THREE.Mesh(new THREE.BoxGeometry(W, H, KL), [kulitMat, kulitMat, kulitMat, kulitMat, muka, dalam]);
-  dep.position.x = W / 2; dep.castShadow = true; engsel.add(dep);
+  const dep = papanKulit(W, H, KL, kulitMat, muka, dalam);
+  dep.position.x = W / 2; engsel.add(dep);
   /* Reben penanda */
   const reben = new THREE.Mesh(new THREE.BoxGeometry(.06, .32, .006), new THREE.MeshStandardMaterial({color: 0xC8323C, roughness: .6}));
   reben.position.set(.22, -H / 2 - .12, .02); akar.add(reben);
   /* Skrin app yang naik keluar */
   const skrin = telefon3D(img, r, k === "planner");
   skrin.scale.setScalar(.001); akar.add(skrin);
-  akar.userData = {engsel, skrin, muka, buka: 0};
+  /* Bayang sentuhan di tapak buku supaya buku "duduk" di atas meja */
+  if (!bayangTapak) { const cv = document.createElement("canvas"); cv.width = 128; cv.height = 64; const x = cv.getContext("2d");
+    const g = x.createRadialGradient(64, 32, 4, 64, 32, 62); g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(.45, "rgba(0,0,0,.55)"); g.addColorStop(1, "rgba(0,0,0,0)");
+    x.setTransform(1, 0, 0, .5, 0, 16); x.fillStyle = g; x.fillRect(0, -32, 128, 128); bayangTapak = new THREE.CanvasTexture(cv); }
+  const bayang = new THREE.Mesh(new THREE.PlaneGeometry(W + .35, TB + KL * 2 + .5), new THREE.MeshBasicMaterial({map: bayangTapak, transparent: true, opacity: .5, depthWrite: false, toneMapped: false}));
+  bayang.rotation.x = -Math.PI / 2; bayang.position.set(.02, -H / 2 + .004, 0); bayang.renderOrder = 1; akar.add(bayang);
+  akar.userData = {engsel, skrin, muka, bayang, buka: 0};
   return akar;
 }
 
@@ -731,7 +785,7 @@ async function mula3D() {
   if (!window.THREE) { try { await muatSkrip("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; } }
   const kanvas = $("dunia");
   let r;
-  try { r = new THREE.WebGLRenderer({canvas: kanvas, antialias: !(innerWidth < 760), alpha: true, powerPreference: "low-power"}); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; }
+  try { r = new THREE.WebGLRenderer({canvas: kanvas, antialias: true, alpha: true, powerPreference: "low-power"}); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; }
   try { await Promise.all([document.fonts.load("800 56px 'Plus Jakarta Sans'"), document.fonts.load("600 26px 'Plus Jakarta Sans'"), document.fonts.load("700 21px 'JetBrains Mono'")]); } catch (e) {}
   const kunci = ["sains", "math", "sejarah", "english", "anak", "planner"];
   const img = {}; await Promise.all(kunci.concat("soalan").map(async k => { img[k] = window.GAMBAR ? await muatGambar(GAMBAR[k]) : null; }));
@@ -743,8 +797,17 @@ async function mula3D() {
   const babak = new THREE.Scene();
   const kam = new THREE.PerspectiveCamera(38, 1, .1, 100);
 
-  babak.add(new THREE.HemisphereLight(0xffffff, 0xB9C6C0, .7));
-  const utama = new THREE.DirectionalLight(0xFFF1DC, 1.05);
+  /* Studio maya untuk pantulan: kotak gelap dengan tiga panel cahaya lembut */
+  const pm = new THREE.PMREMGenerator(r), bilik = new THREE.Scene();
+  bilik.add(new THREE.Mesh(new THREE.BoxGeometry(24, 24, 24), new THREE.MeshBasicMaterial({color: 0x3a403d, side: THREE.BackSide})));
+  [[10, 5, [0, 10, 5], 3.2], [5, 7, [-10, 4, 3], 1.4], [5, 7, [10, 5, -3], 1.9], [12, 3, [0, 2, -11], .8]].forEach(([w, h, p, n]) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({color: new THREE.Color(n, n * .97, n * .92), side: THREE.DoubleSide}));
+    m.position.set(...p); m.lookAt(0, 0, 0); bilik.add(m);
+  });
+  babak.environment = pm.fromScene(bilik, .04).texture; pm.dispose();
+
+  babak.add(new THREE.HemisphereLight(0xffffff, 0xB9C6C0, .32));
+  const utama = new THREE.DirectionalLight(0xFFF1DC, 1.0);
   utama.position.set(4, 8, 6); utama.castShadow = true; utama.shadow.mapSize.set(telefon ? 1024 : 2048, telefon ? 1024 : 2048);
   utama.shadow.radius = 6; utama.shadow.bias = -.0004;
   Object.assign(utama.shadow.camera, {left: -7, right: 7, top: 7, bottom: -7}); babak.add(utama);
@@ -754,7 +817,15 @@ async function mula3D() {
   const c = k => new THREE.Color(WARNA(k));
 
   /* Meja dengan bucu lembut */
-  const mejaMat = new THREE.MeshStandardMaterial({color: c("meja"), roughness: .8});
+  /* Permukaan meja: urat halus supaya tidak nampak plastik rata */
+  const cvM = document.createElement("canvas"); cvM.width = 1024; cvM.height = 512; const xm = cvM.getContext("2d");
+  xm.fillStyle = "#fff"; xm.fillRect(0, 0, 1024, 512);
+  /* Urat berkala (gelombang penuh setiap 1024px) supaya tiada garis sambungan bila berulang */
+  for (let i = 0; i < 120; i++) { const y = Math.random() * 512, f = 1 + (i % 3), ph = Math.random() * 6.28; xm.strokeStyle = `rgba(0,0,0,${.01 + Math.random() * .018})`; xm.lineWidth = .5 + Math.random() * 1.5;
+    xm.beginPath(); for (let px = 0; px <= 1024; px += 16) xm.lineTo(px, y + Math.sin(px / 1024 * 6.2832 * f + ph) * 5); xm.stroke(); }
+  for (let i = 0; i < 9000; i++) { xm.fillStyle = `rgba(0,0,0,${Math.random() * .04})`; xm.fillRect(Math.random() * 1024, Math.random() * 512, 1, 1); }
+  const teksMeja = tekstur(cvM, r); teksMeja.wrapS = teksMeja.wrapT = THREE.RepeatWrapping; teksMeja.repeat.set(.12, .12);
+  const mejaMat = new THREE.MeshStandardMaterial({color: c("meja"), map: teksMeja, roughness: .72, envMapIntensity: .6});
   const meja = new THREE.Mesh(new THREE.ExtrudeGeometry(bentukBulat(10, 5.6, .5), {depth: .3, bevelEnabled: true, bevelThickness: .05, bevelSize: .05, bevelSegments: 3}), mejaMat);
   meja.rotation.x = -Math.PI / 2; meja.position.y = -.35; meja.receiveShadow = true; babak.add(meja);
 
@@ -891,7 +962,9 @@ async function mula3D() {
       const e = lancar(Math.min(1, u.buka));
       u.engsel.rotation.y = -2.25 * e;
       const undur = aktif ? 0 : lancar(Math.min(1, fokus));
-      bk.position.y = u.asal.y + Math.sin(t * 1.1 + u.i) * .035 + e * .2 - undur * .5;
+      /* Buku rehat diam di atas meja; hanya buku yang dipilih terangkat dan beralun */
+      bk.position.y = u.asal.y + (Math.sin(t * 1.1 + u.i) * .035 + .2) * e - undur * .5;
+      u.bayang.material.opacity = .5 * (1 - e) * (1 - undur);
       bk.position.z = u.asal.z + e * .45 - undur * 2.2;
       bk.rotation.y = u.rotAsal * (1 - e) + Math.sin(t * .8) * .04 * e;
       const s = Math.max(.001, e);
