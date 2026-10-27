@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://naikgred.com/sitemap.xml
+Sitemap: https://jejaktpsains.naikgred.com/sitemap.xml
+Sitemap: https://jejaktpmath.naikgred.com/sitemap.xml
+Sitemap: https://jejaktpsejarah.naikgred.com/sitemap.xml
+Sitemap: https://jejaktpenglish.naikgred.com/sitemap.xml
