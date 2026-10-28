@@ -92,6 +92,21 @@ p{margin:14px 0 0;color:var(--mute);max-width:34em}
 .hasil .jimat{background:color-mix(in srgb,var(--hijau2) 14%,transparent);border-color:color-mix(in srgb,var(--hijau2) 40%,transparent)}
 .hasil small{color:var(--mute);font-size:13px}
 
+/* Senarai sebab (kenapa / murid) */
+.ciri{display:grid;gap:18px;margin:22px 0 0;padding:0;list-style:none}
+.ciri li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:2px 14px;align-items:start}
+.ciri .ik{grid-row:1/3;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--hijau2) 16%,transparent);color:var(--hijau2)}
+.ciri .ik svg{width:22px;height:22px}
+.ciri b{font-size:16px;line-height:1.3}
+.ciri span{color:var(--mute);font-size:14px;line-height:1.5}
+#murid .ciri .ik{background:color-mix(in srgb,var(--emas) 20%,transparent);color:var(--emas)}
+/* Cerita */
+.cerita p{color:var(--ink);opacity:.86}
+.cerita .tandatangan{display:flex;align-items:center;gap:12px;margin-top:20px}
+.cerita .tandatangan img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--hijau2);background:#fff}
+.cerita .tandatangan b{display:block;font-size:15px}
+.cerita .tandatangan small{display:block;color:var(--mute);font-size:13px;line-height:1.4}
+
 /* Laporan ibu bapa */
 .laporan{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:start;margin-top:20px}
 .laporan img{width:150px;border-radius:16px;border:1px solid var(--garis);box-shadow:0 20px 40px -24px #0006}
@@ -289,7 +304,41 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
     </div>
   </section>
 
-  <section id="bukti" data-kam="2">
+  <section id="kenapa" data-kam="1">
+    <div class="isi">
+      <div class="panel">
+        <div class="label" id="k-label"></div>
+        <h2 id="k-tajuk"></h2>
+        <ul class="ciri" id="k-senarai"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="kanan" id="murid" data-kam="2">
+    <div class="isi">
+      <div class="panel">
+        <div class="label" id="u-label"></div>
+        <h2 id="u-tajuk"></h2>
+        <ul class="ciri" id="u-senarai"></ul>
+        <p class="nota" id="u-nota"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cerita" data-kam="2">
+    <div class="isi">
+      <div class="panel cerita">
+        <div class="label" id="c-label"></div>
+        <h2 id="c-tajuk"></h2>
+        <p id="c-1"></p>
+        <p id="c-2"></p>
+        <p id="c-3"></p>
+        <div class="tandatangan"><img src="aset/muka-sains.jpg" alt="" width="52" height="52" loading="lazy"><div><b id="c-nama"></b><small id="c-peranan"></small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kanan" id="bukti" data-kam="2">
     <div class="isi">
       <div class="panel">
         <div class="label" data-t="b.label">Sudah digunakan di sekolah</div>
@@ -395,6 +444,27 @@ const T = {
     "m.nota":"Anggaran kasar: 3 minit setiap murid setiap bab untuk menentukan TP dan menulis ulasan, berbanding kira-kira 30 saat untuk menyemak TP yang dicadangkan.",
     "l.label":"Laporan anak","l.tajuk":"Anda nampak apa yang guru nampak.","l.1":"Markah setiap bab","l.1s":"Peratus dan label: Cemerlang, Baik, Sederhana atau Perlu bantuan.",
     "l.2":"Bab paling lemah","l.2s":"Disusun bermula dengan bab yang paling perlu dibantu.","l.3":"Satu tindakan minggu ini","l.3s":"Contohnya: minta anak mengulang Bab 5.","l.nota":"Tangkapan skrin sebenar daripada app. Nama dan markah ialah data contoh.",
+    kenapa:{
+      guru:{label:"Kenapa guru memilih Jejak TP",h:"PBD yang adil, tanpa berjam-jam mengisi TP.",items:[
+        ["bukti","TP berdasarkan bukti, bukan anggaran","Setiap TP dicadangkan daripada jawapan sebenar murid. Rekod percubaan tersimpan sebagai bukti apabila PBD dipantau."],
+        ["masa","Jimat berjam-jam setiap penggal","Tiada lagi menanda dan mengisi TP murid satu demi satu. Guru hanya menyemak, mengesahkan dan mengeksport ke SPPB."],
+        ["bantu","Nampak murid yang perlu dibantu","Murid yang belum mencuba dan bab yang masih lemah kelihatan serta-merta, jadi intervensi boleh dibuat lebih awal."]]},
+      ibubapa:{label:"Kenapa ibu bapa memilih Anak NaikGred",h:"Tahu keadaan sebenar anak, sebelum keputusan peperiksaan keluar.",items:[
+        ["mata","Bukan sekadar “dah faham”","Anda nampak markah sebenar setiap bab, terus daripada jawapan anak sendiri."],
+        ["sasar","Tahu bab mana yang perlu dibantu","Bab paling lemah dipaparkan dahulu, bersama satu tindakan mudah untuk minggu ini."],
+        ["dompet","Lebih murah daripada tuisyen","RM32 setahun untuk empat subjek, kurang daripada RM3 sebulan. Anak berlatih di rumah pada bila-bila masa."]]}
+    },
+    murid:{label:"Kebaikan untuk murid",h:"Murid yang kerap berlatih lebih bersedia untuk peperiksaan.",items:[
+      ["mentol","Faham sebabnya, bukan menghafal jawapan","Setiap jawapan, sama ada betul atau salah, diikuti penjelasan ringkas."],
+      ["ulang","Ulang sehingga menguasai","Hentian boleh dicuba semula. TP dan markah diambil daripada percubaan terbaik, jadi murid tidak takut mencuba."],
+      ["buku","Latihan sama dengan yang diajar di kelas","Soalan disusun mengikut DSKP dan buku teks KSSM, lengkap dengan rajah, Tingkatan 1 hingga 5."],
+      ["api","Seronok, jadi mereka mahu berlatih lagi","Kombo, mata, bintang dan kad baharu menjadikan latihan seperti bermain permainan."]],
+      nota:"Latihan mengingat semula secara kerap ialah antara kaedah belajar yang paling berkesan menurut kajian pendidikan."},
+    cerita:{label:"Cerita kami",h:"Dibina oleh seorang guru Sains, untuk guru dan murid.",
+      p:["Jejak TP bermula di bilik darjah seorang guru Sains sekolah menengah. Setiap penggal, beliau menghabiskan berjam-jam menentukan TP dan menulis ulasan PBD untuk lebih 100 murid, satu demi satu.",
+         "Jadi beliau menyusun soalan mengikut DSKP dalam bentuk permainan. Murid berlatih di telefon, dan TP terisi dengan sendirinya berdasarkan jawapan mereka.",
+         "Sebelum dikongsi, app ini diuji dahulu dengan murid kelasnya sendiri. Kini ia digunakan oleh guru di seluruh Malaysia, untuk Sains, Matematik, Sejarah dan English."],
+      nama:"Seorang guru Sains",peranan:"Sekolah menengah kebangsaan, Malaysia"},
     "b.label":"Sudah digunakan di sekolah", bTajuk:{guru:"Guru sebenar. Murid sebenar. Bukan demo.",ibubapa:"Soalan yang sama digunakan oleh guru di sekolah."},
     "b.main":"murid sudah menjawab","b.sekolah":"sekolah sudah mendaftar","b.hidup":"Angka hidup","b.nota":"Semua subjek Jejak TP, setakat 22 Oktober 2026.","b.notaHidup":"Dikemas kini setiap kali halaman dibuka.",
     "pr.label":"Produk NaikGred", prTajuk:{guru:"Pilih subjek. Bab 1 dan 2 percuma.",ibubapa:"Anak NaikGred untuk ibu bapa."},
@@ -429,6 +499,27 @@ const T = {
     "m.nota":"Rough estimate: 3 minutes per student per chapter to decide TP and write a comment, against about 30 seconds to check a suggested TP.",
     "l.label":"Your child's report","l.tajuk":"You see what the teacher sees.","l.1":"Marks for every chapter","l.1s":"A percentage and a label: Excellent, Good, Fair or Needs help.",
     "l.2":"Weakest chapters first","l.2s":"Sorted from the chapter that needs the most help.","l.3":"One action this week","l.3s":"For example: ask your child to redo Chapter 5.","l.nota":"Real screenshot from the app (in Malay). The name and marks are sample data.",
+    kenapa:{
+      guru:{label:"Why teachers choose Jejak TP",h:"Fair PBD, without hours of filling in TP.",items:[
+        ["bukti","TP based on evidence, not guesswork","Every TP is suggested from each student's real answers. Attempt records are kept as evidence when PBD is reviewed."],
+        ["masa","Save hours every term","No more marking and filling in TP student by student. Teachers just check, confirm and export to SPPB."],
+        ["bantu","See who needs help","Students who have not tried yet and weak chapters show up straight away, so you can step in earlier."]]},
+      ibubapa:{label:"Why parents choose Anak NaikGred",h:"Know where your child really stands, before exam results come out.",items:[
+        ["mata","More than “I understand already”","You see real marks for every chapter, straight from your child's own answers."],
+        ["sasar","Know which chapter needs help","The weakest chapters appear first, with one simple action for this week."],
+        ["dompet","Cheaper than tuition","RM32 a year for four subjects, under RM3 a month. Your child practises at home, any time."]]}
+    },
+    murid:{label:"What students gain",h:"Students who practise often are better prepared for exams.",items:[
+      ["mentol","Understand why, not memorise answers","Every answer, right or wrong, is followed by a short explanation."],
+      ["ulang","Repeat until mastered","Stops can be retried. TP and marks come from the best attempt, so students are not afraid to try."],
+      ["buku","Practice that matches the classroom","Questions follow the DSKP and KSSM textbooks, with diagrams, Form 1 to 5."],
+      ["api","Fun, so they want to practise more","Combos, points, stars and new cards make practice feel like a game."]],
+      nota:"Frequent retrieval practice is one of the most effective ways to learn, according to education research."},
+    cerita:{label:"Our story",h:"Built by a Science teacher, for teachers and students.",
+      p:["Jejak TP started in the classroom of a secondary school Science teacher. Every term she spent hours deciding TP and writing PBD comments for more than 100 students, one by one.",
+         "So she arranged DSKP-aligned questions as a game. Students practise on their phones, and TP fills in by itself from their answers.",
+         "Before it was shared, the app was tested with her own students first. Today teachers across Malaysia use it for Science, Maths, History and English."],
+      nama:"A Science teacher",peranan:"National secondary school, Malaysia"},
     "b.label":"Already used in schools", bTajuk:{guru:"Real teachers. Real students. Not a demo.",ibubapa:"The same questions teachers use in school."},
     "b.main":"students have answered","b.sekolah":"schools signed up","b.hidup":"Live numbers","b.nota":"All Jejak TP subjects, as of 22 October 2026.","b.notaHidup":"Updated every time this page opens.",
     "pr.label":"NaikGred products", prTajuk:{guru:"Pick a subject. Chapters 1 and 2 are free.",ibubapa:"Anak NaikGred for parents."},
@@ -464,6 +555,19 @@ try { bahasa = localStorage.getItem("ng-bahasa") || "ms"; persona = localStorage
 if (!SUSUN[persona]) persona = "guru";
 
 const $ = id => document.getElementById(id);
+const IKON = {
+  bukti:'<path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+  masa:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  bantu:'<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8"/><path d="M17 8v6M14 11h6"/>',
+  mata:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
+  sasar:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+  dompet:'<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M16 14.5h2"/>',
+  mentol:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+  ulang:'<path d="M4 12a8 8 0 0 1 13.7-5.7L20 8.5"/><path d="M20 4v4.5h-4.5"/><path d="M20 12a8 8 0 0 1-13.7 5.7L4 15.5"/><path d="M4 20v-4.5h4.5"/>',
+  buku:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/>',
+  api:'<path d="M12 22c4 0 7-2.8 7-6.8 0-3.6-2.4-5.8-4-8.2-.7 1.8-1.8 2.8-3 3.2.4-3.2-.8-6.2-3-8.2.2 3.4-4 6.4-4 11.4C5 19.2 8 22 12 22z"/>'
+};
+const senaraiCiri = xs => xs.map(([ik, t, d]) => `<li><span class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IKON[ik]}</svg></span><b>${t}</b><span>${d}</span></li>`).join("");
 const PANAH = `<svg class="anak-panah" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
 
 const VIDEO = ["sains","math","sejarah","english","anak"];
@@ -505,6 +609,12 @@ function lukis() {
   $("h-dua").textContent = h.dua; $("h-dua").href = persona === "guru" ? "#masa" : "#laporan";
   $("h-nota").textContent = h.nota;
   $("b-tajuk").textContent = L.bTajuk[persona];
+  const K = L.kenapa[persona];
+  $("k-label").textContent = K.label; $("k-tajuk").textContent = K.h; $("k-senarai").innerHTML = senaraiCiri(K.items);
+  $("u-label").textContent = L.murid.label; $("u-tajuk").textContent = L.murid.h; $("u-senarai").innerHTML = senaraiCiri(L.murid.items); $("u-nota").textContent = L.murid.nota;
+  $("c-label").textContent = L.cerita.label; $("c-tajuk").textContent = L.cerita.h;
+  L.cerita.p.forEach((t, i) => $("c-" + (i + 1)).textContent = t);
+  $("c-nama").textContent = L.cerita.nama; $("c-peranan").textContent = L.cerita.peranan;
   $("pr-tajuk").textContent = L.prTajuk[persona];
   $("bar-teks").innerHTML = L.bar[persona][0];
   $("bar-cta").textContent = L.bar[persona][1];
