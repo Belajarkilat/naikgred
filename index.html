@@ -467,7 +467,7 @@ const $ = id => document.getElementById(id);
 const PANAH = `<svg class="anak-panah" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
 
 const VIDEO = ["sains","math","sejarah","english","anak"];
-const MUKA = {sains:"aset/muka-sains.jpg", math:"aset/muka-math.jpg", sejarah:"aset/muka-sejarah.jpg", anak:"aset/muka-anak.jpg", planner:"aset/muka-planner.jpg"};
+const MUKA = {sains:"aset/muka-sains.jpg", math:"aset/muka-math.jpg", sejarah:"aset/muka-sejarah.jpg", english:"aset/muka-english.jpg", anak:"aset/muka-anak.jpg", planner:"aset/muka-planner.jpg"};
 const mukaKad = k => MUKA[k] ? `<img class="muka" src="${MUKA[k]}" alt="" width="56" height="56" loading="lazy" decoding="async">` : `<span class="muka ikon" aria-hidden="true">Aa</span>`;
 function mediaKad(k, L) {
   const lk = L.langkah[k === "anak" ? "anak" : "subjek"];
