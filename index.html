@@ -119,17 +119,40 @@ p{margin:14px 0 0;color:var(--mute);max-width:34em}
 .kad{--w:var(--sains);background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--garis);border-radius:18px;min-width:0;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
 .kad::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--w)}
 .kad.aktif{border-color:var(--w)}
-.kad-kepala{all:unset;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:2px 12px;width:100%;padding:12px 14px 12px 20px;cursor:pointer}
+.kad-kepala{all:unset;box-sizing:border-box;display:grid;grid-template-columns:56px minmax(0,1fr) auto auto;align-items:center;gap:2px 12px;width:100%;padding:12px 14px 12px 20px;cursor:pointer}
+.kad .muka{grid-row:1/4;grid-column:1;width:56px;height:56px;border-radius:14px;object-fit:cover;border:2px solid var(--w);background:#fff;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.kad .muka.ikon{display:grid;place-items:center;background:var(--w);color:#fff;font:800 22px var(--f-papar);letter-spacing:-.03em}
+.kad.aktif .muka,.kad:hover .muka{transform:scale(1.06) rotate(-3deg)}
 .kad-kepala:focus-visible{outline:3px solid var(--emas);outline-offset:-3px}
-.kad .jenis{grid-column:1/-1;font:700 11px var(--f-data);letter-spacing:.1em;text-transform:uppercase;color:var(--w)}
+.kad .jenis{grid-column:2/-1;font:700 11px var(--f-data);letter-spacing:.1em;text-transform:uppercase;color:var(--w)}
 .kad .t{margin:0;font-size:18px;font-weight:700;letter-spacing:-.02em}
-.kad .ringkas{grid-column:1;font-size:13px;color:var(--mute)}
-.kad .harga{grid-row:2;grid-column:2;font:700 17px var(--f-data);text-align:right;white-space:nowrap}
+.kad .ringkas{grid-column:2;font-size:13px;color:var(--mute)}
+.kad .harga{grid-row:2;grid-column:3;font:700 17px var(--f-data);text-align:right;white-space:nowrap}
 .kad .harga small{font:500 11px var(--f-data);color:var(--mute);display:block}
-.kad .anak-panah{grid-row:2/4;grid-column:3;width:22px;height:22px;transition:transform .25s;color:var(--mute)}
+.kad .anak-panah{grid-row:2/4;grid-column:4;width:22px;height:22px;transition:transform .25s;color:var(--mute)}
 .kad.aktif .anak-panah{transform:rotate(180deg)}
-.kad-badan{display:none;padding:0 14px 16px 20px}
-.kad.aktif .kad-badan{display:grid;gap:10px}
+/* Kad kembang dengan animasi ketinggian (grid 0fr ke 1fr) */
+.kad-badan{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1)}
+.kad.aktif .kad-badan{grid-template-rows:1fr}
+.kad-dalam{min-height:0;overflow:hidden;visibility:hidden;transition:visibility .4s}
+.kad.aktif .kad-dalam{visibility:visible}
+.kad-isi{display:grid;gap:10px;padding:0 14px 16px 20px}
+.kad:hover{transform:translateY(-2px)}
+/* Video app sebenar dalam bingkai telefon (telefon & mod ringan; desktop 3D main video pada skrin telefon 3D) */
+.media{display:none;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:center}
+.telefon{position:relative;width:150px;aspect-ratio:360/780;border-radius:26px;padding:6px;background:linear-gradient(145deg,#26302c,#0d1210);box-shadow:0 24px 40px -22px #000a,inset 0 0 0 1px #ffffff1a}
+.telefon video{display:block;width:100%;height:100%;object-fit:cover;border-radius:20px;background:#fff}
+.media ol{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:l}
+.media li{display:grid;grid-template-columns:24px 1fr;gap:8px;font-size:14px;font-weight:600;line-height:1.35;counter-increment:l}
+.media li::before{content:counter(l);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--w);color:#fff;font:800 12px var(--f-data)}
+.media li.rakam{display:flex;align-items:center;gap:6px;font:600 11px var(--f-data);color:var(--mute);letter-spacing:.06em;text-transform:uppercase;counter-increment:none}
+.media li.rakam::before{content:"";width:7px;height:7px;border-radius:50%;background:#e5484d;animation:denyut 1.8s infinite}
+.ringan .media{display:grid}
+/* Muncul ketika skrol */
+.js-sedia .muncul{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js-sedia .muncul.nampak{opacity:1;transform:none}
+header{transition:box-shadow .3s}
+.lepas header{box-shadow:0 8px 30px -18px #0006}
 .kad-badan .gbr{display:none}
 .kad-badan .pilih{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .kad-badan .btn{padding:11px 12px;font-size:14px;background:var(--w);box-shadow:none}
@@ -175,7 +198,9 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
   .petunjuk{display:none}
   #produk{min-height:auto}
   .kad.aktif .kad-badan .gbr{display:block;width:100%;max-height:260px;object-fit:cover;object-position:top;border-radius:14px;border:1px solid var(--garis)}
+  .media{display:grid}
 }
+@media (max-width:380px){.media{grid-template-columns:128px minmax(0,1fr);gap:12px}.telefon{width:128px}.media li{font-size:13px}}
 @media (max-width:560px){
   .angka{gap:8px}
   .panel{padding:20px}
@@ -185,7 +210,7 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
   .laporan img{width:100px}
   .peringkat{grid-template-columns:1fr}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.js-sedia .muncul{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -213,14 +238,14 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
           <button data-p="guru" aria-pressed="true" data-t="p.guru">Guru</button>
           <button data-p="ibubapa" aria-pressed="false" data-t="p.ibubapa">Ibu bapa</button>
         </div>
-        <span class="pil" id="h-pil"></span>
-        <h1 id="h-tajuk"></h1>
-        <p id="h-sub"></p>
+        <span class="pil" id="h-pil">Bab 1 &amp; 2 percuma, semua subjek</span>
+        <h1 id="h-tajuk">TP 40 murid.<br><em>Auto dijana selepas menjawab.</em></h1>
+        <p id="h-sub">Murid menjawab soalan di telefon. TP dan ulasan PBD setiap murid terisi secara automatik, sedia untuk dieksport.</p>
         <div class="tindakan">
-          <a class="btn" id="h-cta" href="#"></a>
-          <a class="btn kedua" href="#produk" id="h-dua"></a>
+          <a class="btn" id="h-cta" href="#produk">Pilih subjek, cuba percuma →</a>
+          <a class="btn kedua" href="#masa" id="h-dua">Kira masa anda</a>
         </div>
-        <div class="nota" id="h-nota"></div>
+        <div class="nota" id="h-nota">TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English</div>
       </div>
     </div>
   </section>
@@ -334,14 +359,15 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 
 <div class="bar-beli">
   <div class="isi">
-    <span id="bar-teks"></span>
-    <a class="btn" id="bar-cta" href="#produk" style="padding:10px 16px"></a>
+    <span id="bar-teks"><b>Bab 1 &amp; 2 percuma</b> · RM23 sebelum 31 Dis</span>
+    <a class="btn" id="bar-cta" href="#produk" style="padding:10px 16px">Mula percuma</a>
   </div>
 </div>
 <div class="petunjuk" id="petunjuk" hidden></div>
 
-<script src="aset/web3d-gambar.js"></script>
 <script>
+/* Tangkapan skrin (340 KB) dimuat tanpa menyekat paparan teks; kad & 3D dilukis semula bila siap */
+const gambarSedia = new Promise(ok => { const s = document.createElement("script"); s.src = "aset/web3d-gambar.js"; s.onload = s.onerror = ok; document.head.appendChild(s); });
 /* ---------- Pautan sebenar ke app ---------- */
 const APP = {sains:"https://jejaktpsains.naikgred.com", math:"https://jejaktpmath.naikgred.com", sejarah:"https://jejaktpsejarah.naikgred.com", english:"https://jejaktpenglish.naikgred.com"};
 /* Kod ?dari yang membawa pelawat ke laman ini diteruskan ke app, supaya sumber guru kekal tepat. */
@@ -375,6 +401,7 @@ const T = {
     cuba:"Cuba Bab 1 & 2 percuma", langgan:"Langgan", rendah:"T1–T3", atas:"T4–T5", landing:"Lihat butiran penuh", setahun:"setahun", percuma:"Percuma",
     pilihAnak:"Pilih subjek anak untuk mendaftar:", contohLaporan:"Lihat contoh laporan", muatPlanner:"Muat turun Planner percuma",
     notaBayar:"Bayar melalui FPX (caj FPX RM1). Daftar atau log masuk dahulu, kemudian halaman bayaran terbuka dengan sendirinya.", kemudian:"mulai 2027",
+    rakam:"Rakaman sebenar app", langkah:{subjek:["Murid menjawab di telefon, seperti bermain permainan","Lulus hentian, TP dijana secara automatik","Guru menyemak, kemudian eksport ke SPPB"], anak:["Anak bermain di telefon","Markah setiap bab terus dipaparkan kepada anda","Bab paling lemah ditunjukkan dahulu"]},
     produk:{
       sains:{j:"Jejak TP",t:"Sains",d:"T1–T5 · rajah dan soalan ikut DSKP"},
       math:{j:"Jejak TP",t:"Matematik",d:"T1–T5 · 53 bab, jalan kira ditunjukkan"},
@@ -408,6 +435,7 @@ const T = {
     cuba:"Try Chapters 1 & 2 free", langgan:"Subscribe", rendah:"F1–F3", atas:"F4–F5", landing:"See full details", setahun:"a year", percuma:"Free",
     pilihAnak:"Pick your child's subject to register:", contohLaporan:"See a sample report", muatPlanner:"Download the free Planner",
     notaBayar:"Pay by FPX (RM1 FPX fee). Sign up or log in first, then the payment page opens by itself.", kemudian:"from 2027",
+    rakam:"Real app recording (in Malay)", langkah:{subjek:["Students answer on their phones, like a game","Pass a stop and TP is generated automatically","Teacher checks, then exports to SPPB"], anak:["Your child plays on the phone","Marks for every chapter appear for you","Weakest chapters are shown first"]},
     produk:{
       sains:{j:"Jejak TP",t:"Science",d:"F1–F5 · diagrams and DSKP-aligned questions"},
       math:{j:"Jejak TP",t:"Maths",d:"F1–F5 · 53 chapters, working shown"},
@@ -438,8 +466,16 @@ if (!SUSUN[persona]) persona = "guru";
 const $ = id => document.getElementById(id);
 const PANAH = `<svg class="anak-panah" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
 
+const VIDEO = ["sains","math","sejarah","english","anak"];
+const MUKA = {sains:"aset/muka-sains.jpg", math:"aset/muka-math.jpg", sejarah:"aset/muka-sejarah.jpg", anak:"aset/muka-anak.jpg", planner:"aset/muka-planner.jpg"};
+const mukaKad = k => MUKA[k] ? `<img class="muka" src="${MUKA[k]}" alt="" width="56" height="56" loading="lazy" decoding="async">` : `<span class="muka ikon" aria-hidden="true">Aa</span>`;
+function mediaKad(k, L) {
+  const lk = L.langkah[k === "anak" ? "anak" : "subjek"];
+  return `<div class="media"><div class="telefon"><video data-k="${k}" muted loop playsinline preload="none" poster="aset/video/demo-${k}.jpg" aria-label="${L.rakam}: ${L.produk[k].t}"><source src="aset/video/demo-${k}.mp4" type="video/mp4"></video></div>
+    <ol>${lk.map(x => `<li>${x}</li>`).join("")}<li class="rakam">${L.rakam}</li></ol></div>`;
+}
 function badanKad(k, L) {
-  const gbr = window.GAMBAR && GAMBAR[k] ? `<img class="gbr" src="${GAMBAR[k]}" alt="" loading="lazy">` : "";
+  const gbr = VIDEO.includes(k) ? mediaKad(k, L) : window.GAMBAR && GAMBAR[k] ? `<img class="gbr" src="${GAMBAR[k]}" alt="" loading="lazy">` : "";
   if (k === "planner") return `${gbr}<a class="btn" data-jejak="planner" href="${pautan.planner()}" target="_blank" rel="noopener">${L.muatPlanner} →</a>`;
   if (k === "anak") return `${gbr}<small>${L.pilihAnak}</small><div class="pilih">${SUBJEK.map(s => `<a class="btn" data-jejak="anak-${s}" href="${pautan.anak(s)}" target="_blank" rel="noopener">${L.subjek[s]}</a>`).join("")}</div>
     <span class="pautan"><a data-jejak="anak-contoh" href="${pautan.anakLanding()}" target="_blank" rel="noopener">${L.contohLaporan} ↗</a></span>`;
@@ -482,15 +518,17 @@ function lukis() {
     const harga = hg ? `${hg[0]}<small>${hg[1]} ${L.kemudian}</small>` : L.percuma;
     return `<article class="kad${k === kadAktif ? " aktif" : ""}" data-k="${k}" style="--w:var(--${k})">
       <button class="kad-kepala" aria-expanded="${k === kadAktif}">
-        <span class="jenis">${p.j}</span><span class="t">${p.t}</span><span class="harga">${harga}</span>${PANAH}<span class="ringkas">${p.d}</span>
+        ${mukaKad(k)}<span class="jenis">${p.j}</span><span class="t">${p.t}</span><span class="harga">${harga}</span>${PANAH}<span class="ringkas">${p.d}</span>
       </button>
-      <div class="kad-badan">${badanKad(k, L)}</div></article>`;
+      <div class="kad-badan"><div class="kad-dalam"><div class="kad-isi">${badanKad(k, L)}</div></div></div></article>`;
   }).join("");
   $("senarai").querySelectorAll(".kad-kepala").forEach(b => b.onclick = () => bukaKad(b.parentElement.dataset.k, true));
   /* Tetikus atas kad: pratonton buku; keluar senarai: kembali kepada kad yang dibuka */
   $("senarai").querySelectorAll(".kad").forEach(kd => kd.onmouseenter = () => window.pilihBuku && pilihBuku(kd.dataset.k));
   $("senarai").onmouseleave = () => window.pilihBuku && pilihBuku(kadAktif);
   window.pilihBuku && pilihBuku(kadAktif);
+  $("senarai").querySelectorAll(".media video").forEach(v => pemerhatiVideo.observe(v));
+  semakVideo();
 
   /* Pilihan subjek di bahagian harga */
   [["h-subjek", kemasHarga], ["ha-subjek", kemasHargaAnak]].forEach(([id, fn]) => {
@@ -500,12 +538,36 @@ function lukis() {
   });
   detik();
 }
+/* Video kad: main hanya bila kad dibuka DAN kelihatan; selain itu berhenti (jimat data & bateri) */
+const KURANG_GERAK = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const kelihatan = new Set();
+const pemerhatiVideo = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? kelihatan.add(e.target) : kelihatan.delete(e.target)); semakVideo(); }, {threshold: .35});
+function semakVideo() {
+  document.querySelectorAll(".media video").forEach(v => {
+    if (KURANG_GERAK) { v.controls = true; return; }
+    const main = kelihatan.has(v) && v.closest(".kad").classList.contains("aktif") && getComputedStyle(v.closest(".media")).display !== "none";
+    if (main && v.paused) { v.play().catch(() => {}); jejak("video-" + v.dataset.k); }
+    else if (!main && !v.paused) v.pause();
+  });
+}
+/* Peralihan lembut bila tukar bahasa/persona (View Transitions API jika ada) */
+const peralihan = fn => document.startViewTransition && !KURANG_GERAK ? document.startViewTransition(fn) : fn();
+/* Angka naik dari nilai semasa bila kelihatan; jika belum kelihatan, ditangguh sehingga panel muncul */
+function kiraNaik(el, nilai) {
+  if (KURANG_GERAK) { el.textContent = nilai.toLocaleString("ms-MY"); return; }
+  if (!el.dataset.sudahNaik && el.getBoundingClientRect().top > innerHeight) { el.dataset.akan = nilai; return; }
+  const mula = performance.now(), dari = +(el.textContent.replace(/\D/g, "")) || 0;
+  (function langkah(t) { const p = Math.min(1, (t - mula) / 1200), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(dari + (nilai - dari) * e).toLocaleString("ms-MY"); if (p < 1) requestAnimationFrame(langkah); })(mula);
+  el.dataset.sudahNaik = 1;
+}
 function bukaKad(k, olehPelawat) {
   const kd = document.querySelector(`.kad[data-k="${k}"]`); if (!kd) return;
   const sudah = kd.classList.contains("aktif");
   document.querySelectorAll(".kad").forEach(x => { const on = x === kd && !(sudah && olehPelawat); x.classList.toggle("aktif", on); x.querySelector(".kad-kepala").setAttribute("aria-expanded", on); });
   kadAktif = k;
   window.pilihBuku && pilihBuku(k);
+  semakVideo();
   if (olehPelawat) jejak("kad-" + k);
 }
 function kemasHarga() {
@@ -515,9 +577,9 @@ function kemasHarga() {
 }
 function kemasHargaAnak() { const k = $("ha-subjek").value; $("ha-cta").href = pautan.anak(k); $("ha-cta").dataset.jejak = `anak-${k}`; }
 function simpan(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-$("bm").onclick = () => { bahasa = "ms"; simpan("ng-bahasa", "ms"); lukis(); window.labelBuku && labelBuku(); };
-$("en").onclick = () => { bahasa = "en"; simpan("ng-bahasa", "en"); lukis(); window.labelBuku && labelBuku(); jejak("bahasa-en"); };
-document.querySelectorAll(".persona button").forEach(b => b.onclick = () => { persona = b.dataset.p; simpan("ng-persona", persona); lukis(); jejak("persona-" + persona); });
+$("bm").onclick = () => { bahasa = "ms"; simpan("ng-bahasa", "ms"); peralihan(lukis); window.labelBuku && labelBuku(); };
+$("en").onclick = () => { bahasa = "en"; simpan("ng-bahasa", "en"); peralihan(lukis); window.labelBuku && labelBuku(); jejak("bahasa-en"); };
+document.querySelectorAll(".persona button").forEach(b => b.onclick = () => { persona = b.dataset.p; simpan("ng-persona", persona); peralihan(lukis); jejak("persona-" + persona); });
 
 function kira() {
   const m = +$("r-murid").value, b = +$("r-bab").value;
@@ -563,9 +625,9 @@ function angkaHidup() {
   Promise.all([ambil(AWAN, "lo_statistik_awam"), ambil(MJ, "mj_statistik_awam"), ambil(AWAN, "ng_sekolah_awam"), ambil(MJ, "ng_sekolah_awam")]).then(([s, m, sa, sb]) => {
     if (!s || !(s.bermain_semua >= 1)) return;
     const f = n => n.toLocaleString("ms-MY");
-    $("n-main").textContent = f(s.bermain_semua + (m && m.semua ? m.semua : 0));
+    kiraNaik($("n-main"), s.bermain_semua + (m && m.semua ? m.semua : 0));
     /* Sekolah unik merentas semua subjek: kedua-dua pangkalan data memulangkan cincang nama sekolah */
-    if (Array.isArray(sa)) $("n-sekolah").textContent = f(new Set(sa.concat(Array.isArray(sb) ? sb : [])).size);
+    if (Array.isArray(sa)) kiraNaik($("n-sekolah"), new Set(sa.concat(Array.isArray(sb) ? sb : [])).size);
     $("b-nota").textContent = T[bahasa]["b.notaHidup"];
   });
 }
@@ -587,6 +649,19 @@ $("ringan").onclick = () => { ringan = !ringan; simpan("ng-ringan", ringan ? "1"
 const lepasHero = () => document.body.classList.toggle("lepas", scrollY > innerHeight * .6);
 addEventListener("scroll", lepasHero, {passive: true}); lepasHero();
 lukis(); kira(); suara(); angkaHidup();
+gambarSedia.then(lukis);
+
+/* Panel dan tajuk muncul perlahan ketika diskrol; angka yang tertangguh mula naik bila kelihatan */
+if (!KURANG_GERAK && "IntersectionObserver" in window) {
+  document.documentElement.classList.add("js-sedia");
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("nampak"); io.unobserve(e.target);
+    e.target.querySelectorAll("[data-akan]").forEach(el => { const v = +el.dataset.akan; delete el.dataset.akan; el.dataset.sudahNaik = 1; kiraNaik(el, v); });
+  }), {threshold: .15});
+  document.querySelectorAll("main .panel, .produk-isi > .label, .produk-isi > h2, .senarai").forEach(el => { el.classList.add("muncul"); io.observe(el); });
+  document.querySelector("#atas .panel").classList.add("nampak");
+}
 
 /* ---------- Dunia 3D ---------- */
 let sudah3D = false;
@@ -626,6 +701,8 @@ function telefon3D(img, r, kertas) {
   x.restore();
   const skrin = new THREE.Mesh(new THREE.PlaneGeometry(w - .05, h - .05), new THREE.MeshBasicMaterial({map: tekstur(cv, r), transparent: true, toneMapped: false}));
   skrin.position.z = (kertas ? .005 : .037); g.add(skrin);
+  /* Telefon tinggi (video) dikecilkan sedikit supaya ketinggian di skrin hampir sama dengan telefon tangkapan skrin */
+  g.userData.skrin = skrin; g.userData.nisbah = (h - .05) / (w - .05); g.userData.skala = 1.45 * Math.min(1, 1.32 / h);
   if (!kertas) {
     const kilat = new THREE.Mesh(new THREE.PlaneGeometry(w - .05, h - .05), new THREE.MeshPhysicalMaterial({color: 0xffffff, transparent: true, opacity: .06, roughness: .05, clearcoat: 1}));
     kilat.position.z = .039; g.add(kilat);
@@ -782,13 +859,14 @@ async function mula3D() {
   if (sudah3D || ringan) return;
   sudah3D = true;
   /* Three.js dimuat hanya bila 3D digunakan; mod ringan tidak memuat apa-apa */
-  if (!window.THREE) { try { await muatSkrip("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; } }
+  if (!window.THREE) { try { await muatSkrip("aset/three.min.js"); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; } }
   const kanvas = $("dunia");
   let r;
   try { r = new THREE.WebGLRenderer({canvas: kanvas, antialias: true, alpha: true, powerPreference: "low-power"}); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; }
   try { await Promise.all([document.fonts.load("800 56px 'Plus Jakarta Sans'"), document.fonts.load("600 26px 'Plus Jakarta Sans'"), document.fonts.load("700 21px 'JetBrains Mono'")]); } catch (e) {}
+  await gambarSedia;
   const kunci = ["sains", "math", "sejarah", "english", "anak", "planner"];
-  const img = {}; await Promise.all(kunci.concat("soalan").map(async k => { img[k] = window.GAMBAR ? await muatGambar(GAMBAR[k]) : null; }));
+  const img = {}; await Promise.all(kunci.concat("soalan").map(async k => { img[k] = VIDEO.includes(k) ? await muatGambar(`aset/video/demo-${k}.jpg`) : window.GAMBAR ? await muatGambar(GAMBAR[k]) : null; }));
 
   const telefon = innerWidth < 760;
   r.setPixelRatio(Math.min(devicePixelRatio, telefon ? 1.5 : 2));
@@ -857,6 +935,23 @@ async function mula3D() {
     Object.assign(b.userData, {asal: b.position.clone(), rotAsal: -sudut, i, k});
     babak.add(b); buku[k] = b;
   });
+  /* Video app sebenar pada skrin telefon 3D: dimuat hanya bila buku itu dibuka */
+  const bucu = {};
+  function videoBuku(k) {
+    const u = buku[k].userData; if (u.vid) return u.vid;
+    const v = document.createElement("video");
+    Object.assign(v, {muted: true, loop: true, playsInline: true, preload: "auto", src: `aset/video/demo-${k}.mp4`});
+    const m = u.skrin.userData.skrin, rv = 780 / 360, rp = u.skrin.userData.nisbah;
+    const t = new THREE.VideoTexture(v); t.encoding = THREE.sRGBEncoding; t.minFilter = THREE.LinearFilter;
+    if (rp > rv) { t.repeat.x = rv / rp; t.offset.x = (1 - t.repeat.x) / 2; } else { t.repeat.y = rp / rv; t.offset.y = (1 - t.repeat.y) / 2; }
+    const kb = rp.toFixed(2);
+    if (!bucu[kb]) { const cv = document.createElement("canvas"); cv.width = 200; cv.height = Math.round(200 * rp); const x = cv.getContext("2d");
+      x.fillStyle = "#000"; x.fillRect(0, 0, cv.width, cv.height); x.fillStyle = "#fff"; x.beginPath();
+      x.roundRect ? x.roundRect(0, 0, cv.width, cv.height, 17) : x.rect(0, 0, cv.width, cv.height); x.fill(); bucu[kb] = new THREE.CanvasTexture(cv); }
+    /* Tukar ke video hanya selepas bingkai pertama siap, supaya tiada kelipan hitam */
+    v.addEventListener("playing", () => { m.material.map = t; m.material.alphaMap = bucu[kb]; m.material.needsUpdate = true; }, {once: true});
+    return u.vid = v;
+  }
   window.labelBuku = () => kunci.forEach(k => { const m = buku[k].userData.muka; m.map.dispose(); m.map = kulitBuku(k, r); m.needsUpdate = true; });
   let bukuAktif = kadAktif;
   window.pilihBuku = k => { bukuAktif = k; };
@@ -968,10 +1063,15 @@ async function mula3D() {
       bk.position.z = u.asal.z + e * .45 - undur * 2.2;
       bk.rotation.y = u.rotAsal * (1 - e) + Math.sin(t * .8) * .04 * e;
       const s = Math.max(.001, e);
-      u.skrin.scale.setScalar(s * 1.45);
+      u.skrin.scale.setScalar(s * u.skrin.userData.skala);
       u.skrin.position.set(.22 * e, .55 * e, .42 * e + .02);
       u.skrin.rotation.set(-.12 * e, -.15 * e, .04 * Math.sin(t * 1.3) * e);
       u.skrin.visible = e > .02;
+      if (VIDEO.includes(kk)) {
+        const main = aktif && e > .3 && lebar() && !KURANG_GERAK;
+        if (main) { const v = videoBuku(kk); if (v.paused) { v.play().catch(() => {}); jejak("video3d-" + kk); } }
+        else if (u.vid && !u.vid.paused) u.vid.pause();
+      }
     });
     habuk.rotation.y = t * .015;
     r.render(babak, kam);
