@@ -544,7 +544,14 @@ const T = {
   }
 };
 /* Ayat guru sebenar (dengan izin). Kosong = bahagian ini tidak dipaparkan. Format: {ms:"…", en:"…", nama:"Cikgu …, SMK …"} */
-const SUARA = [];
+const SUARA = [
+  {ms:"Interaktif, soalan yang banyak sesuai untuk latih tubi dan murid suka kerana paparan Jejak TP jelas dan tidak terlalu padat.",
+   en:"Interactive, plenty of questions for drilling, and students like it because the Jejak TP display is clear and not cluttered.",
+   nama:"Guru Sains, sekolah menengah", namaen:"Science teacher, secondary school"},
+  {ms:"Penggunaan PIN dapat membantu murid daripada meniru … guru boleh menilai pencapaian pelajar setiap individu selepas ujian dilaksanakan.",
+   en:"The PIN stops students from copying. Teachers can assess each student's achievement after the test.",
+   nama:"Guru Sains, sekolah menengah", namaen:"Science teacher, secondary school"}
+];
 const SUSUN = {guru:["sains","math","sejarah","english","planner","anak"], ibubapa:["anak"]};
 const SUBJEK = ["sains","math","sejarah","english"];
 const HARGA = {anak:["RM32","RM59"], planner:null};
@@ -745,7 +752,7 @@ function angkaHidup() {
 function suara() {
   const el = $("suara"); if (!SUARA.length) { el.hidden = true; return; }
   el.hidden = false;
-  el.innerHTML = SUARA.map(s => `<blockquote><p>“${s[bahasa] || s.ms}”</p><cite>${s.nama}</cite></blockquote>`).join("");
+  el.innerHTML = SUARA.map(s => `<blockquote><p>“${s[bahasa] || s.ms}”</p><cite>${(bahasa==="en"&&s.namaen)||s.nama}</cite></blockquote>`).join("");
 }
 
 /* Mod ringan */
