@@ -828,6 +828,23 @@ function telefon3D(img, r, kertas) {
 }
 
 /* Kulit buku: kecerunan, ikon subjek, tajuk, label emas */
+/* Ilustrasi panel kulit (aset/kulit-*.jpg); sebelum dimuat, ikon garis dilukis sebagai ganti */
+const GAMBAR_KULIT = {};
+["sains","math","sejarah","english","anak","planner"].forEach(k => {
+  const im = new Image(); im.decoding = "async";
+  im.onload = () => window.semulaKulit && semulaKulit(k);
+  im.src = "aset/kulit-" + k + ".jpg"; GAMBAR_KULIT[k] = im;
+});
+function lukisPanel(x, im) {
+  const X = 82, Y = 116, W = 366, H = 262, R = 14;
+  const bulat = () => { x.beginPath(); x.roundRect ? x.roundRect(X, Y, W, H, R) : x.rect(X, Y, W, H); };
+  x.save(); x.shadowColor = "rgba(0,0,0,.28)"; x.shadowBlur = 14; x.shadowOffsetY = 4; x.fillStyle = "#F4EFE2"; bulat(); x.fill(); x.restore();
+  x.save(); bulat(); x.clip();
+  const r = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * r, h = im.naturalHeight * r;
+  x.drawImage(im, X + (W - w) / 2, Y + (H - h) / 2, w, h);
+  x.restore();
+  x.strokeStyle = "rgba(255,255,255,.55)"; x.lineWidth = 2; bulat(); x.stroke();
+}
 function lukisIkon(x, k, cx, cy) {
   x.save(); x.translate(cx, cy); x.strokeStyle = "rgba(255,255,255,.92)"; x.fillStyle = "rgba(255,255,255,.92)"; x.lineWidth = 9; x.lineCap = "round"; x.lineJoin = "round";
   if (k === "sains") {
@@ -882,7 +899,8 @@ function kulitBuku(k, r) {
   const emas = x.createLinearGradient(82, 62, 82 + lw, 102); emas.addColorStop(0, "#C99A3A"); emas.addColorStop(.35, "#F4DB8E"); emas.addColorStop(.6, "#D9AE4E"); emas.addColorStop(1, "#B8862C");
   x.fillStyle = emas; x.beginPath(); x.roundRect ? x.roundRect(82, 62, lw, 40, 20) : x.rect(82, 62, lw, 40); x.fill();
   x.fillStyle = "#2B2205"; x.fillText(lbl, 98, 89);
-  lukisIkon(x, k, 271, 255);
+  const gk = GAMBAR_KULIT[k];
+  if (gk && gk.complete && gk.naturalWidth) lukisPanel(x, gk); else lukisIkon(x, k, 271, 255);
   x.fillStyle = "#fff"; x.font = "800 56px 'Plus Jakarta Sans', sans-serif";
   const kata = p.t.split(" "), baris = []; let b = "";
   kata.forEach(wd => { const c = b ? b + " " + wd : wd; if (x.measureText(c).width > 370) { baris.push(b); b = wd; } else b = c; }); baris.push(b);
@@ -1069,7 +1087,8 @@ async function mula3D() {
     v.addEventListener("playing", () => { m.material.map = t; m.material.alphaMap = bucu[kb]; m.material.needsUpdate = true; }, {once: true});
     return u.vid = v;
   }
-  window.labelBuku = () => kunci.forEach(k => { const m = buku[k].userData.muka; m.map.dispose(); m.map = kulitBuku(k, r); m.needsUpdate = true; });
+  window.semulaKulit = k => { if (!buku[k]) return; const m = buku[k].userData.muka; m.map.dispose(); m.map = kulitBuku(k, r); m.needsUpdate = true; };
+  window.labelBuku = () => kunci.forEach(semulaKulit);
   let bukuAktif = kadAktif;
   window.pilihBuku = k => { bukuAktif = k; };
 
