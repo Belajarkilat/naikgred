@@ -26,7 +26,7 @@
 :root{
   --bg:#F3F6F4; --ink:#13201B; --mute:#56645E; --garis:#DCE4E0; --panel:rgba(255,255,255,.86);
   --hijau:#0C6B5E; --hijau2:#14A38B; --emas:#E0A526; --meja:#E6ECE8;
-  --sains:#14A38B; --math:#2F6FD6; --sejarah:#C9822B; --english:#6B54D6; --kimia:#B8432F; --anak:#D9577E; --planner:#47605A;
+  --sains:#14A38B; --math:#2F6FD6; --sejarah:#C9822B; --english:#6B54D6; --kimia:#B8432F; --fizik:#2D4FA0; --biologi:#4F8A2B; --anak:#D9577E; --planner:#47605A;
   --f-papar:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-data:"JetBrains Mono",ui-monospace,Consolas,monospace;
 }
@@ -260,7 +260,7 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
           <a class="btn" id="h-cta" href="#produk">Pilih subjek, cuba percuma →</a>
           <a class="btn kedua" href="#masa" id="h-dua">Kira masa anda</a>
         </div>
-        <div class="nota" id="h-nota">TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English, Kimia</div>
+        <div class="nota" id="h-nota">TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English, Kimia, Fizik, Biologi</div>
       </div>
     </div>
   </section>
@@ -418,7 +418,7 @@ footer code{font-family:var(--f-data);color:var(--ink);user-select:all}
 /* Tangkapan skrin (340 KB) dimuat tanpa menyekat paparan teks; kad & 3D dilukis semula bila siap */
 const gambarSedia = new Promise(ok => { const s = document.createElement("script"); s.src = "aset/web3d-gambar.js"; s.onload = s.onerror = ok; document.head.appendChild(s); });
 /* ---------- Pautan sebenar ke app ---------- */
-const APP = {sains:"https://jejaktpsains.naikgred.com", math:"https://jejaktpmath.naikgred.com", sejarah:"https://jejaktpsejarah.naikgred.com", english:"https://jejaktpenglish.naikgred.com", kimia:"https://jejaktpkimia.naikgred.com"};
+const APP = {sains:"https://jejaktpsains.naikgred.com", math:"https://jejaktpmath.naikgred.com", sejarah:"https://jejaktpsejarah.naikgred.com", english:"https://jejaktpenglish.naikgred.com", kimia:"https://jejaktpkimia.naikgred.com", fizik:"https://jejaktpfizik.naikgred.com", biologi:"https://jejaktpbiologi.naikgred.com"};
 /* Kod ?dari yang membawa pelawat ke laman ini diteruskan ke app, supaya sumber guru kekal tepat. */
 const DARI = (() => { const m = /[?&]dari=([^&#]*)/.exec(location.search); return m ? decodeURIComponent(m[1]).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 30) : "web"; })();
 const pautan = {
@@ -436,8 +436,8 @@ const T = {
     ringan:"Mod ringan", ringanOff:"Mod 3D", mula:"Mula percuma", tatal:"Tatal untuk meneroka ↓",
     "p.guru":"Guru","p.ibubapa":"Ibu bapa",
     hero:{
-      guru:{pil:"Bab 1 & 2 percuma, semua subjek",h:"TP 40 murid.<br><em>Auto dijana selepas menjawab.</em>",s:"Murid menjawab soalan di telefon. TP dan ulasan PBD setiap murid terisi secara automatik, sedia untuk dieksport.",cta:"Pilih subjek, cuba percuma",dua:"Kira masa anda",nota:"TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English, Kimia"},
-      ibubapa:{pil:"RM32 setahun · harga awal",h:"Tahu markah sebenar anak.<br><em>Setiap bab.</em>",s:"Anak menjawab soalan mengikut sukatan pelajaran sekolah. Anda nampak markah dan bab yang perlu dibantu, terus dari telefon.",cta:"Daftar anak saya",dua:"Lihat contoh laporan",nota:"Sains, Matematik, Sejarah, English (T1–5) dan Kimia (T4–5)"}
+      guru:{pil:"Bab 1 & 2 percuma, semua subjek",h:"TP 40 murid.<br><em>Auto dijana selepas menjawab.</em>",s:"Murid menjawab soalan di telefon. TP dan ulasan PBD setiap murid terisi secara automatik, sedia untuk dieksport.",cta:"Pilih subjek, cuba percuma",dua:"Kira masa anda",nota:"TP dicadangkan, guru mengesahkan · Sains, Matematik, Sejarah, English, Kimia, Fizik, Biologi"},
+      ibubapa:{pil:"RM32 setahun · harga awal",h:"Tahu markah sebenar anak.<br><em>Setiap bab.</em>",s:"Anak menjawab soalan mengikut sukatan pelajaran sekolah. Anda nampak markah dan bab yang perlu dibantu, terus dari telefon.",cta:"Daftar anak saya",dua:"Lihat contoh laporan",nota:"Sains, Matematik, Sejarah, English (T1–5) serta Kimia, Fizik, Biologi (T4–5)"}
     },
     "m.label":"Masa yang hilang","m.tajuk":"Berapa jam anda habiskan untuk TP setiap penggal?","m.murid":"Bilangan murid","m.bab":"Bab setiap penggal",
     "m.manual":"jam secara manual","m.jimat":"jam dijimatkan dengan Jejak TP","m.cta":"Cuba percuma dengan satu kelas →",
@@ -478,6 +478,8 @@ const T = {
       sejarah:{j:"Jejak TP",t:"Sejarah",d:"T1–T5 · 49 bab, soalan sumber dan peristiwa"},
       english:{j:"Jejak TP",t:"English",d:"Form 1–5 · reading, grammar, listening"},
       kimia:{j:"Jejak TP",t:"Kimia",d:"T4–T5 · 13 bab, jadual data eksperimen"},
+      fizik:{j:"Jejak TP",t:"Fizik",d:"T4–T5 · 13 bab, graf dan pengiraan"},
+      biologi:{j:"Jejak TP",t:"Biologi",d:"T4–T5 · 28 bab, rajah dan graf eksperimen"},
       anak:{j:"Ibu bapa",t:"Anak NaikGred",d:"Markah anak setiap bab, dalam telefon anda"},
       planner:{j:"Percuma",t:"Planner Guru 2027",d:"Takwim KPM 2027 (Kumpulan B), nama anda di kulit"}
     },
@@ -486,14 +488,14 @@ const T = {
     "ha.label":"Harga awal","ha.tajuk":"RM32 setahun. Kurang daripada RM3 sebulan.","ha.subjek":"Subjek anak","ha.cta":"Daftar anak saya","ha.baki":"Harga RM32 tamat dalam:","ha.nota":"Harga biasa RM59 setahun mulai 1 Januari 2027.",
     "f.wa":"WhatsApp","f.privasi":"Privasi","f.terma":"Terma", hari:"hari",
     bar:{guru:["<b>Bab 1 & 2 percuma</b> · RM23 sebelum 31 Dis","Mula percuma"],ibubapa:["<b>Anak NaikGred</b> · RM32 setahun","Daftar anak"]},
-    subjek:{sains:"Sains",math:"Matematik",sejarah:"Sejarah",english:"English",kimia:"Kimia"}
+    subjek:{sains:"Sains",math:"Matematik",sejarah:"Sejarah",english:"English",kimia:"Kimia",fizik:"Fizik",biologi:"Biologi"}
   },
   en: {
     ringan:"Lite mode", ringanOff:"3D mode", mula:"Start free", tatal:"Scroll to explore ↓",
     "p.guru":"Teacher","p.ibubapa":"Parent",
     hero:{
-      guru:{pil:"Chapters 1 & 2 free, every subject",h:"TP for 40 students.<br><em>Auto-generated after answering.</em>",s:"Students answer questions on their phones. Each student's TP and PBD comment fill in automatically, ready to export.",cta:"Pick a subject, try free",dua:"Count your hours",nota:"TP suggested, teacher confirms · Science, Maths, History, English, Chemistry"},
-      ibubapa:{pil:"RM32 a year · early price",h:"Know your child's real marks.<br><em>Every chapter.</em>",s:"Your child answers questions that follow the school syllabus. You see the marks and the chapters that need help, right on your phone.",cta:"Register my child",dua:"See a sample report",nota:"Science, Maths, History, English (F1–5) and Chemistry (F4–5)"}
+      guru:{pil:"Chapters 1 & 2 free, every subject",h:"TP for 40 students.<br><em>Auto-generated after answering.</em>",s:"Students answer questions on their phones. Each student's TP and PBD comment fill in automatically, ready to export.",cta:"Pick a subject, try free",dua:"Count your hours",nota:"TP suggested, teacher confirms · Science, Maths, History, English, Chemistry, Physics, Biology"},
+      ibubapa:{pil:"RM32 a year · early price",h:"Know your child's real marks.<br><em>Every chapter.</em>",s:"Your child answers questions that follow the school syllabus. You see the marks and the chapters that need help, right on your phone.",cta:"Register my child",dua:"See a sample report",nota:"Science, Maths, History, English (F1–5) plus Chemistry, Physics, Biology (F4–5)"}
     },
     "m.label":"Lost time","m.tajuk":"How many hours do you spend on TP each term?","m.murid":"Number of students","m.bab":"Chapters per term",
     "m.manual":"hours by hand","m.jimat":"hours saved with Jejak TP","m.cta":"Try free with one class →",
@@ -534,6 +536,8 @@ const T = {
       sejarah:{j:"Jejak TP",t:"History",d:"F1–F5 · 49 chapters, sources and events"},
       english:{j:"Jejak TP",t:"English",d:"Form 1–5 · reading, grammar, listening"},
       kimia:{j:"Jejak TP",t:"Chemistry",d:"Form 4–5 · 13 chapters, experiment data tables"},
+      fizik:{j:"Jejak TP",t:"Physics",d:"Form 4–5 · 13 chapters, graphs and calculations"},
+      biologi:{j:"Jejak TP",t:"Biology",d:"Form 4–5 · 28 chapters, diagrams and experiment graphs"},
       anak:{j:"Parents",t:"Anak NaikGred",d:"Your child's marks per chapter, on your phone"},
       planner:{j:"Free",t:"Teacher Planner 2027",d:"KPM 2027 calendar (Group B), your name on the cover"}
     },
@@ -542,7 +546,7 @@ const T = {
     "ha.label":"Early price","ha.tajuk":"RM32 a year. Under RM3 a month.","ha.subjek":"Your child's subject","ha.cta":"Register my child","ha.baki":"The RM32 price ends in:","ha.nota":"Regular price RM59 a year from 1 January 2027.",
     "f.wa":"WhatsApp","f.privasi":"Privacy","f.terma":"Terms", hari:"days",
     bar:{guru:["<b>Chapters 1 & 2 free</b> · RM23 before 31 Dec","Start free"],ibubapa:["<b>Anak NaikGred</b> · RM32 a year","Register child"]},
-    subjek:{sains:"Science",math:"Maths",sejarah:"History",english:"English",kimia:"Chemistry"}
+    subjek:{sains:"Science",math:"Maths",sejarah:"History",english:"English",kimia:"Chemistry",fizik:"Physics",biologi:"Biology"}
   }
 };
 /* Ayat guru sebenar (dengan izin). Kosong = bahagian ini tidak dipaparkan. Format: {ms:"…", en:"…", nama:"Cikgu …, SMK …"} */
@@ -554,10 +558,10 @@ const SUARA = [
    en:"The PIN stops students from copying. Teachers can assess each student's achievement after the test.",
    nama:"Guru Sains, sekolah menengah", namaen:"Science teacher, secondary school"}
 ];
-const SUSUN = {guru:["sains","math","sejarah","english","kimia","planner","anak"], ibubapa:["anak"]};
-const SUBJEK = ["sains","math","sejarah","english","kimia"];
+const SUSUN = {guru:["sains","math","sejarah","english","kimia","fizik","biologi","planner","anak"], ibubapa:["anak"]};
+const SUBJEK = ["sains","math","sejarah","english","kimia","fizik","biologi"];
 /* Kimia hanya menengah atas (T4–T5): tiada peringkat rendah */
-const HANYA_ATAS = ["kimia"];
+const HANYA_ATAS = ["kimia","fizik","biologi"];
 const HARGA = {anak:["RM32","RM59"], planner:null};
 const WARNA = k => getComputedStyle(document.documentElement).getPropertyValue("--"+k).trim();
 
@@ -581,8 +585,8 @@ const IKON = {
 const senaraiCiri = xs => xs.map(([ik, t, d]) => `<li><span class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IKON[ik]}</svg></span><b>${t}</b><span>${d}</span></li>`).join("");
 const PANAH = `<svg class="anak-panah" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
 
-const VIDEO = ["sains","math","sejarah","english","kimia","anak"];
-const MUKA = {sains:"aset/muka-sains.jpg", math:"aset/muka-math.jpg", sejarah:"aset/muka-sejarah.jpg", english:"aset/muka-english.jpg", kimia:"aset/muka-kimia.jpg", anak:"aset/muka-anak.jpg", planner:"aset/muka-planner.jpg"};
+const VIDEO = ["sains","math","sejarah","english","kimia","fizik","biologi","anak"];
+const MUKA = {sains:"aset/muka-sains.jpg", math:"aset/muka-math.jpg", sejarah:"aset/muka-sejarah.jpg", english:"aset/muka-english.jpg", kimia:"aset/muka-kimia.jpg", fizik:"aset/muka-fizik.jpg", biologi:"aset/muka-biologi.jpg", anak:"aset/muka-anak.jpg", planner:"aset/muka-planner.jpg"};
 const mukaKad = k => MUKA[k] ? `<img class="muka" src="${MUKA[k]}" alt="" width="56" height="56" loading="lazy" decoding="async">` : `<span class="muka ikon" aria-hidden="true">Aa</span>`;
 function mediaKad(k, L) {
   const lk = L.langkah[k === "anak" ? "anak" : "subjek"];
@@ -835,7 +839,7 @@ function telefon3D(img, r, kertas) {
 /* Kulit buku: kecerunan, ikon subjek, tajuk, label emas */
 /* Ilustrasi panel kulit (aset/kulit-*.jpg); sebelum dimuat, ikon garis dilukis sebagai ganti */
 const GAMBAR_KULIT = {};
-["sains","math","sejarah","english","kimia","anak","planner"].forEach(k => {
+["sains","math","sejarah","english","kimia","fizik","biologi","anak","planner"].forEach(k => {
   const im = new Image(); im.decoding = "async";
   im.onload = () => window.semulaKulit && semulaKulit(k);
   im.src = "aset/kulit-" + k + ".jpg"; GAMBAR_KULIT[k] = im;
@@ -868,6 +872,13 @@ function lukisIkon(x, k, cx, cy) {
     x.beginPath(); x.moveTo(-26, -92); x.lineTo(26, -92); x.moveTo(-18, -92); x.lineTo(-18, -30); x.lineTo(-84, 74); x.lineTo(84, 74); x.lineTo(18, -30); x.lineTo(18, -92); x.stroke();
     x.beginPath(); x.moveTo(-58, 32); x.lineTo(58, 32); x.stroke();
     [[-20, 52, 9], [22, 46, 7], [0, 6, 6]].forEach(([px, py, pr]) => { x.beginPath(); x.arc(px, py, pr, 0, Math.PI * 2); x.fill(); });
+  } else if (k === "fizik") {
+    x.beginPath(); x.moveTo(-60, -92); x.lineTo(60, -92); x.moveTo(0, -92); x.lineTo(34, 20); x.stroke();
+    x.beginPath(); x.arc(40, 40, 22, 0, Math.PI * 2); x.fill();
+    x.beginPath(); x.moveTo(-90, 80); x.bezierCurveTo(-70, 40, -50, 40, -30, 80); x.bezierCurveTo(-10, 120, 10, 120, 30, 80); x.bezierCurveTo(50, 40, 70, 40, 90, 80); x.stroke();
+  } else if (k === "biologi") {
+    x.beginPath(); x.moveTo(0, 86); x.bezierCurveTo(-96, 30, -80, -70, 0, -96); x.bezierCurveTo(80, -70, 96, 30, 0, 86); x.closePath(); x.stroke();
+    x.beginPath(); x.moveTo(0, 100); x.lineTo(0, -70); [-40, 0, 40].forEach(py => { x.moveTo(0, py); x.lineTo(-38, py - 28); x.moveTo(0, py); x.lineTo(38, py - 28); }); x.stroke();
   } else if (k === "anak") {
     x.beginPath(); x.moveTo(0, 70); x.bezierCurveTo(-110, -10, -60, -100, 0, -46); x.bezierCurveTo(60, -100, 110, -10, 0, 70); x.fill();
     x.fillStyle = "rgba(0,0,0,.18)"; x.font = "800 42px 'Plus Jakarta Sans', sans-serif"; x.textAlign = "center"; x.fillText("A+", 0, 4);
@@ -917,7 +928,7 @@ function kulitBuku(k, r) {
   x.shadowColor = "rgba(0,0,0,.25)"; x.shadowBlur = 12; x.shadowOffsetY = 3;
   baris.forEach(l => { x.fillText(l, 82, y); y += 62; });
   x.shadowColor = "transparent";
-  const sub = {anak: bahasa === "ms" ? "Untuk ibu bapa" : "For parents", planner: bahasa === "ms" ? "Edisi 2027" : "2027 edition", kimia: bahasa === "ms" ? "Tingkatan 4–5" : "Form 4–5"}[k] || (bahasa === "ms" ? "Tingkatan 1–5" : "Form 1–5");
+  const sub = {anak: bahasa === "ms" ? "Untuk ibu bapa" : "For parents", planner: bahasa === "ms" ? "Edisi 2027" : "2027 edition", kimia: bahasa === "ms" ? "Tingkatan 4–5" : "Form 4–5", fizik: bahasa === "ms" ? "Tingkatan 4–5" : "Form 4–5", biologi: bahasa === "ms" ? "Tingkatan 4–5" : "Form 4–5"}[k] || (bahasa === "ms" ? "Tingkatan 1–5" : "Form 1–5");
   x.font = "600 26px 'Plus Jakarta Sans', sans-serif"; x.fillStyle = "rgba(255,255,255,.85)"; x.fillText(sub, 82, y + 2);
   x.font = "800 24px 'Plus Jakarta Sans', sans-serif"; x.fillStyle = "rgba(255,255,255,.9)"; x.fillText("NaikGred", 82, 644);
   x.font = "700 24px 'JetBrains Mono', monospace"; x.textAlign = "right";
@@ -1009,7 +1020,7 @@ async function mula3D() {
   try { r = new THREE.WebGLRenderer({canvas: kanvas, antialias: true, alpha: true, powerPreference: "low-power"}); } catch (e) { document.body.classList.add("ringan"); sudah3D = false; return; }
   try { await Promise.all([document.fonts.load("800 56px 'Plus Jakarta Sans'"), document.fonts.load("600 26px 'Plus Jakarta Sans'"), document.fonts.load("700 21px 'JetBrains Mono'")]); } catch (e) {}
   await gambarSedia;
-  const kunci = ["sains", "math", "sejarah", "english", "kimia", "anak", "planner"];
+  const kunci = ["sains", "math", "sejarah", "english", "kimia", "fizik", "biologi", "anak", "planner"];
   const img = {}; await Promise.all(kunci.concat("soalan").map(async k => { img[k] = VIDEO.includes(k) ? await muatGambar(`aset/video/demo-${k}.jpg`) : window.GAMBAR ? await muatGambar(GAMBAR[k]) : null; }));
 
   const telefon = innerWidth < 760;
@@ -1073,9 +1084,11 @@ async function mula3D() {
   kunci.forEach((k, i) => {
     const b = bukuBaru(k, r, halaman, img[k]);
     /* Jarak sudut dikecilkan bila buku bertambah supaya lengkung kekal muat skrin (6 buku = .2) */
-    const sudut = (i - (kunci.length - 1) / 2) * Math.min(.2, 1.08 / (kunci.length - 1));
+    const sudut = (i - (kunci.length - 1) / 2) * Math.min(.2, .96 / (kunci.length - 1));
     b.position.set(Math.sin(sudut) * 6.6, .69 - .35 + .35, -1.7 - (1 - Math.cos(sudut)) * 6.6);
-    b.position.y = .69;
+    /* Lebih 7 buku: kecilkan buku supaya tidak bertindih (9 buku = .8) */
+    const kecil = Math.min(1, 7.2 / kunci.length); b.scale.setScalar(kecil);
+    b.position.y = .69 * kecil;
     b.rotation.y = -sudut;
     Object.assign(b.userData, {asal: b.position.clone(), rotAsal: -sudut, i, k});
     babak.add(b); buku[k] = b;
